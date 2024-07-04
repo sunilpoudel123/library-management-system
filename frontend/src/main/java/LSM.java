@@ -1,7 +1,8 @@
 package src.main.java;
 
-import member.CreateNewMember;
-import member.EditMemberInfo;
+
+import src.main.java.member.CreateNewMember;
+import src.main.java.member.EditMemberInfo;
 
 import javax.swing.*;
 import java.awt.*;
@@ -45,8 +46,8 @@ public class LSM extends JFrame {
     private JMenuItem[] bookMenuItems = {addBookItemMenu, editBookItemMenu, addCopyBookItemMenu, viewBookItemMenu, searchBookItemMenu, editCopyBookItemMenu};
 
 
-    public LSM(String username){
-        setTitle(TITLE+" ("+username+")");
+    public LSM(String username) {
+        setTitle(TITLE + " (" + username + ")");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setVisible(true);
 
@@ -63,17 +64,17 @@ public class LSM extends JFrame {
         setResizable(false);
 
 
-        addMemberItemMenu.addActionListener(e ->{
+        addMemberItemMenu.addActionListener(e -> {
             createNewMember = new CreateNewMember(dynamicView.getWidth(), dynamicView.getHeight());
             setDynamicView(createNewMember);
         });
-        editMemberItemMenu.addActionListener(e ->{
+        editMemberItemMenu.addActionListener(e -> {
             editMemberInfo = new EditMemberInfo(dynamicView.getWidth(), dynamicView.getHeight());
             setDynamicView(editMemberInfo);
         });
     }
 
-    private void setDynamicView(JPanel newDynamicView){
+    private void setDynamicView(JPanel newDynamicView) {
         dynamicView.removeAll();
         System.out.println(newDynamicView.getClass().getName());
         dynamicView.add(newDynamicView, ""); // Add panel with a name for card layout
@@ -82,8 +83,8 @@ public class LSM extends JFrame {
         dynamicView.revalidate();
     }
 
-    private void createMenuItem(JMenu menu, JMenuItem[] items){
-        for(JMenuItem item : items){
+    private void createMenuItem(JMenu menu, JMenuItem[] items) {
+        for (JMenuItem item : items) {
             menu.add(item);
         }
     }
@@ -91,7 +92,7 @@ public class LSM extends JFrame {
     private JMenuBar createMenuBar() {
         JMenuBar menuBar = new JMenuBar();
 
-        for(JMenu menuItem : mainMenus){
+        for (JMenu menuItem : mainMenus) {
             menuBar.add(menuItem);
         }
         return menuBar;

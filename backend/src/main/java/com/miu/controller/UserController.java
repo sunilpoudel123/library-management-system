@@ -1,4 +1,4 @@
-package main.java.controller;
+package com.miu.controller;
 
 public class UserController {
 
