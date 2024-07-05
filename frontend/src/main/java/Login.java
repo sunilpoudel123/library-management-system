@@ -1,4 +1,3 @@
-
 import javax.swing.*;
 import java.awt.event.*;
 
@@ -40,11 +39,10 @@ public class Login extends JFrame {
             @Override
             public void windowClosed(WindowEvent e) {
                 if(isSuccess){
-                    new LSM(usernameTextField.getText());
+                    new LMS("Testing!");
                 }
             }
         });
-
     }
 
     private void login(String username, String password){
@@ -52,7 +50,8 @@ public class Login extends JFrame {
             JOptionPane.showMessageDialog(null, "Username or password is empty", "Empty fields", JOptionPane.WARNING_MESSAGE);
         }
         else{
-            if(!isValid(username, password)){
+
+            if(!isSuccess){
                 JOptionPane.showMessageDialog(null, "Username or password is incorrect", "Invalid credential", JOptionPane.WARNING_MESSAGE);
                 passwordField.setText("");
                 isSuccess = !isSuccess;
@@ -62,9 +61,5 @@ public class Login extends JFrame {
                 this.dispose();
             }
         }
-    }
-
-    private boolean isValid(String username, String password){
-        return isSuccess;
     }
 }
