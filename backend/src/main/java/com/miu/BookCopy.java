@@ -1,7 +1,8 @@
 package com.miu;
 
+import java.io.Serializable;
 import java.util.Date;
-public class BookCopy extends Book {
+public class BookCopy extends Book implements Serializable {
     private String bookCopyId;
     private int copyNumber;
     private boolean isAvailable;

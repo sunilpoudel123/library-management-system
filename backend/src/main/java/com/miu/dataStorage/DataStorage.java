@@ -1,8 +1,6 @@
 package com.miu.dataStorage;
-
 import com.miu.User;
 import com.miu.dao.UserDao;
-
 import java.io.*;
 import java.util.HashMap;
 import java.util.Map;
@@ -25,7 +23,6 @@ public class DataStorage implements Serializable {
         return user.getAuthenticatedUser(username, password);
     }
 
-
     public static Map<Object, Object> read() {
         try (FileInputStream fileIn = new FileInputStream(filePath);
              ObjectInputStream in = new ObjectInputStream(fileIn)) {
@@ -43,12 +40,14 @@ public class DataStorage implements Serializable {
         return data;
     }
 
-    public static void write(Object object) {
+    public static boolean write(Object object) {
         try (FileOutputStream fileOut = new FileOutputStream(filePath);
              ObjectOutputStream out = new ObjectOutputStream(fileOut)) {
             out.writeObject(object);
+            return true;
         } catch (IOException e) {
             e.printStackTrace();
         }
+        return false;
     }
 }

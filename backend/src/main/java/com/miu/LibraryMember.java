@@ -1,9 +1,10 @@
 package com.miu;
-
+import java.io.*;
 import java.util.List;
 
-public class LibraryMember extends UserRole {
-    private String memberId;
+public class LibraryMember extends UserRole implements Serializable {
+    private static final long serialVersionUID = 1L; // Optional, for version control
+    private int memberId;
     private String firstName;
     private String lastName;
     private String phoneNumber;
@@ -12,7 +13,7 @@ public class LibraryMember extends UserRole {
     private String roleName;
 
     // Constructors, getters, and setters
-    public LibraryMember(String memberId, String firstName,String lastName,String phoneNumber,Address address,String roleName) {
+    public LibraryMember(int memberId, String firstName,String lastName,String phoneNumber,Address address,String roleName) {
         super(roleName);
         this.memberId = memberId;
         this.firstName = firstName;
@@ -21,7 +22,7 @@ public class LibraryMember extends UserRole {
         this.address = address;
     }
 
-    public String getMemberId() {
+    public int getMemberId() {
         return memberId;
     }
     public String getFirstName() {
@@ -39,7 +40,7 @@ public class LibraryMember extends UserRole {
     public Address getAddress() {
         return address;
     }
-    public void setMemberId(String memberId) {
+    public void setMemberId(int memberId) {
         this.memberId = memberId;
     }
     public void setFirstName(String firstName) {

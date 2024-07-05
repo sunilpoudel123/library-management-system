@@ -1,7 +1,5 @@
 package com.miu.dataStorage;
-
 import com.miu.User;
-
 import java.util.HashMap;
 import java.util.Map;
 
@@ -10,7 +8,6 @@ public class PopulateDataUtil {
     public static void addUsers() {
 
         Map<Object, Object> data = new HashMap<>();
-
         User adminUser = new User();
         adminUser.setUsername("admin");
         adminUser.setPassword("admin");
