@@ -1,4 +1,5 @@
 import book.AddBookCopied;
+import book.BookCheckOut;
 import book.ImportBook;
 import member.EditMemberInformation;
 import member.MemberRegistration;
@@ -17,17 +18,13 @@ public class LMS extends JFrame {
     private final String TITLE = "Library Management System";
     private JPanel basePanel;
 
-    private final MemberRegistration memberRegistration;
-    private final EditMemberInformation editMemberInformation;
-    private final ImportBook importBook;
-    private final AddBookCopied addBookCopied;
+
     /*Menu*/
     private final JMenu homeMenu = new JMenu("Home");
     private final JMenu memberMenu = new JMenu("Member");
     private final JMenu bookMenu = new JMenu("Book");
-    private final JMenu checkoutMenu = new JMenu("Checkout");
     private final JMenu aboutMenu = new JMenu("About");
-    private final JMenu[] mainMenus = {homeMenu, memberMenu, bookMenu, checkoutMenu, aboutMenu};
+    private final JMenu[] mainMenus = {homeMenu, memberMenu, bookMenu, aboutMenu};
 
     /*Menu Item*/
     private final JMenuItem addMemberItemMenu = new JMenuItem("Add Member");
@@ -37,8 +34,8 @@ public class LMS extends JFrame {
     private final JMenuItem[] memberMenuItems = {addMemberItemMenu, editMemberItemMenu, viewCheckoutRecordItemMenu};
 
     private final JMenuItem addBookItemMenu = new JMenuItem("Add Book");
-//    private JMenuItem editBookItemMenu = new JMenuItem("Edit Book");
     private final JMenuItem addCopyBookItemMenu = new JMenuItem("Add Copied Book");
+    private final JMenuItem checkoutBookItemMenu = new JMenuItem("Checkout Book");
     private final JMenuItem viewBookItemMenu = new JMenuItem("List All the Book");
     private final JMenuItem searchBookItemMenu = new JMenuItem("Search Book");
     private final JMenuItem editCopyBookItemMenu = new JMenuItem("Edit Copied Book");
@@ -47,7 +44,7 @@ public class LMS extends JFrame {
     private JPanel menuPanel;
     private JPanel dynamicView;
 
-    private final JMenuItem[] bookMenuItems = {addBookItemMenu /*, editBookItemMenu*/, addCopyBookItemMenu, viewBookItemMenu, searchBookItemMenu, editCopyBookItemMenu};
+    private final JMenuItem[] bookMenuItems = {addBookItemMenu /*, editBookItemMenu*/, addCopyBookItemMenu, checkoutBookItemMenu, viewBookItemMenu, searchBookItemMenu, editCopyBookItemMenu};
 
     public LMS(String username){
         setTitle(STR."\{TITLE} \{username})");
@@ -66,10 +63,7 @@ public class LMS extends JFrame {
         setLocationRelativeTo(null);
         setResizable(false);
 
-        editMemberInformation = new EditMemberInformation(dynamicView.getWidth(), dynamicView.getHeight());
-        memberRegistration = new MemberRegistration(dynamicView.getWidth(), dynamicView.getHeight());
-        importBook = new ImportBook(dynamicView.getWidth(), dynamicView.getHeight());
-        addBookCopied = new AddBookCopied(dynamicView.getWidth(), dynamicView.getHeight());
+
 
         homeMenu.addMouseListener(new MouseAdapter() {
             @Override
@@ -82,22 +76,30 @@ public class LMS extends JFrame {
         });
 
         addMemberItemMenu.addActionListener(e ->{
+            MemberRegistration memberRegistration = new MemberRegistration(dynamicView.getWidth(), dynamicView.getHeight());
             setDynamicView(memberRegistration);
         });
 
         editMemberItemMenu.addActionListener(e ->{
-
+            EditMemberInformation editMemberInformation = new EditMemberInformation(dynamicView.getWidth(), dynamicView.getHeight());
             setDynamicView(editMemberInformation);
         });
 
         /*Start Book function*/
 
         addBookItemMenu.addActionListener(e ->{
+            ImportBook importBook = new ImportBook(dynamicView.getWidth(), dynamicView.getHeight());
             setDynamicView(importBook);
         });
 
         addCopyBookItemMenu.addActionListener(e ->{
+            AddBookCopied addBookCopied = new AddBookCopied(dynamicView.getWidth(), dynamicView.getHeight());
             setDynamicView(addBookCopied);
+        });
+
+        checkoutBookItemMenu.addActionListener(e->{
+            BookCheckOut bookCheckOut = new BookCheckOut(dynamicView.getWidth(), dynamicView.getHeight());
+            setDynamicView(bookCheckOut);
         });
 
         /*End Book function*/
