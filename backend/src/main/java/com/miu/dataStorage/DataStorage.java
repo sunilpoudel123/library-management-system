@@ -18,15 +18,15 @@ public class DataStorage implements Serializable {
     private static Map<Object, Object> data = new HashMap<>();
 
     public DataStorage() {
-        this.data = load();
+        this.data = read();
     }
 
-    public static User testLogin(String username) {
-        return user.findByUsername(username);
+    public static User testLogin(String username, String password) {
+        return user.getAuthenticatedUser(username, password);
     }
 
 
-    public static Map<Object, Object> load() {
+    public static Map<Object, Object> read() {
         try (FileInputStream fileIn = new FileInputStream(filePath);
              ObjectInputStream in = new ObjectInputStream(fileIn)) {
             Object obj = in.readObject();
@@ -43,7 +43,7 @@ public class DataStorage implements Serializable {
         return data;
     }
 
-    public static void save(Object object) {
+    public static void write(Object object) {
         try (FileOutputStream fileOut = new FileOutputStream(filePath);
              ObjectOutputStream out = new ObjectOutputStream(fileOut)) {
             out.writeObject(object);

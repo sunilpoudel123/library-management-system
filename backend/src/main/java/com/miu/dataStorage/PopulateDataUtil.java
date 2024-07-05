@@ -25,7 +25,8 @@ public class PopulateDataUtil {
         libraryUser.setLastName("Person");
         data.put(libraryUser.getUsername(), libraryUser);
 
-        DataStorage.save(data);
+        DataStorage.write(data);
+
         System.out.println("Data has been populated and saved to the file.");
 
     }

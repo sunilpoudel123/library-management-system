@@ -15,8 +15,9 @@ public class MainApplication {
         System.out.println("### Please login your username for testing: ###");
         Scanner scanner = new Scanner(System.in);
         String username = scanner.nextLine();
-
-        User user = DataStorage.testLogin(username);
+        System.out.println("Enter your password for testing:");
+        String password = scanner.nextLine();
+        User user = DataStorage.testLogin(username, password);
         if (user == null) {
             System.out.println("Invalid username or password");
         } else {

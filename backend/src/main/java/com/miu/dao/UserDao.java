@@ -42,12 +42,16 @@ public final class UserDao<T extends Serializable> {
     }
 
     public static User save(User user) {
+        Map<Object, Object> data = new HashMap<>();
+        data.put(user.getUsername(), user);
+        DataStorage.write(data);
+        System.out.println("data write successfully");
         return null;
     }
 
     private static Map<Object, Object> readDatabase() {
         DataStorage dataStorage = new DataStorage();
-        Map<Object, Object> objectMap = dataStorage.load();
+        Map<Object, Object> objectMap = dataStorage.read();
         return objectMap;
     }
 
