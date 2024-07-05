@@ -23,7 +23,7 @@ public class MemberRegistration extends JPanel{
     private JButton submitButton;
 
     private JComboBox<String> stateComboBox;
-    private JComboBox<String> cityComboBox;
+    private JTextField cityTextField;
 
     private final List<String> DEFAULT = List.of("Default");
 
@@ -32,8 +32,7 @@ public class MemberRegistration extends JPanel{
         if (getParent() != null && getParent().isVisible()) { // Check if parent is visible
             setVisible(true);
         }
-        Utility.comboBoxItemSetter(stateComboBox, DEFAULT);
-        Utility.comboBoxItemSetter(cityComboBox, DEFAULT);
+        Utility.comboBoxItemSetter(stateComboBox, Utility.usState);
         Utility.textFeildNumericOnly(phoneNumberTextField, false);
         Utility.textFeildNumericOnly(zipCodeTextField, false);
         add(basePanel);
