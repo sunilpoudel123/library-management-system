@@ -1,11 +1,20 @@
 package com.miu.service;
 
-import com.miu.dao.UserDao;
+
+import com.miu.dao.UserDaoImpl;
 import com.miu.model.User;
+import com.miu.util.HelperUtil;
 
 public class UserServiceImpl implements UserService {
 
-    private static UserDao userDao;
+    private UserDaoImpl userDao;
+    private User user;
+    private HelperUtil helperUtil;
+
+    public UserServiceImpl(UserDaoImpl userDao) {
+        this.userDao = userDao;
+    }
+
 
     @Override
     public User login() {
@@ -14,10 +23,9 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User findByUsername(String username) {
-        User user= userDao.findByUsername(username);
-
+        System.out.println("finding user by: " + username);
+        User user = userDao.findByUsername(username);
         return user;
     }
-
 
 }
