@@ -1,7 +1,7 @@
 package com.miu.dao;
 
 import com.miu.User;
-import com.miu.util.HelperUtil;
+import com.miu.dataStorage.DataStorage;
 
 import java.io.Serializable;
 import java.util.HashMap;
@@ -42,12 +42,16 @@ public final class UserDao<T extends Serializable> {
     }
 
     public static User save(User user) {
+        Map<Object, Object> data = new HashMap<>();
+        data.put(user.getUsername(), user);
+        DataStorage.write(data);
+        System.out.println("data write successfully");
         return null;
     }
 
     private static Map<Object, Object> readDatabase() {
-        HelperUtil helperUtil = new HelperUtil();
-        Map<Object, Object> objectMap = helperUtil.load();
+        DataStorage dataStorage = new DataStorage();
+        Map<Object, Object> objectMap = dataStorage.read();
         return objectMap;
     }
 

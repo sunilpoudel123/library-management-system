@@ -1,4 +1,4 @@
-package com.miu.util;
+package com.miu.dataStorage;
 
 import com.miu.User;
 import com.miu.dao.UserDao;
@@ -7,7 +7,7 @@ import java.io.*;
 import java.util.HashMap;
 import java.util.Map;
 
-public class HelperUtil implements Serializable {
+public class DataStorage implements Serializable {
 
     private static UserDao userDao = new UserDao();
 
@@ -17,16 +17,16 @@ public class HelperUtil implements Serializable {
 
     private static Map<Object, Object> data = new HashMap<>();
 
-    public HelperUtil() {
-        this.data = load();
+    public DataStorage() {
+        this.data = read();
     }
 
-    public static User testLogin(String username) {
-        return user.findByUsername(username);
+    public static User testLogin(String username, String password) {
+        return user.getAuthenticatedUser(username, password);
     }
 
 
-    public static Map<Object, Object> load() {
+    public static Map<Object, Object> read() {
         try (FileInputStream fileIn = new FileInputStream(filePath);
              ObjectInputStream in = new ObjectInputStream(fileIn)) {
             Object obj = in.readObject();
@@ -43,7 +43,7 @@ public class HelperUtil implements Serializable {
         return data;
     }
 
-    public static void save(Object object) {
+    public static void write(Object object) {
         try (FileOutputStream fileOut = new FileOutputStream(filePath);
              ObjectOutputStream out = new ObjectOutputStream(fileOut)) {
             out.writeObject(object);

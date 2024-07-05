@@ -56,6 +56,13 @@ public class User implements Serializable {
         this.lastName = lastName;
     }
 
+    public UserRole getRole() {
+        return role;
+    }
+
+    public void setRole(UserRole role) {
+        this.role = role;
+    }
 
     @Override
     public String toString() {
@@ -68,23 +75,32 @@ public class User implements Serializable {
         return user;
     }
 
-    public User getAuthenticatedUser(String userId, String password) {
-        System.out.println("finding user by: " + username);
-        User user = userDao.findByUsername(username);
-        return user;
-    }
-
-    public User login(String username, String password) {
-        System.out.println("login requested by: " + username);
-
+    public User getAuthenticatedUser(String username, String password) {
+        System.out.println("Login requested by: " + username);
         User user = findByUsername(username);
         if (user == null) {
-            System.out.println("user is not found");
+            System.out.println("User not found");
+            return null;
         }
-        if (user.getUsername().equals(username) && user.getPassword().equals(password)) {
-            System.out.println("login successful");
+        if (user.getPassword().equals(password)) {
+            System.out.println("Login successful");
+            return user;
+        } else {
+            System.out.println("Invalid username/password, login failed");
+            return null;
         }
+    }
 
+    public User addUser(String username, String password, String firstName, String lastName) {
+        User user = new User();
+        System.out.println("Adding user: " + username);
+        user.setUsername(username);
+        user.setPassword(password);
+        user.setFirstName(firstName);
+        user.setLastName(lastName);
+//        user.setRole();
+        userDao.save(user);
+        System.out.println("User successfully added");
         return user;
     }
 }

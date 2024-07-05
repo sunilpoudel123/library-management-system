@@ -1,4 +1,4 @@
-package com.miu.util;
+package com.miu.dataStorage;
 
 import com.miu.User;
 
@@ -25,7 +25,8 @@ public class PopulateDataUtil {
         libraryUser.setLastName("Person");
         data.put(libraryUser.getUsername(), libraryUser);
 
-        HelperUtil.save(data);
+        DataStorage.write(data);
+
         System.out.println("Data has been populated and saved to the file.");
 
     }
