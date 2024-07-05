@@ -1,13 +1,16 @@
 package com.miu.controller;
 
 
+import com.miu.dao.UserDaoImpl;
 import com.miu.model.User;
 import com.miu.service.UserService;
 import com.miu.service.UserServiceImpl;
 
 public class LoginController {
 
-    private static final UserService userService = new UserServiceImpl();
+    private static UserDaoImpl userDao = new UserDaoImpl();
+
+    private static UserService userService = new UserServiceImpl(userDao);
 
     public User login(String username, String password) {
         System.out.println("login requested by: " + username);
@@ -23,7 +26,7 @@ public class LoginController {
         return user;
     }
 
-    public void logOut(){
+    public void logOut() {
         System.out.println("logout requested");
     }
 
