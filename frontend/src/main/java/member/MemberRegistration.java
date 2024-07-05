@@ -25,16 +25,14 @@ public class MemberRegistration extends JPanel{
     private JComboBox<String> stateComboBox;
     private JTextField cityTextField;
 
-    private final List<String> DEFAULT = List.of("Default");
-
     public MemberRegistration(int width, int height) {
         setSize(width, height);
         if (getParent() != null && getParent().isVisible()) { // Check if parent is visible
             setVisible(true);
         }
         Utility.comboBoxItemSetter(stateComboBox, Utility.usState);
-        Utility.textFeildNumericOnly(phoneNumberTextField, false, 11);
-        Utility.textFeildNumericOnly(zipCodeTextField, false, 5);
+        Utility.textFieldNumericOnly(phoneNumberTextField, false, 11);
+        Utility.textFieldNumericOnly(zipCodeTextField, false, 5);
         add(basePanel);
     }
 

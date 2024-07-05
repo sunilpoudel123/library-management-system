@@ -25,20 +25,20 @@ public class ImportBook extends JPanel{
 
     private JButton cancelButton;
     private JButton submitButton;
-    private JComboBox stateComboBox;
-    private JComboBox cityComboBox;
+    private JComboBox<String> stateComboBox;
+    private JTextField cityTextField;
 
     public ImportBook(int width, int height){
         setSize(width, height);
         if (getParent() != null && getParent().isVisible()) { // Check if parent is visible
             setVisible(true);
         }
-        Utility.textFeildNumericOnly(borrowedPeriodTextField, false);
-        Utility.textFeildNumericOnly(copiedQtyTextField, false);
-        Utility.textFeildNumericOnly(availableQtyTextField, false);
-        Utility.textFeildNumericOnly(phoneNumberTextField, false);
-        Utility.textFeildNumericOnly(zipCodeTextField, false);
-
+        Utility.textFieldNumericOnly(borrowedPeriodTextField, false);
+        Utility.textFieldNumericOnly(copiedQtyTextField, false);
+        Utility.textFieldNumericOnly(availableQtyTextField, false);
+        Utility.textFieldNumericOnly(phoneNumberTextField, false, 11);
+        Utility.textFieldNumericOnly(zipCodeTextField, false, 5);
+        Utility.comboBoxItemSetter(stateComboBox, Utility.usState);
         add(basePanel);
     }
 }

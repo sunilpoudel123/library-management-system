@@ -1,7 +1,7 @@
 package utility;
 
 import javax.swing.*;
-import javax.swing.text.JTextComponent;
+import javax.swing.text.*;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
@@ -78,7 +78,7 @@ public class Utility extends JFrame {
         comboBox.setSelectedIndex(-1);
     }
 
-    public static void textFeildNumericOnly(JTextComponent jTextField, boolean isDouble){
+    public static void textFieldNumericOnly(JTextComponent jTextField, boolean isDouble){
         if(isDouble){
             jTextField.addKeyListener(new KeyAdapter() {
                 @Override
@@ -109,7 +109,7 @@ public class Utility extends JFrame {
         }
     }
 
-    public static void textFeildNumericOnly(JTextComponent jTextField, boolean isDouble, int length){
+    public static void textFieldNumericOnly(JTextComponent jTextField, boolean isDouble, int length){
         if(isDouble){
             jTextField.addKeyListener(new KeyAdapter() {
                 @Override

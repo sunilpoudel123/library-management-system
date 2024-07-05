@@ -30,7 +30,7 @@ public class AddBookCopied extends JPanel{
         if (getParent() != null && getParent().isVisible()) { // Check if parent is visible
             setVisible(true);
         }
-        Utility.textFeildNumericOnly(increaseCopiedQtyTextField, false);
+        Utility.textFieldNumericOnly(increaseCopiedQtyTextField, false);
         add(basePanel);
         isbnTextField.addKeyListener(new KeyAdapter() {
             @Override
