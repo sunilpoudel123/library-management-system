@@ -20,8 +20,7 @@ public class AddBookCopied extends JPanel{
     private JTextField copiedQtyTextField;
     private JTextField copiedAvailableQtyTextFeild;
     private JTextField increaseCopiedQtyTextField;
-    private JLabel statusLabel;
-    private JLabel titleLabel;
+    private JTextField titleTextField;
 
     private boolean isFound = false;
     private final boolean isSuccess = false;
@@ -53,13 +52,12 @@ public class AddBookCopied extends JPanel{
     }
     private void isBookExist(String isbn){
         if(!isFound){
-            statusLabel.setText("Status: Not Found!");
-            statusLabel.setForeground(Color.RED);
+            titleTextField.setForeground(Color.RED);
+            titleTextField.setText("N/A");
         }
         else{
-            statusLabel.setText("Status: Found!");
-            statusLabel.setForeground(Color.GREEN);
-            titleLabel.setText("Object-Oriented-Programming");
+            titleTextField.setForeground(Color.GREEN);
+            titleTextField.setText("Object-Oriented-Programming");
             copiedQtyTextField.setText("10");
             copiedAvailableQtyTextFeild.setText("2");
             increaseCopiedQtyTextField.setEditable(true);
