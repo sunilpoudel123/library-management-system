@@ -1,3 +1,6 @@
+import com.miu.User;
+import com.miu.dataStorage.DataStorage;
+
 import javax.swing.*;
 import java.awt.event.*;
 
@@ -11,7 +14,7 @@ public class Login extends JFrame {
     private final String TITLE = "Login";
 
     static boolean isSuccess = false;
-
+    private User user;
     public Login(){
         setTitle(TITLE);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -39,7 +42,7 @@ public class Login extends JFrame {
             @Override
             public void windowClosed(WindowEvent e) {
                 if(isSuccess){
-                    new LMS("Testing!");
+                    new LMS(user);
                 }
             }
         });
@@ -50,14 +53,13 @@ public class Login extends JFrame {
             JOptionPane.showMessageDialog(null, "Username or password is empty", "Empty fields", JOptionPane.WARNING_MESSAGE);
         }
         else{
-
-            if(!isSuccess){
+            user = DataStorage.testLogin(username, password);
+            if(user==null){
                 JOptionPane.showMessageDialog(null, "Username or password is incorrect", "Invalid credential", JOptionPane.WARNING_MESSAGE);
                 passwordField.setText("");
-                isSuccess = !isSuccess;
             }
             else{
-                JOptionPane.showMessageDialog(null, "Welcome back " + username +"!");
+                isSuccess = !isSuccess;
                 this.dispose();
             }
         }

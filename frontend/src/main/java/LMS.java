@@ -1,6 +1,7 @@
 import book.AddBookCopied;
 import book.BookCheckOut;
 import book.ImportBook;
+import com.miu.User;
 import member.EditMemberInformation;
 import member.MemberRegistration;
 
@@ -46,8 +47,8 @@ public class LMS extends JFrame {
 
     private final JMenuItem[] bookMenuItems = {addBookItemMenu /*, editBookItemMenu*/, addCopyBookItemMenu, checkoutBookItemMenu, viewBookItemMenu, searchBookItemMenu, editCopyBookItemMenu};
 
-    public LMS(String username){
-        setTitle(STR."\{TITLE} \{username}");
+    public LMS(User username){
+        setTitle(STR."\{TITLE} (\{username.getUsername()})");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setVisible(true);
         createMenuItem(memberMenu, memberMenuItems);
