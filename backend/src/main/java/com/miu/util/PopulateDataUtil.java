@@ -1,10 +1,8 @@
 package com.miu.util;
 
-import com.miu.model.User;
+import com.miu.User;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 public class PopulateDataUtil {

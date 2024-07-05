@@ -1,8 +1,5 @@
-package com.miu.model;
+package com.miu;
 
-import com.miu.model.CheckoutRecordEntry;
-
-import java.util.Date;
 import java.util.List;
 
 public class CheckoutRecord {
