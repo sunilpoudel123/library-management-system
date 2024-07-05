@@ -6,17 +6,15 @@ public class BookCopy extends Book implements Serializable {
     private String bookCopyId;
     private int copyNumber;
     private boolean isAvailable;
-    private Date dueDate;
     private String title;
     private String isbn;
     private int borrowedPeriod;
 
-    public BookCopy(String bookCopyId,int copyNumber,boolean isAvailable,Date dueDate,String title,String isbn,int borrowedPeriod){
+    public BookCopy(String bookCopyId,int copyNumber,boolean isAvailable,String title,String isbn,int borrowedPeriod){
         super(title,isbn,borrowedPeriod);
         this.bookCopyId =  bookCopyId;
         this.copyNumber = copyNumber;
         this.isAvailable = isAvailable;
-        this.dueDate = dueDate;
     }
 
     public String getBookCopyId(){
@@ -31,10 +29,6 @@ public class BookCopy extends Book implements Serializable {
         return isAvailable;
     }
 
-    public  Date getDueDate(){
-        return dueDate;
-    }
-
     public void setBookCopyId(String bookCopyId) {
         this.bookCopyId = bookCopyId;
     }
@@ -47,7 +41,4 @@ public class BookCopy extends Book implements Serializable {
         this.isAvailable = isAvailable;
     }
 
-    public void setDueDate(Date dueDate){
-        this.dueDate = dueDate;
-    }
 }

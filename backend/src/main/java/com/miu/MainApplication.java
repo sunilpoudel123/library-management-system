@@ -22,19 +22,18 @@ public class MainApplication {
             System.out.println("Login Successful for : " + user);
         } */
 
-
-
-        Address add1 = new Address("Street1", "Fairfield", "Iowa", "52555");
-        LibraryMember libraryMember = new LibraryMember(1, "toetoe1", "aung", "6412332028", add1, "member");
+      //  Address add1 = new Address("Street1", "Fairfield", "Iowa", "52555");
+     //   LibraryMember libraryMember = new LibraryMember(1, "toetoe1", "aung", "6412332028", add1, "member");
         LibraryMemberInterface factory = new LibraryMemberFactory();
 
+        factory.addMember(1, "toetoe1", "aung", "6412332028", "member","Street1", "Fairfield", "Iowa", "52555");
         //System.out.println(add1.getCity());
-        boolean isSuccess = factory.addMember(libraryMember);
-        if (isSuccess) {
-            System.out.println("Member was added successfully.");
-        } else {
-            System.out.println("Failed to add member.");
-        }
+      //  factory.addMember(libraryMember);
+//        if (isSuccess) {
+//            System.out.println("Member was added successfully.");
+//        } else {
+//            System.out.println("Failed to add member.");
+//        }
 
 
 
