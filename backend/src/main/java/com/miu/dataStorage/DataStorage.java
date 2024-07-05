@@ -1,4 +1,4 @@
-package com.miu.util;
+package com.miu.dataStorage;
 
 import com.miu.User;
 import com.miu.dao.UserDao;
@@ -7,7 +7,7 @@ import java.io.*;
 import java.util.HashMap;
 import java.util.Map;
 
-public class HelperUtil implements Serializable {
+public class DataStorage implements Serializable {
 
     private static UserDao userDao = new UserDao();
 
@@ -17,7 +17,7 @@ public class HelperUtil implements Serializable {
 
     private static Map<Object, Object> data = new HashMap<>();
 
-    public HelperUtil() {
+    public DataStorage() {
         this.data = load();
     }
 

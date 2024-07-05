@@ -1,7 +1,7 @@
 package com.miu;
 
-import com.miu.util.HelperUtil;
-import com.miu.util.PopulateDataUtil;
+import com.miu.dataStorage.DataStorage;
+import com.miu.dataStorage.PopulateDataUtil;
 
 import java.util.Scanner;
 
@@ -16,7 +16,7 @@ public class MainApplication {
         Scanner scanner = new Scanner(System.in);
         String username = scanner.nextLine();
 
-        User user = HelperUtil.testLogin(username);
+        User user = DataStorage.testLogin(username);
         if (user == null) {
             System.out.println("Invalid username or password");
         } else {
