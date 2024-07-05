@@ -1,9 +1,7 @@
 package com.miu.util;
 
-import com.miu.dao.UserDaoImpl;
-import com.miu.model.User;
-import com.miu.service.UserService;
-import com.miu.service.UserServiceImpl;
+import com.miu.User;
+import com.miu.dao.UserDao;
 
 import java.io.*;
 import java.util.HashMap;
@@ -11,9 +9,9 @@ import java.util.Map;
 
 public class HelperUtil implements Serializable {
 
-    private static UserDaoImpl userDao = new UserDaoImpl();
+    private static UserDao userDao = new UserDao();
 
-    private static UserService userService = new UserServiceImpl(userDao);
+    private static User user = new User();
 
     public static final String filePath = "resources/database/bin/database.ser";
 
@@ -24,8 +22,7 @@ public class HelperUtil implements Serializable {
     }
 
     public static User testLogin(String username) {
-        User user = userService.findByUsername(username);
-        return user;
+        return user.findByUsername(username);
     }
 
 

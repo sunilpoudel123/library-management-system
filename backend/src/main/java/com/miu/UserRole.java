@@ -1,4 +1,4 @@
-package com.miu.model;
+package com.miu;
 
 public abstract class UserRole{
     private String roleName;

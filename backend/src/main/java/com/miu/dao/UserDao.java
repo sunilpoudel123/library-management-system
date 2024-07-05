@@ -1,15 +1,54 @@
 package com.miu.dao;
 
-import com.miu.model.User;
+import com.miu.User;
+import com.miu.util.HelperUtil;
 
-public interface UserDao {
+import java.io.Serializable;
+import java.util.HashMap;
+import java.util.Map;
 
-    User login(String username, String password);
+public final class UserDao<T extends Serializable> {
 
-    User findByUsername(String username);
+    private static Map<String, User> users = new HashMap<>();
 
-    User findById(int id);
+    public UserDao() {
+        Map<Object, Object> loadedData = readDatabase();
+        if (loadedData != null) {
+            for (Map.Entry<Object, Object> entry : loadedData.entrySet()) {
+                if (entry.getValue() instanceof User) {
+                    users.put((String) entry.getKey(), (User) entry.getValue());
+                }
+            }
+        }
+    }
 
-    User save(User user);
+
+    public User login(String username, String password) {
+        return null;
+    }
+
+    public static User findByUsername(String username) {
+        User user = users.get(username);
+        if (user != null) {
+            return user;
+        } else {
+            System.out.println("User Not Found");
+            return null;
+        }
+    }
+
+    public static User findById(int id) {
+        return null;
+    }
+
+    public static User save(User user) {
+        return null;
+    }
+
+    private static Map<Object, Object> readDatabase() {
+        HelperUtil helperUtil = new HelperUtil();
+        Map<Object, Object> objectMap = helperUtil.load();
+        return objectMap;
+    }
 
 }

@@ -1,4 +1,4 @@
-package com.miu.model;
+package com.miu;
 
 public class Address {
     private String street;

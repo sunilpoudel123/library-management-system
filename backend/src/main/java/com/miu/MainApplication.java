@@ -1,6 +1,5 @@
 package com.miu;
 
-import com.miu.model.User;
 import com.miu.util.HelperUtil;
 import com.miu.util.PopulateDataUtil;
 

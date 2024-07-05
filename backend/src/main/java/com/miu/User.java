@@ -1,16 +1,20 @@
-package com.miu.model;
+package com.miu;
+
+import com.miu.dao.UserDao;
 
 import java.io.Serializable;
 
 public class User implements Serializable {
 
-    private static final long serialVersionUID = 1L;
+    private static UserDao userDao = new UserDao();
 
+    private static final long serialVersionUID = 1L;
     private long id;
     private String username;
     private String password;
     private String firstName;
     private String lastName;
+    private UserRole role;
 
     public long getId() {
         return id;
@@ -53,9 +57,34 @@ public class User implements Serializable {
     }
 
 
-
     @Override
     public String toString() {
         return "User{id=" + id + ", name='" + firstName + " " + lastName + "'}";
+    }
+
+    public User findByUsername(String username) {
+        System.out.println("finding user by: " + username);
+        User user = userDao.findByUsername(username);
+        return user;
+    }
+
+    public User getAuthenticatedUser(String userId, String password) {
+        System.out.println("finding user by: " + username);
+        User user = userDao.findByUsername(username);
+        return user;
+    }
+
+    public User login(String username, String password) {
+        System.out.println("login requested by: " + username);
+
+        User user = findByUsername(username);
+        if (user == null) {
+            System.out.println("user is not found");
+        }
+        if (user.getUsername().equals(username) && user.getPassword().equals(password)) {
+            System.out.println("login successful");
+        }
+
+        return user;
     }
 }

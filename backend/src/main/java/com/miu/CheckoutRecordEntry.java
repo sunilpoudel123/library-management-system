@@ -1,4 +1,4 @@
-package com.miu.model;
+package com.miu;
 
 import java.util.Date;
 

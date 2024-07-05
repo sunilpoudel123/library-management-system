@@ -1,4 +1,4 @@
-package com.miu.model;
+package com.miu;
 
 public class Librarian extends UserRole{
     public Librarian(String roleName) {
