@@ -47,7 +47,7 @@ public class LMS extends JFrame {
     private final JMenuItem[] bookMenuItems = {addBookItemMenu /*, editBookItemMenu*/, addCopyBookItemMenu, checkoutBookItemMenu, viewBookItemMenu, searchBookItemMenu, editCopyBookItemMenu};
 
     public LMS(String username){
-        setTitle(STR."\{TITLE} \{username})");
+        setTitle(STR."\{TITLE} \{username}");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setVisible(true);
         createMenuItem(memberMenu, memberMenuItems);

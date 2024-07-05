@@ -33,8 +33,8 @@ public class MemberRegistration extends JPanel{
             setVisible(true);
         }
         Utility.comboBoxItemSetter(stateComboBox, Utility.usState);
-        Utility.textFeildNumericOnly(phoneNumberTextField, false);
-        Utility.textFeildNumericOnly(zipCodeTextField, false);
+        Utility.textFeildNumericOnly(phoneNumberTextField, false, 11);
+        Utility.textFeildNumericOnly(zipCodeTextField, false, 5);
         add(basePanel);
     }
 

@@ -102,7 +102,41 @@ public class Utility extends JFrame {
                         e.consume(); // Consume the event to prevent character insertion
                     }
                     else{
-                        JOptionPane.showMessageDialog(null, "Number only", "Non-Numeric!", JOptionPane.WARNING_MESSAGE);
+
+                    }
+                }
+            });
+        }
+    }
+
+    public static void textFeildNumericOnly(JTextComponent jTextField, boolean isDouble, int length){
+        if(isDouble){
+            jTextField.addKeyListener(new KeyAdapter() {
+                @Override
+                public void keyTyped(KeyEvent e) {
+                    if(jTextField.getText().length() == length){
+                        e.consume();
+                    }
+                    char c = e.getKeyChar();
+                    String currentText = jTextField.getText();
+                    Pattern pattern = Pattern.compile(allowedCharsForDouble);
+                    Matcher matcher = pattern.matcher(currentText + c); // Include the typed character in the match
+                    if (!matcher.matches()) {
+                        e.consume();
+                    }
+                }
+            });
+        }
+        else{
+            jTextField.addKeyListener(new KeyAdapter() {
+                @Override
+                public void keyTyped(KeyEvent e) {
+                    if(jTextField.getText().length() == length){
+                        e.consume();
+                    }
+                    char c = e.getKeyChar();
+                    if (!Character.isDigit(c)) {
+                        e.consume(); // Consume the event to prevent character insertion
                     }
                 }
             });

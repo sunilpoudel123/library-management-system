@@ -31,8 +31,8 @@ public class EditMemberInformation extends JPanel{
         }
         Utility.comboBoxItemSetter(stateComboBox, Utility.usState);
         Utility.textFeildNumericOnly(memberIDTextField, false);
-        Utility.textFeildNumericOnly(phoneNumberTextField, false);
-        Utility.textFeildNumericOnly(zipCodeTextField, false);
+        Utility.textFeildNumericOnly(phoneNumberTextField, false, 11);
+        Utility.textFeildNumericOnly(zipCodeTextField, false, 5);
         add(basePanel);
     }
 }
