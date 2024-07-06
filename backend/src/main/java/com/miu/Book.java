@@ -19,7 +19,7 @@ public abstract class Book implements Serializable {
     private List<BookCopy> bookCopyList;
 
     public Book(String title, String isbn, int borrowedPeriod) {
-        this.bookId = HelperUtil.generateID();
+        this.bookId = HelperUtil.generateStringID();
         this.title = title;
         this.isbn = isbn;
         this.borrowedPeriod = borrowedPeriod;
