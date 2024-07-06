@@ -1,9 +1,11 @@
 package com.miu;
+
 import java.io.*;
+
 import com.miu.libraryinterface.Member;
 import com.miu.User;
 
-public class Librarian extends User implements Member,Serializable{
+public class Librarian extends User implements Member, Serializable {
 
     public Librarian(int userId, String userName, String password) {
         super(userId, userName, password);
@@ -13,8 +15,5 @@ public class Librarian extends User implements Member,Serializable{
         System.out.println("Book checkout");
     }
 
-    @Override
-    public void viewCheckoutRecord() {
-    }
 }
 
