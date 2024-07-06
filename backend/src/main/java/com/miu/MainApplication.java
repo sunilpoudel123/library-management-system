@@ -24,18 +24,15 @@ public class MainApplication {
 
       //  Address add1 = new Address("Street1", "Fairfield", "Iowa", "52555");
      //   LibraryMember libraryMember = new LibraryMember(1, "toetoe1", "aung", "6412332028", add1, "member");
+
         LibraryMemberInterface factory = new LibraryMemberFactory();
+        factory.addMember("keang", "hua", "6412332028", "member","Street1", "Fairfield", "Iowa", "52555");
+        LibraryMember m=factory.findMember(39);
 
-        factory.addMember(1, "toetoe1", "aung", "6412332028", "member","Street1", "Fairfield", "Iowa", "52555");
-        //System.out.println(add1.getCity());
-      //  factory.addMember(libraryMember);
-//        if (isSuccess) {
-//            System.out.println("Member was added successfully.");
-//        } else {
-//            System.out.println("Failed to add member.");
-//        }
-
-
-
+        if(m == null){
+            System.out.printf("not found");
+        } else {
+            System.out.println(m.getFirstName() +m.getLastName());
+        }
     }
 }
