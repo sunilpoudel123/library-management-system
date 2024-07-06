@@ -1,5 +1,7 @@
 package com.miu.person;
 
+import com.miu.Address;
+
 import java.io.Serializable;
 
 public class Author implements Serializable {
