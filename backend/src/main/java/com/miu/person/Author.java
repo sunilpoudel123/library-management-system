@@ -1,59 +1,69 @@
-package com.miu;
+package com.miu.person;
 
-import java.util.List;
+import java.io.Serializable;
 
-public class LibraryMember extends UserRole {
-    private String memberId;
+public class Author implements Serializable {
     private String firstName;
     private String lastName;
     private String phoneNumber;
-    private List<BookCopy> bookCopyList;
+    private String credentials;
+    private String shortBio;
     private Address address;
-    private String roleName;
 
-    // Constructors, getters, and setters
-    public LibraryMember(String memberId, String firstName,String lastName,String phoneNumber,Address address,String roleName) {
-        super(roleName);
-        this.memberId = memberId;
+    public Author(String firstName, String lastName, String phoneNumber, String credentials, String shortBio, Address address) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.phoneNumber = phoneNumber;
+        this.credentials = credentials;
+        this.shortBio = shortBio;
         this.address = address;
     }
 
-    public String getMemberId() {
-        return memberId;
-    }
     public String getFirstName() {
         return firstName;
     }
+
     public String getLastName() {
         return lastName;
     }
+
     public String getPhoneNumber() {
         return phoneNumber;
     }
-    public List<BookCopy> getBookCopyList() {
-        return bookCopyList;
+
+    public String getCredentials() {
+        return credentials;
     }
+
+    public String getShortBio() {
+        return shortBio;
+    }
+
     public Address getAddress() {
         return address;
     }
-    public void setMemberId(String memberId) {
-        this.memberId = memberId;
-    }
+
     public void setFirstName(String firstName) {
         this.firstName = firstName;
     }
+
     public void setLastName(String lastName) {
         this.lastName = lastName;
     }
+
     public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
+
     }
-    public void setBookCopyList(List<BookCopy> bookCopyList) {
-        this.bookCopyList = bookCopyList;
+
+    public void setCredentials(String credentials) {
+        this.credentials = credentials;
     }
+
+    public void setShortBio(String shortBio) {
+        this.shortBio = shortBio;
+    }
+
     public void setAddress(Address address) {
         this.address = address;
     }

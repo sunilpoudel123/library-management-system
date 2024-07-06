@@ -1,6 +1,6 @@
 package com.miu.dataStorage;
 
-import com.miu.User;
+import com.miu.person.User;
 
 import java.util.HashMap;
 import java.util.Map;

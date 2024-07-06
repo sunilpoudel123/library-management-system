@@ -1,8 +1,7 @@
 package com.miu.dao;
 
-import com.miu.Book;
-import com.miu.BookCopy;
-import com.miu.User;
+import com.miu.book.Book;
+import com.miu.book.BookCopy;
 import com.miu.dataStorage.DataStorage;
 
 import java.util.HashMap;

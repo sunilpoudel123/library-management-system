@@ -1,4 +1,4 @@
-package com.miu;
+package com.miu.person;
 
 import java.io.Serializable;
 

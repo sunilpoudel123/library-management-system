@@ -2,6 +2,7 @@ package com.miu;
 
 import com.miu.dataStorage.DataStorage;
 import com.miu.dataStorage.PopulateDataUtil;
+import com.miu.person.User;
 
 import java.util.Scanner;
 
