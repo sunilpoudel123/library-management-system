@@ -29,7 +29,10 @@ public class Book implements Publication, Serializable {
         this.bookCopyList = new ArrayList<>();
         this.bookCopyList.add(bookCopy);
     }
-
+    public Book(String isb)
+    {
+        this.bookId = HelperUtil.generateID();
+    }
     //Book with * Authors & 1 Copy
     public Book(String title, String isbn, int borrowedPeriod, List<Author> authorList, BookCopy bookCopy) {
         this.bookId = HelperUtil.generateID();
@@ -79,5 +82,8 @@ public class Book implements Publication, Serializable {
     }
     public int numberOfBookCopy(){
         return bookCopyList.size();
+    }
+    public String getISBN(){
+        return isbn;
     }
 }

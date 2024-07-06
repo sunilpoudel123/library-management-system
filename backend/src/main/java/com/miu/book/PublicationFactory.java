@@ -8,7 +8,9 @@ import java.util.List;
 
 public class PublicationFactory {
     public static Publication createBook(String title, String isbn, int borrowedPeriod, Author author, BookCopy bookCopy){
-        return new Book(title, isbn, borrowedPeriod, author, bookCopy);
+        Book book = new Book(title, isbn, borrowedPeriod, author, bookCopy);
+        bookCopy.setBook(book);
+        return book;
     }
     public static Publication createBook(String title, String isbn, int borrowedPeriod, List<Author> authorList, BookCopy bookCopy){
         return new Book(title, isbn, borrowedPeriod, authorList, bookCopy);

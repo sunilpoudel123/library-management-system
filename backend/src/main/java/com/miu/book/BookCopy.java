@@ -15,4 +15,7 @@ public class BookCopy extends Book{
     public void setBook(Book book){
         this.book = book;
     }
+    public Book getBook(){
+        return this.book;
+    }
 }

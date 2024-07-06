@@ -13,6 +13,13 @@ import java.util.Scanner;
 public class MainApplication {
 
     public static void main(String[] args) {
+
+        BookCopy bookCopy = new BookCopy();
+        Author author = new Author("","", "", "","", null);
+        Book book = (Book) PublicationFactory.createBook("MPP", "16855", 7, author, bookCopy);
+
+        System.out.println(bookCopy.getBook().getISBN());
+
         System.out.println("Library Management System Running .... ");
         System.out.println("#### Default Users are adding #####");
         PopulateDataUtil.addUsers();
@@ -23,11 +30,6 @@ public class MainApplication {
         System.out.println("Enter your password for testing:");
         String password = scanner.nextLine();
         User user = DataStorage.testLogin(username, password);
-
-        BookCopy bookCopy = new BookCopy();
-        Author author = new Author("","", "", "","", null);
-        Book book = (Book) PublicationFactory.createBook("MPP", "16855", 7, author, bookCopy);
-        bookCopy.setBook(book);
 
         if (user == null) {
             System.out.println("Invalid username or password");
