@@ -15,7 +15,7 @@ public class MainApplication {
     public static void main(String[] args) {
 
         BookCopy bookCopy = new BookCopy();
-        Author author = new Author("","", "", "","", null);
+        Author author = new Author("", "", "", "", "", null);
         Book book = (Book) BookFactory.createBook("MPP", "16855", 7, author, bookCopy);
 
         System.out.println(bookCopy.getBook().getISBN());

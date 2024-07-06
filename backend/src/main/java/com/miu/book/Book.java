@@ -16,11 +16,12 @@ public class Book implements BookInterface, Serializable {
     private List<Author> authorList;
     private List<BookCopy> bookCopyList;
 
-    protected Book() {}
+    protected Book() {
+    }
 
     //Book with 1 Author & 1 Copy
     public Book(String title, String isbn, int borrowedPeriod, Author author, BookCopy bookCopy) {
-        this.bookId = HelperUtil.generateID();
+        this.bookId = HelperUtil.generateStringID();
         this.title = title;
         this.isbn = isbn;
         this.authorList = new ArrayList<>();
@@ -28,13 +29,14 @@ public class Book implements BookInterface, Serializable {
         this.bookCopyList = new ArrayList<>();
         this.bookCopyList.add(bookCopy);
     }
-    public Book(String isb)
-    {
-        this.bookId = HelperUtil.generateID();
+
+    public Book(String isbn) {
+        this.bookId = HelperUtil.generateStringID();
     }
+
     //Book with * Authors & 1 Copy
     public Book(String title, String isbn, int borrowedPeriod, List<Author> authorList, BookCopy bookCopy) {
-        this.bookId = HelperUtil.generateID();
+        this.bookId = HelperUtil.generateStringID();
         this.title = title;
         this.isbn = isbn;
         this.authorList = authorList;
@@ -44,7 +46,7 @@ public class Book implements BookInterface, Serializable {
 
     //Book with 1 Author & * Copies
     public Book(String title, String isbn, int borrowedPeriod, Author author, List<BookCopy> bookCopyList) {
-        this.bookId = HelperUtil.generateID();
+        this.bookId = HelperUtil.generateStringID();
         this.title = title;
         this.isbn = isbn;
         this.authorList = new ArrayList<>();
@@ -55,7 +57,7 @@ public class Book implements BookInterface, Serializable {
 
     //Book with * Authors & * Copies
     public Book(String title, String isbn, int borrowedPeriod, List<Author> authorList, List<BookCopy> bookCopyList) {
-        this.bookId = HelperUtil.generateID();
+        this.bookId = HelperUtil.generateStringID();
         this.title = title;
         this.isbn = isbn;
         this.borrowedPeriod = borrowedPeriod;
@@ -66,23 +68,28 @@ public class Book implements BookInterface, Serializable {
     public List<BookCopy> getBookCopyList() {
         return bookCopyList;
     }
-    public String getTitle(){
+
+    public String getTitle() {
         return title;
     }
 
     public void addBookDefaultCopy(BookCopy bookCopy) {
         bookCopyList.add(bookCopy);
     }
+
     public void setBookId(String bookId) {
         this.bookId = bookId;
     }
-    public int numberOfAuthor(){
+
+    public int numberOfAuthor() {
         return authorList.size();
     }
-    public int numberOfBookCopy(){
+
+    public int numberOfBookCopy() {
         return bookCopyList.size();
     }
-    public String getISBN(){
+
+    public String getISBN() {
         return isbn;
     }
 }
