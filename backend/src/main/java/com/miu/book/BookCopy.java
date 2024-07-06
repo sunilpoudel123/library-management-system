@@ -3,39 +3,22 @@ package com.miu.book;
 import com.miu.person.Author;
 import com.miu.util.HelperUtil;
 
-import java.util.List;
-
 public class BookCopy extends Book{
     private String bookCopyId;
     private boolean isAvailable;
+    private Book book;
 
     public BookCopy(){
-        this.bookCopyId=HelperUtil.generateID();
-        isAvailable = true;
-    }
-
-    public BookCopy(String title, String isbn, int borrowedPeriod, Author author, BookCopy bookCopy){
-        super(title, isbn, borrowedPeriod, author, bookCopy);
-        super.setBookId(HelperUtil.generateID());
         this.bookCopyId = HelperUtil.generateID();
         this.isAvailable = true;
     }
-    public BookCopy(String title, String isbn, int borrowedPeriod, List<Author> authorList, BookCopy bookCopy){
-        super(title, isbn, borrowedPeriod, authorList, bookCopy);
-        super.setBookId(HelperUtil.generateID());
-        this.bookCopyId = HelperUtil.generateID();
-        this.isAvailable = true;
+    public void setBook(Book book){
+        this.book = book;
     }
-    public BookCopy(String title, String isbn, int borrowedPeriod, Author author, List<BookCopy> bookCopyList){
-        super(title, isbn, borrowedPeriod, author, bookCopyList);
-        super.setBookId(HelperUtil.generateID());
-        this.bookCopyId = HelperUtil.generateID();
-        this.isAvailable = true;
-    }
-    public BookCopy(String title, String isbn, int borrowedPeriod, List<Author> authorList, List<BookCopy> bookCopyList){
-        super(title, isbn, borrowedPeriod, authorList, bookCopyList);
-        super.setBookId(HelperUtil.generateID());
-        this.bookCopyId = HelperUtil.generateID();
-        this.isAvailable = true;
+    public static void main(String[] args) {
+        BookCopy bookCopy = new BookCopy();
+        Author author = new Author("","", "", "","", null);
+        Book book = (Book) PublicationFactory.createBook("MPP", "16855", 7, author, bookCopy);
+        bookCopy.setBook(book);
     }
 }
