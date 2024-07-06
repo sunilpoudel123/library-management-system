@@ -2,6 +2,7 @@ package utility;
 
 import javax.swing.*;
 import javax.swing.text.*;
+import java.awt.*;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
@@ -140,6 +141,28 @@ public class Utility extends JFrame {
                     }
                 }
             });
+        }
+    }
+
+    public static void enableComponent(Component component, boolean enable){
+        component.setEnabled(enable);
+    }
+    public static void enableComponent(Component[] components, boolean enable){
+        for(Component component : components){
+            component.setEnabled(enable);
+        }
+    }
+    public static void resetComponent(Component[] components){
+        for(Component component : components){
+            if(component instanceof JTextComponent){
+                JTextComponent jTextComponent = (JTextComponent)component;
+                jTextComponent.setText(null);
+            }
+            else if (component instanceof JComboBox<?>) {
+                JComboBox<?> jTextComponent = (JComboBox<?>)component;
+                jTextComponent.setSelectedIndex(-1);
+
+            }
         }
     }
 }
