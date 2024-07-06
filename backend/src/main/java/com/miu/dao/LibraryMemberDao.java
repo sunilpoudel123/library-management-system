@@ -1,8 +1,7 @@
 package com.miu.dao;
 
-import com.miu.LibraryMember;
-import com.miu.User;
 import com.miu.dataStorage.DataStorage;
+import com.miu.person.LibraryMember;
 
 import java.io.Serializable;
 import java.lang.reflect.Member;

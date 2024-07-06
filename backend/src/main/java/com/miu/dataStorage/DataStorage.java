@@ -1,6 +1,8 @@
 package com.miu.dataStorage;
-import com.miu.User;
+
+import com.miu.person.User;
 import com.miu.dao.UserDao;
+
 import java.io.*;
 import java.util.HashMap;
 import java.util.Map;
@@ -9,7 +11,7 @@ public class DataStorage implements Serializable {
 
     private static UserDao userDao = new UserDao();
 
-    private static User user = new User(1,"toe","123");
+    private static User user = new User();
 
     public static final String filePath = "resources/database/bin/database.ser";
 
@@ -22,6 +24,7 @@ public class DataStorage implements Serializable {
     public static User testLogin(String username, String password) {
         return user.getAuthenticatedUser(username, password);
     }
+
 
     public static Map<Object, Object> read() {
         try (FileInputStream fileIn = new FileInputStream(filePath);
