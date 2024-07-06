@@ -59,10 +59,6 @@ public class LibraryMember   implements Member,Serializable  {
         this.address = address;
     }
 
-    @Override
-    public void viewCheckoutRecord() {
-        System.out.println("Viewing record: " + memberId);
-    }
 
     public LibraryMember addLibraryMember(LibraryMember libraryMember) {
         libraryMemberDao=new LibraryMemberDao();
