@@ -1,8 +1,5 @@
 package com.miu;
-import com.miu.dao.LibraryMemberDao;
-import com.miu.factory.*;
-import com.miu.libraryinterface.*;
-import com.miu.factory.MamberFactory;
+import com.miu.factory.MemberFactory;
 
 public class MainApplication {
 
@@ -27,7 +24,7 @@ public class MainApplication {
         //(int userId, String userName, String password, int memberId, String firstName, String lastName, String phoneNumber, Address address)
 
          Address add1 = new Address("Street1", "Fairfield", "Iowa", "52555");
-         LibraryMember member=  MamberFactory.addLibrarianMember(1,"tag","aung", "6412332028",add1);
+         LibraryMember member=  MemberFactory.addLibrarianMember(1,"tag","aung", "6412332028",add1);
          System.out.println(member.getFirstName());
          System.out.println(member.findMember(1));
 

@@ -1,10 +1,13 @@
 package com.miu;
+
 import java.io.*;
 import java.util.List;
+
 import com.miu.dao.LibraryMemberDao;
 import com.miu.libraryinterface.Member;
+import com.miu.util.HelperUtil;
 
-public class LibraryMember   implements Member,Serializable  {
+public class LibraryMember implements Member, Serializable {
     private static final long serialVersionUID = 1L; // Optional, for version control
     private int memberId;
     private String firstName;
@@ -13,10 +16,8 @@ public class LibraryMember   implements Member,Serializable  {
     private List<BookCopy> bookCopyList;
     private Address address;
 
-
-    LibraryMemberDao libraryMemberDao=new LibraryMemberDao();
     public LibraryMember(int memberId, String firstName, String lastName, String phoneNumber, Address address) {
-        this.memberId =  libraryMemberDao.findMaxId();
+        this.memberId = HelperUtil.generateID();
         this.firstName = firstName;
         this.lastName = lastName;
         this.phoneNumber = phoneNumber;
@@ -25,48 +26,57 @@ public class LibraryMember   implements Member,Serializable  {
     public int getMemberId() {
         return memberId;
     }
+
     public String getFirstName() {
         return firstName;
     }
+
     public String getLastName() {
         return lastName;
     }
+
     public String getPhoneNumber() {
         return phoneNumber;
     }
+
     public List<BookCopy> getBookCopyList() {
         return bookCopyList;
     }
+
     public Address getAddress() {
         return address;
     }
+
     public void setMemberId(int memberId) {
         this.memberId = memberId;
     }
+
     public void setFirstName(String firstName) {
         this.firstName = firstName;
     }
+
     public void setLastName(String lastName) {
         this.lastName = lastName;
     }
+
     public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
     }
+
     public void setBookCopyList(List<BookCopy> bookCopyList) {
         this.bookCopyList = bookCopyList;
     }
+
     public void setAddress(Address address) {
         this.address = address;
     }
 
 
-    public LibraryMember addLibraryMember(LibraryMember libraryMember) {
-        libraryMemberDao=new LibraryMemberDao();
-        return libraryMemberDao.addLibraryMember(libraryMember);
+    public static LibraryMember addLibraryMember(LibraryMember libraryMember) {
+        return LibraryMemberDao.addLibraryMember(libraryMember);
     }
 
-    public LibraryMember findMember(int memberId){
-        libraryMemberDao=new LibraryMemberDao();
-       return libraryMemberDao.findMember(memberId);
+    public static LibraryMember findMember(int memberId) {
+        return LibraryMemberDao.findMember(memberId);
     }
 }
