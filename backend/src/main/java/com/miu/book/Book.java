@@ -8,7 +8,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Book implements Publication, Serializable {
+public abstract class Book implements Publication, Serializable {
     private String bookId;
     private String title;
     private String isbn;
@@ -17,6 +17,7 @@ public class Book implements Publication, Serializable {
     private List<Author> authorList;
     private List<BookCopy> bookCopyList;
 
+    protected Book() {}
     //Book with 1 Author & 1 Copy
     public Book(String title, String isbn, int borrowedPeriod, Author author, BookCopy bookCopy) {
         this.bookId = HelperUtil.generateID();
@@ -62,6 +63,9 @@ public class Book implements Publication, Serializable {
         for(int i = 0; i < numberOfNewCopy; i++) {
 
         }
+    }
+    public void setBookId(String bookId) {
+        this.bookId = bookId;
     }
     public int numberOfAuthor(){
         return authorList.size();
