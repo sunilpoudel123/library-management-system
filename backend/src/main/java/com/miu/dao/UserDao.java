@@ -14,7 +14,7 @@ public final class UserDao<T extends Serializable> {
         if (loadedData != null) {
             for (Map.Entry<Object, Object> entry : loadedData.entrySet()) {
                 if (entry.getValue() instanceof User) {
-                    users.put((String) entry.getKey(), (User) entry.getValue());
+                    users.put((String) entry.getKey().toString(), (User) entry.getValue());
                 }
             }
         }

@@ -9,7 +9,7 @@ public class DataStorage implements Serializable {
 
     private static UserDao userDao = new UserDao();
 
-    private static User user = new User();
+    private static User user = new User(1,"toe","123");
 
     public static final String filePath = "resources/database/bin/database.ser";
 
@@ -40,14 +40,12 @@ public class DataStorage implements Serializable {
         return data;
     }
 
-    public static boolean write(Object object) {
+    public static void write(Object object) {
         try (FileOutputStream fileOut = new FileOutputStream(filePath);
              ObjectOutputStream out = new ObjectOutputStream(fileOut)) {
             out.writeObject(object);
-            return true;
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return false;
     }
 }

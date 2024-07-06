@@ -1,11 +1,10 @@
 package com.miu;
 import java.io.*;
 import java.util.List;
-
 import com.miu.dao.LibraryMemberDao;
 import com.miu.libraryinterface.Member;
 
-public class LibraryMember extends User  implements Member,Serializable  {
+public class LibraryMember   implements Member,Serializable  {
     private static final long serialVersionUID = 1L; // Optional, for version control
     private int memberId;
     private String firstName;
@@ -13,10 +12,11 @@ public class LibraryMember extends User  implements Member,Serializable  {
     private String phoneNumber;
     private List<BookCopy> bookCopyList;
     private Address address;
+
+
     LibraryMemberDao libraryMemberDao=new LibraryMemberDao();
-    public LibraryMember(int userId, String userName, String password, int memberId, String firstName, String lastName, String phoneNumber, Address address) {
-        super(userId, userName, password);
-        this.memberId = memberId;
+    public LibraryMember(int memberId, String firstName, String lastName, String phoneNumber, Address address) {
+        this.memberId =  libraryMemberDao.findMaxId();
         this.firstName = firstName;
         this.lastName = lastName;
         this.phoneNumber = phoneNumber;
@@ -59,13 +59,18 @@ public class LibraryMember extends User  implements Member,Serializable  {
         this.address = address;
     }
 
-
     @Override
     public void viewCheckoutRecord() {
         System.out.println("Viewing record: " + memberId);
     }
 
-    public boolean addLibraryMember(LibraryMember libraryMember) {
+    public LibraryMember addLibraryMember(LibraryMember libraryMember) {
+        libraryMemberDao=new LibraryMemberDao();
         return libraryMemberDao.addLibraryMember(libraryMember);
+    }
+
+    public LibraryMember findMember(int memberId){
+        libraryMemberDao=new LibraryMemberDao();
+       return libraryMemberDao.findMember(memberId);
     }
 }

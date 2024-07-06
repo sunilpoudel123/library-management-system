@@ -21,19 +21,31 @@ public final class LibraryMemberDao<T extends Serializable> {
         }
     }
 
-    public static LibraryMember findMember(int memberId) {
-        for (Map.Entry<String, LibraryMember> entry : members.entrySet()) {
-            return entry.getValue();
+    public LibraryMember findMember(int memberId) {
+          for (Map.Entry<String, LibraryMember> entry : members.entrySet()) {
+
+             if (entry.getValue().getMemberId() == memberId) {
+                return entry.getValue();
+            }
         }
         return null;
     }
 
-    public static int findMaximumMemberId() {
-        return findMaxId().orElse(0); // Return 0 if no members exist
+    public LibraryMember addLibraryMember(LibraryMember libraryMember) {
+            Map<Object, Object> data = new HashMap<>();
+            data.put(libraryMember.getMemberId(), libraryMember);
+            DataStorage.write(data);
+            System.out.println("data write successfully");
+            for (Map.Entry<String, LibraryMember> entry : members.entrySet()) {
+                if (entry.getValue().getMemberId() == libraryMember.getMemberId()) {
+                    return entry.getValue();
+                }
+            }
+            return null;
     }
 
-    public static Optional<Integer> findMaxId() {
-        return members.keySet().stream()
+    public int findMaxId() {
+         return members.keySet().stream()
                 .map(id -> {
                     try {
                         return Integer.parseInt(id);
@@ -42,18 +54,7 @@ public final class LibraryMemberDao<T extends Serializable> {
                     }
                 })
                 .filter(id -> id != null)
-                .max(Integer::compareTo);
-    }
-
-    public static boolean addLibraryMember(LibraryMember libraryMember) {
-            boolean flag;
-            Map<Object, Object> data = new HashMap<>();
-            data.put(libraryMember.getMemberId(), libraryMember);
-            flag= DataStorage.write(data);
-            if (flag) {
-                System.out.println("data write successfully");
-            }
-        return flag;
+                .max(Integer::compareTo).orElse(0);
     }
 
  }
