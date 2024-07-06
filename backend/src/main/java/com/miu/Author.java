@@ -1,12 +1,15 @@
 package com.miu;
 
-public class Author{
+import java.io.Serializable;
+
+public class Author implements Serializable {
     private String firstName;
     private String lastName;
     private String phoneNumber;
     private String credentials;
     private String shortBio;
     private Address address;
+
     public Author(String firstName, String lastName, String phoneNumber, String credentials, String shortBio, Address address) {
         this.firstName = firstName;
         this.lastName = lastName;
@@ -19,9 +22,11 @@ public class Author{
     public String getFirstName() {
         return firstName;
     }
+
     public String getLastName() {
         return lastName;
     }
+
     public String getPhoneNumber() {
         return phoneNumber;
     }
@@ -29,9 +34,11 @@ public class Author{
     public String getCredentials() {
         return credentials;
     }
+
     public String getShortBio() {
         return shortBio;
     }
+
     public Address getAddress() {
         return address;
     }
@@ -43,17 +50,20 @@ public class Author{
     public void setLastName(String lastName) {
         this.lastName = lastName;
     }
+
     public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
 
     }
+
     public void setCredentials(String credentials) {
         this.credentials = credentials;
     }
 
-    public  void setShortBio(String shortBio) {
+    public void setShortBio(String shortBio) {
         this.shortBio = shortBio;
     }
+
     public void setAddress(Address address) {
         this.address = address;
     }
