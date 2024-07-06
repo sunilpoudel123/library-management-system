@@ -1,6 +1,7 @@
 package com.miu.util;
 
 import java.util.Random;
+import java.util.UUID;
 
 public class HelperUtil {
     private static final Random random = new Random();
@@ -9,6 +10,10 @@ public class HelperUtil {
 
     public static int generateID() {
         return random.nextInt((MAX - MIN) + 1) + MIN;
+    }
+
+    public static String generateStringID() {
+        return UUID.randomUUID().toString();
     }
 
 }
