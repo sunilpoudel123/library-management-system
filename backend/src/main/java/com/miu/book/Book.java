@@ -1,6 +1,5 @@
 package com.miu.book;
 
-import com.miu.dao.BookDao;
 import com.miu.person.Author;
 import com.miu.util.HelperUtil;
 
@@ -8,7 +7,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Book implements Publication, Serializable {
+public class Book implements BookInterface, Serializable {
     private String bookId;
     private String title;
     private String isbn;

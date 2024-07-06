@@ -2,7 +2,7 @@ package com.miu;
 
 import com.miu.book.Book;
 import com.miu.book.BookCopy;
-import com.miu.book.PublicationFactory;
+import com.miu.book.BookFactory;
 import com.miu.dataStorage.DataStorage;
 import com.miu.dataStorage.PopulateDataUtil;
 import com.miu.person.Author;
@@ -16,7 +16,7 @@ public class MainApplication {
 
         BookCopy bookCopy = new BookCopy();
         Author author = new Author("","", "", "","", null);
-        Book book = (Book) PublicationFactory.createBook("MPP", "16855", 7, author, bookCopy);
+        Book book = (Book) BookFactory.createBook("MPP", "16855", 7, author, bookCopy);
 
         System.out.println(bookCopy.getBook().getISBN());
 
