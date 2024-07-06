@@ -39,15 +39,15 @@ public class LMS extends JFrame {
     private final JMenuItem checkoutBookItemMenu = new JMenuItem("Checkout Book");
     private final JMenuItem viewBookItemMenu = new JMenuItem("List All the Book");
     private final JMenuItem searchBookItemMenu = new JMenuItem("Search Book");
-    private final JMenuItem editCopyBookItemMenu = new JMenuItem("Edit Copied Book");
 
     private JMenuBar mainMenu;
     private JPanel menuPanel;
     private JPanel dynamicView;
 
-    private final JMenuItem[] bookMenuItems = {addBookItemMenu /*, editBookItemMenu*/, addCopyBookItemMenu, checkoutBookItemMenu, viewBookItemMenu, searchBookItemMenu, editCopyBookItemMenu};
+    private final JMenuItem[] bookMenuItems = {addBookItemMenu, addCopyBookItemMenu, checkoutBookItemMenu, viewBookItemMenu, searchBookItemMenu};
 
     public LMS(String username){
+
         setTitle(STR."\{TITLE} \{username}");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setVisible(true);
@@ -62,8 +62,6 @@ public class LMS extends JFrame {
         setSize(1000, 500);
         setLocationRelativeTo(null);
         setResizable(false);
-
-
 
         homeMenu.addMouseListener(new MouseAdapter() {
             @Override

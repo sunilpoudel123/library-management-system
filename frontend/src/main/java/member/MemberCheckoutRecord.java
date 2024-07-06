@@ -4,11 +4,8 @@ import utility.Utility;
 
 import javax.swing.*;
 import javax.swing.table.AbstractTableModel;
-import javax.swing.table.DefaultTableModel;
 import java.awt.*;
-import java.lang.reflect.Member;
 import java.util.ArrayList;
-import java.util.List;
 
 public class MemberCheckoutRecord extends JPanel {
 
