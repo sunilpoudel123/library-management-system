@@ -15,10 +15,4 @@ public class BookCopy extends Book{
     public void setBook(Book book){
         this.book = book;
     }
-    public static void main(String[] args) {
-        BookCopy bookCopy = new BookCopy();
-        Author author = new Author("","", "", "","", null);
-        Book book = (Book) PublicationFactory.createBook("MPP", "16855", 7, author, bookCopy);
-        bookCopy.setBook(book);
-    }
 }
