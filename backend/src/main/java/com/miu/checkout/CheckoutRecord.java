@@ -1,4 +1,4 @@
-package com.miu;
+package com.miu.checkout;
 
 import java.util.List;
 

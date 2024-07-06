@@ -1,8 +1,7 @@
 package com.miu.dao;
 
-import com.miu.Book;
-import com.miu.BookCopy;
-import com.miu.User;
+import com.miu.book.Book;
+import com.miu.book.BookCopy;
 import com.miu.dataStorage.DataStorage;
 
 import java.util.HashMap;
@@ -30,7 +29,7 @@ public class BookDao {
 
     public static Book save(Book book) {
         Map<Object, Object> data = new HashMap<>();
-        data.put(book.getIsbn(), book);
+//        data.put(book.getIsbn(), book);
         DataStorage.write(data);
         System.out.println("data write successfully");
         return null;
@@ -42,7 +41,7 @@ public class BookDao {
 
     public static Book saveBookCopy(BookCopy bookCopy) {
         Map<Object, Object> data = new HashMap<>();
-        data.put(bookCopy.getIsbn(), bookCopy);
+//        data.put(bookCopy.getIsbn(), bookCopy);
         DataStorage.write(data);
         System.out.println("data write successfully");
         return null;

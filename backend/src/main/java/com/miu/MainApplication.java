@@ -1,13 +1,28 @@
 package com.miu;
-import com.miu.factory.MemberFactory;
+
+import com.miu.book.Book;
+import com.miu.book.BookCopy;
+import com.miu.book.BookFactory;
+import com.miu.dataStorage.DataStorage;
+import com.miu.dataStorage.PopulateDataUtil;
+import com.miu.person.Author;
+import com.miu.person.User;
+
+import java.util.Scanner;
 
 public class MainApplication {
 
     public static void main(String[] args) {
-   /*     System.out.println("Library Management System Running .... ");
+
+        BookCopy bookCopy = new BookCopy();
+        Author author = new Author("", "", "", "", "", null);
+        Book book = (Book) BookFactory.createBook("MPP", "16855", 7, author, bookCopy);
+
+        System.out.println(bookCopy.getBook().getISBN());
+
+        System.out.println("Library Management System Running .... ");
         System.out.println("#### Default Users are adding #####");
         PopulateDataUtil.addUsers();
-
         System.out.println("## Users are add successful ##");
         System.out.println("### Please login your username for testing: ###");
         Scanner scanner = new Scanner(System.in);
@@ -15,30 +30,11 @@ public class MainApplication {
         System.out.println("Enter your password for testing:");
         String password = scanner.nextLine();
         User user = DataStorage.testLogin(username, password);
+
         if (user == null) {
             System.out.println("Invalid username or password");
         } else {
             System.out.println("Login Successful for : " + user);
-        } */
-
-        //(int userId, String userName, String password, int memberId, String firstName, String lastName, String phoneNumber, Address address)
-
-         Address add1 = new Address("Street1", "Fairfield", "Iowa", "52555");
-         LibraryMember member=  MemberFactory.addLibrarianMember(1,"tag","aung", "6412332028",add1);
-         System.out.println(member.getFirstName());
-         System.out.println(member.findMember(1));
-
-       //    factory.addMember("keang", "hua", "6412332028", "member","Street1", "Fairfield", "Iowa", "52555");
-       // LibraryMember m=factory.findMember(39);
-        /*
-        LibraryMemberInterface factory = new LibraryMemberFactory();
-        factory.addMember("keang", "hua", "6412332028", "member","Street1", "Fairfield", "Iowa", "52555");
-        LibraryMember m=factory.findMember(39);
-
-        if(m == null){
-            System.out.printf("not found");
-        } else {
-            System.out.println(m.getFirstName() +m.getLastName());
-        }*/
+        }
     }
 }
