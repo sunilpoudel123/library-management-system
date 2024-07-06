@@ -1,6 +1,8 @@
 package com.miu;
 
-public abstract class UserRole{
+import java.io.Serializable;
+
+public abstract class UserRole implements Serializable {
     private String roleName;
     public UserRole(String roleName){
         this.roleName = roleName;

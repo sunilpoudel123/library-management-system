@@ -1,7 +1,19 @@
 package com.miu;
 
-public class Librarian extends UserRole{
-    public Librarian(String roleName) {
-        super(roleName);
+import java.io.*;
+
+import com.miu.libraryinterface.Member;
+import com.miu.User;
+
+public class Librarian extends User implements Member, Serializable {
+
+    public Librarian(int userId, String userName, String password) {
+        super(userId, userName, password);
     }
+
+    public void checkoutBook() {
+        System.out.println("Book checkout");
+    }
+
 }
+

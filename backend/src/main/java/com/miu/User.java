@@ -1,35 +1,35 @@
 package com.miu;
-
 import com.miu.dao.UserDao;
-
 import java.io.Serializable;
 
 public class User implements Serializable {
 
     private static UserDao userDao = new UserDao();
-
     private static final long serialVersionUID = 1L;
-    private long id;
-    private String username;
+    private int userId;
+    private String userName;
     private String password;
-    private String firstName;
-    private String lastName;
-    private UserRole role;
 
-    public long getId() {
-        return id;
+    public User(int userId, String userName, String password) {
+        this.userId = userId;
+        this.userName = userName;
+        this.password = password;
     }
 
-    public void setId(long id) {
-        this.id = id;
+    public int getId() {
+        return userId;
     }
 
-    public String getUsername() {
-        return username;
+    public void setId(int userId) {
+        this.userId = userId;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String username) {
+        this.userName = userName;
     }
 
     public String getPassword() {
@@ -40,44 +40,20 @@ public class User implements Serializable {
         this.password = password;
     }
 
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
-
-    public UserRole getRole() {
-        return role;
-    }
-
-    public void setRole(UserRole role) {
-        this.role = role;
-    }
-
     @Override
     public String toString() {
-        return "User{id=" + id + ", name='" + firstName + " " + lastName + "'}";
+        return "User{userId=" + userId + ", userName='" + userName + "'}";
     }
 
-    public User findByUsername(String username) {
-        System.out.println("finding user by: " + username);
-        User user = userDao.findByUsername(username);
+    public User findByUsername(String userName) {
+        System.out.println("finding user by: " + userName);
+        User user = userDao.findByUsername(userName);
         return user;
     }
 
-    public User getAuthenticatedUser(String username, String password) {
-        System.out.println("Login requested by: " + username);
-        User user = findByUsername(username);
+    public User getAuthenticatedUser(String userName, String password) {
+        System.out.println("Login requested by: " + userName);
+        User user = findByUsername(userName);
         if (user == null) {
             System.out.println("User not found");
             return null;
@@ -91,14 +67,11 @@ public class User implements Serializable {
         }
     }
 
-    public User addUser(String username, String password, String firstName, String lastName) {
-        User user = new User();
-        System.out.println("Adding user: " + username);
-        user.setUsername(username);
+    public User addUser(String userName, String password) {
+        User user = new User(0,userName,password);
+        System.out.println("Adding user: " + userName);
+        user.setUserName(userName);
         user.setPassword(password);
-        user.setFirstName(firstName);
-        user.setLastName(lastName);
-//        user.setRole();
         userDao.save(user);
         System.out.println("User successfully added");
         return user;
