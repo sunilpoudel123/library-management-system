@@ -3,6 +3,7 @@ import book.BookCheckOut;
 import book.ImportBook;
 import com.miu.User;
 import member.EditMemberInformation;
+import member.MemberCheckoutRecord;
 import member.MemberRegistration;
 
 import javax.swing.*;
@@ -60,7 +61,6 @@ public class LMS extends JFrame {
         setJMenuBar(mainMenu);
         setContentPane(basePanel);
         setSize(1000, 500);
-        basePanel.setSize(1000, basePanel.getHeight());
         setLocationRelativeTo(null);
         setResizable(false);
 
@@ -84,6 +84,11 @@ public class LMS extends JFrame {
         editMemberItemMenu.addActionListener(e ->{
             EditMemberInformation editMemberInformation = new EditMemberInformation(dynamicView.getWidth(), dynamicView.getHeight());
             setDynamicView(editMemberInformation);
+        });
+
+        viewCheckoutRecordItemMenu.addActionListener(e->{
+            MemberCheckoutRecord memberCheckoutRecord = new MemberCheckoutRecord(dynamicView.getWidth(), dynamicView.getHeight());
+            setDynamicView(memberCheckoutRecord);
         });
 
         /*Start Book function*/
