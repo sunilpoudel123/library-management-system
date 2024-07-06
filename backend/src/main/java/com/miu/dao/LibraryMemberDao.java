@@ -15,8 +15,6 @@ public final class LibraryMemberDao<T extends Serializable> {
         if (loadedData != null) {
             for (Map.Entry<Object, Object> entry : loadedData.entrySet()) {
                 if (entry.getValue() instanceof LibraryMember) {
-                    LibraryMember member = (LibraryMember) entry.getValue();
-                    System.out.println("LibraryMember ***" +((String) entry.getKey().toString()));
                     members.put((String) entry.getKey().toString(), (LibraryMember) entry.getValue());
                 }
             }
@@ -25,7 +23,6 @@ public final class LibraryMemberDao<T extends Serializable> {
 
     public static LibraryMember findMember(int memberId) {
         for (Map.Entry<String, LibraryMember> entry : members.entrySet()) {
-             // System.out.println(entry.getValue().getMemberId());
             return entry.getValue();
         }
         return null;
@@ -48,7 +45,7 @@ public final class LibraryMemberDao<T extends Serializable> {
                 .max(Integer::compareTo);
     }
 
-    public static boolean addMember(LibraryMember libraryMember) {
+    public static boolean addLibraryMember(LibraryMember libraryMember) {
             boolean flag;
             Map<Object, Object> data = new HashMap<>();
             data.put(libraryMember.getMemberId(), libraryMember);
@@ -56,7 +53,7 @@ public final class LibraryMemberDao<T extends Serializable> {
             if (flag) {
                 System.out.println("data write successfully");
             }
-         return flag;
+        return flag;
     }
 
  }

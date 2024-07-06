@@ -20,7 +20,6 @@ public final class UserDao<T extends Serializable> {
         }
     }
 
-
     public User login(String username, String password) {
         return null;
     }
@@ -41,7 +40,7 @@ public final class UserDao<T extends Serializable> {
 
     public static User save(User user) {
         Map<Object, Object> data = new HashMap<>();
-        data.put(user.getUsername(), user);
+        data.put(user.getUserName(), user);
         DataStorage.write(data);
         System.out.println("data write successfully");
         return null;

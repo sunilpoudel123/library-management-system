@@ -2,7 +2,10 @@ package com.miu;
 import java.io.*;
 import java.util.List;
 
-public class LibraryMember extends UserRole implements Serializable {
+import com.miu.dao.LibraryMemberDao;
+import com.miu.libraryinterface.Member;
+
+public class LibraryMember extends User  implements Member,Serializable  {
     private static final long serialVersionUID = 1L; // Optional, for version control
     private int memberId;
     private String firstName;
@@ -10,16 +13,13 @@ public class LibraryMember extends UserRole implements Serializable {
     private String phoneNumber;
     private List<BookCopy> bookCopyList;
     private Address address;
-    private String roleName;
-
-    // Constructors, getters, and setters
-    public LibraryMember(int memberId, String firstName,String lastName,String phoneNumber,Address address,String roleName) {
-        super(roleName);
+    LibraryMemberDao libraryMemberDao=new LibraryMemberDao();
+    public LibraryMember(int userId, String userName, String password, int memberId, String firstName, String lastName, String phoneNumber, Address address) {
+        super(userId, userName, password);
         this.memberId = memberId;
         this.firstName = firstName;
         this.lastName = lastName;
         this.phoneNumber = phoneNumber;
-        this.address = address;
     }
 
     public int getMemberId() {
@@ -59,4 +59,13 @@ public class LibraryMember extends UserRole implements Serializable {
         this.address = address;
     }
 
+
+    @Override
+    public void viewCheckoutRecord() {
+        System.out.println("Viewing record: " + memberId);
+    }
+
+    public boolean addLibraryMember(LibraryMember libraryMember) {
+        return libraryMemberDao.addLibraryMember(libraryMember);
+    }
 }

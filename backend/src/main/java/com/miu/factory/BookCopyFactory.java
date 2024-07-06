@@ -1,5 +1,5 @@
 package com.miu.factory;
-import com.miu.factoryinterface.BookCopyInterface;
+import com.miu.libraryinterface.BookCopyInterface;
 
 public class BookCopyFactory {
     public boolean addBookCopy(BookCopyInterface bookCopy) {

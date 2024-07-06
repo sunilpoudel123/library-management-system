@@ -1,4 +1,4 @@
-package com.miu.factoryinterface;
+package com.miu.libraryinterface;
 
 public interface BookCopyInterface {
     public boolean addBookCopy(BookCopyInterface bookCopy);
