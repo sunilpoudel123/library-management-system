@@ -79,7 +79,6 @@ public final class LibraryMemberDao<T extends Serializable> {
     }
 
 
-
     public static int findMaxId() {
         return members.keySet().stream()
                 .map(id -> {

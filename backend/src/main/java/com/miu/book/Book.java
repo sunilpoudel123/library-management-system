@@ -41,7 +41,7 @@ public class Book implements BookInterface, Serializable {
         this.bookId = bookId;
     }
 
-    public int getBorrowedPeriod(){
+    public int getBorrowedPeriod() {
         return borrowedPeriod;
     }
 
@@ -83,25 +83,28 @@ public class Book implements BookInterface, Serializable {
     }
 
     public BookCopy checkAvailableCopy() {
-        for(BookCopy bookCopy : this.getBookCopyList()){
-            if(bookCopy.getIsAvailable())
+        for (BookCopy bookCopy : this.getBookCopyList()) {
+            if (bookCopy.getIsAvailable())
                 return bookCopy;
         }
         return null;
     }
 
     public int checkAvailableCopyQty() {
-        int count =0;
-        for(BookCopy bookCopy : this.getBookCopyList()){
-            if(bookCopy.getIsAvailable())
+        int count = 0;
+        for (BookCopy bookCopy : this.getBookCopyList()) {
+            if (bookCopy.getIsAvailable())
                 count++;
         }
         return count;
     }
 
-    public Book(){
+    public Book() {
 
     }
 
+    public static Book editBook(Book book) {
+        return BookDao.editBook(book);
+    }
 
 }
