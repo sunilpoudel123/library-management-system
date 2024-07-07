@@ -8,62 +8,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Book implements BookInterface, Serializable {
-    private String bookId;
-    private String title;
-    private String isbn;
-    private int borrowedPeriod;
+    protected String bookId;
+    protected String title;
+    protected String isbn;
+    protected int borrowedPeriod;
 
-    private List<Author> authorList;
-    private List<BookCopy> bookCopyList;
-
-    protected Book() {
-    }
-
-    //Book with 1 Author & 1 Copy
-    public Book(String title, String isbn, int borrowedPeriod, Author author, BookCopy bookCopy) {
-        this.bookId = HelperUtil.generateStringID();
-        this.title = title;
-        this.isbn = isbn;
-        this.authorList = new ArrayList<>();
-        this.authorList.add(author);
-        this.bookCopyList = new ArrayList<>();
-        this.bookCopyList.add(bookCopy);
-    }
-
-    public Book(String isbn) {
-        this.bookId = HelperUtil.generateStringID();
-    }
-
-    //Book with * Authors & 1 Copy
-    public Book(String title, String isbn, int borrowedPeriod, List<Author> authorList, BookCopy bookCopy) {
-        this.bookId = HelperUtil.generateStringID();
-        this.title = title;
-        this.isbn = isbn;
-        this.authorList = authorList;
-        this.bookCopyList = new ArrayList<>();
-        this.bookCopyList.add(bookCopy);
-    }
-
-    //Book with 1 Author & * Copies
-    public Book(String title, String isbn, int borrowedPeriod, Author author, List<BookCopy> bookCopyList) {
-        this.bookId = HelperUtil.generateStringID();
-        this.title = title;
-        this.isbn = isbn;
-        this.authorList = new ArrayList<>();
-        this.authorList.add(author);
-        this.bookCopyList = new ArrayList<>();
-        this.bookCopyList = bookCopyList;
-    }
-
-    //Book with * Authors & * Copies
-    public Book(String title, String isbn, int borrowedPeriod, List<Author> authorList, List<BookCopy> bookCopyList) {
-        this.bookId = HelperUtil.generateStringID();
-        this.title = title;
-        this.isbn = isbn;
-        this.borrowedPeriod = borrowedPeriod;
-        this.authorList = authorList;
-        this.bookCopyList = bookCopyList;
-    }
+    protected List<Author> authorList;
+    protected List<BookCopy> bookCopyList;
 
     public List<BookCopy> getBookCopyList() {
         return bookCopyList;

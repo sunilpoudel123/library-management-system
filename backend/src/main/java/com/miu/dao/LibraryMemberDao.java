@@ -7,6 +7,7 @@ import com.miu.person.LibraryMember;
 import java.io.Serializable;
 import java.lang.reflect.Member;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
@@ -36,8 +37,6 @@ public final class LibraryMemberDao<T extends Serializable> {
     }
 
     public static LibraryMember addLibraryMember(LibraryMember libraryMember) {
-        Map<Object, Object> data = new HashMap<>();
-        data.put(libraryMember.getMemberId(), libraryMember);
         DataStorageFacade.saveNewMember(libraryMember);
         System.out.println("data write successfully");
         for (Map.Entry<Integer, LibraryMember> entry : members.entrySet()) {
@@ -51,12 +50,13 @@ public final class LibraryMemberDao<T extends Serializable> {
     public static LibraryMember editMember(LibraryMember libraryMember) {
         boolean updated = false;
         System.out.println("Updating member with ID: " + libraryMember.getMemberId());
-        Map<Object, Object> loadedData = DataStorage.read();
+        LibraryMember loadedData = LibraryMemberDao.findMember(libraryMember.getMemberId());
         if (loadedData != null) {
-            for (Map.Entry<Object, Object> entry : loadedData.entrySet()) {
+            for (Map.Entry<Integer, LibraryMember> entry : members.entrySet()) {
                 if (entry.getValue() instanceof LibraryMember) {
-                    LibraryMember member = (LibraryMember) entry.getValue();
-                    if (member.getMemberId() == libraryMember.getMemberId()) {
+                    LibraryMember member = entry.getValue();
+                    System.out.println(member.getMemberId() + "==" + libraryMember.getMemberId());
+                    if (member.getMemberId().equals(libraryMember.getMemberId())) {
                         entry.setValue(libraryMember);
                         updated = true;
                         break;
@@ -65,9 +65,9 @@ public final class LibraryMemberDao<T extends Serializable> {
             }
         }
         if (updated) {
-            DataStorage.write(loadedData);
+            DataStorageFacade.saveNewMember(loadedData);
             System.out.println("Data written successfully");
-            System.out.println("Updated member: " + libraryMember.getFirstName());
+            System.out.println(STR."Updated member: \{libraryMember.getFirstName()}");
             return libraryMember;
         }
         System.out.println("Member not found");

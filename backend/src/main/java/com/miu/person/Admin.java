@@ -1,7 +1,7 @@
 package com.miu.person;
 
-public class Admin extends UserRole {
-    public Admin(String roleName) {
-        super(roleName);
-    }
+import java.io.Serializable;
+
+public class Admin extends UserRole implements Serializable {
+
 }
