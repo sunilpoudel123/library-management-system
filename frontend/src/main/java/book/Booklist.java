@@ -16,7 +16,7 @@ public class Booklist extends JPanel{
     private JPanel searchPanel;
     private JPanel resultPanel;
 
-    private String[] columnNames = {"ISBN", "Title", "Borrowed Period", "Total Copies"};
+    private String[] columnNames = {"ISBN", "Title", "Borrowed Period", "Total Copies", "Total Available Copies"};
     private JPanel basePanel;
     private JPanel bodyPanel;
     private JTextField isbnTextField;

@@ -237,6 +237,10 @@ public class Utility extends JFrame {
                         return book.getBorrowedPeriod();
                     case 3:
                         return book.getBookCopyList().size();
+                    case 4:
+                        return book.checkAvailableCopyQty();
+                    default:
+                        return null;
                 }
             }
             if(object instanceof CheckoutRecordEntry){
@@ -259,6 +263,8 @@ public class Utility extends JFrame {
                         return entry.getPaidDate();
                     case 7:
                         return entry.getFine();
+                    default:
+                        return null;
                 }
             }
 
