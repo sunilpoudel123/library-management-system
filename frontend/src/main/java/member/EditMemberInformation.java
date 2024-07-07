@@ -1,6 +1,7 @@
 package member;
 
 import com.miu.Address;
+import com.miu.person.LibraryMember;
 import utility.Utility;
 
 import javax.swing.*;
@@ -26,7 +27,7 @@ public class EditMemberInformation extends JPanel{
     private JButton submitButton;
     private JPanel actionerPanel;
     private JTextField cityTextField;
-    private String memberId;
+    LibraryMember member;
 
     private boolean isFound;
 
@@ -52,19 +53,21 @@ public class EditMemberInformation extends JPanel{
             @Override
             public void keyPressed(KeyEvent e) {
                 if (e.getKeyCode() == KeyEvent.VK_ENTER) {
-                    if(isFound){
-                        output();
-                        Utility.enableComponent(components, isFound);
-                        isFound=!isFound;
+                    if(memberIDTextField.getText().length() == 0){
+                        JOptionPane.showMessageDialog(basePanel, "Please enter a member ID", "Warning", JOptionPane.WARNING_MESSAGE);
+                        return;
+                    }
+                    member =  LibraryMember.findMember(Integer.parseInt(memberIDTextField.getText()));
+                    if(member!=null){
+                        output(member);
+                        Utility.enableComponent(components, true);
                     }
                     else{
-                        JOptionPane.showMessageDialog(basePanel, "Please enter a valid phone number");
-                        isFound=!isFound;
+                        JOptionPane.showMessageDialog(basePanel, "Please enter a valid phone number", "Member not Found", JOptionPane.WARNING_MESSAGE);
                     }
                 }
-                else if(memberId != null){
-                    memberId = null;
-                    Utility.enableComponent(components, isFound);
+                else{
+                    Utility.enableComponent(components, false);
                     Utility.resetComponent(components);
                 }
             }
@@ -83,19 +86,34 @@ public class EditMemberInformation extends JPanel{
                 Utility.resetComponent(components);
             }
         });
+        submitButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Address address = new Address(streetTextField.getText(), cityTextField.getText(), stateComboBox.getSelectedItem().toString(), zipCodeTextField.getText());
+                member.setAddress(address);
+                member.setPhoneNumber(phoneNumberTextField.getText());
+                member.setFirstName(firstNameTextField.getText());
+                member.setLastName(lastNameTextField.getText());
+                update(member);
+            }
+        });
     }
-//    private LibraryMember getMember() {
-//        return new LibraryMember("1", "Hang Kheang", "Taing", "6412330129", new Address("1","FairField","AL", "16855"), "Member");
-//    }
-    private void output(){
-//        firstNameTextField.setText(member.getFirstName());
-//        lastNameTextField.setText(member.getLastName());
-//        phoneNumberTextField.setText(member.getPhoneNumber());
-//
-//        stateComboBox.setSelectedItem(member.getAddress().getState());
-//        cityTextField.setText(member.getAddress().getCity());
-//        zipCodeTextField.setText(member.getAddress().getZip());
-//        streetTextField.setText(member.getAddress().getStreet());
-//        memberId = member.getMemberId();
+    private void update(LibraryMember member) {
+        if(LibraryMember.editMember(member) != null){
+            JOptionPane.showMessageDialog(basePanel, "Member updated successfully!", "Member update", JOptionPane.INFORMATION_MESSAGE);
+        }
+        else{
+            JOptionPane.showMessageDialog(basePanel, "Member updated unsuccessfully!", "Member update", JOptionPane.ERROR_MESSAGE);
+        };
+
+    }
+    private void output(LibraryMember member){
+        firstNameTextField.setText(member.getFirstName());
+        lastNameTextField.setText(member.getLastName());
+        phoneNumberTextField.setText(member.getPhoneNumber());
+        stateComboBox.setSelectedItem(member.getAddress().getState());
+        cityTextField.setText(member.getAddress().getCity());
+        zipCodeTextField.setText(member.getAddress().getZip());
+        streetTextField.setText(member.getAddress().getStreet());
     }
 }
