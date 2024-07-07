@@ -6,8 +6,11 @@ import com.miu.person.LibraryMember;
 import java.io.Serializable;
 import java.lang.reflect.Member;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.util.List;
+import java.util.ArrayList;
 
 public final class CheckoutRecordEntryDao<T extends Serializable> {
     private static Map<Integer, CheckoutRecordEntry> entries = new HashMap<>();
@@ -32,6 +35,17 @@ public final class CheckoutRecordEntryDao<T extends Serializable> {
         }
         return null;
     }
+
+
+    public static List<CheckoutRecordEntry> getCheckoutRecord() {
+        List<CheckoutRecordEntry> checkoutRecords = new ArrayList<>();
+        for (Map.Entry<Integer, CheckoutRecordEntry> entry : entries.entrySet()) {
+            System.out.println(entry.getValue().getMemberId() + " Checkout Record Entry " + entry.getValue().getIsbn());
+            checkoutRecords.add(entry.getValue());
+        }
+        return checkoutRecords;
+    }
+
 
     public static CheckoutRecordEntry findCheckoutRecord(int memberId,String isbn) {
         for (Map.Entry<Integer, CheckoutRecordEntry> entry : entries.entrySet()) {
