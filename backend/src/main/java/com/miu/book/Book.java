@@ -1,5 +1,7 @@
 package com.miu.book;
 
+import com.miu.dao.BookDao;
+import com.miu.dataStorage.DataStorageFacade;
 import com.miu.person.Author;
 import com.miu.util.HelperUtil;
 
@@ -8,6 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Book implements BookInterface, Serializable {
+    private int id;
     protected String bookId;
     protected String title;
     protected String isbn;
@@ -43,4 +46,31 @@ public class Book implements BookInterface, Serializable {
     public String getISBN() {
         return isbn;
     }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public static Book saveBook(Book book) {
+        BookDao.save(book);
+        System.out.println("Book saved");
+        return book;
+    }
+
+    public static Book findByIsbn(String isbn) {
+        Book book = BookDao.findByIsbn(isbn);
+        System.out.println("Book saved");
+        return book;
+    }
+
+    public static List<Book> findAllBooks() {
+        List<Book> book = BookDao.getAllBooks();
+        System.out.println("Book retrieved: ");
+        return book;
+    }
+
 }
