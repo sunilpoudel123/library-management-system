@@ -3,9 +3,8 @@ package com.miu.checkout;
 import com.miu.dao.CheckoutRecordEntryDao;
 import com.miu.dao.LibraryMemberDao;
 import com.miu.person.LibraryMember;
-
 import java.util.Date;
-import java.io.*;
+import java.io.Serializable;
 public class CheckoutRecordEntry  implements Serializable {
     private int memberId;
     private String isbn;

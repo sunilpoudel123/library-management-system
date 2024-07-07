@@ -4,12 +4,14 @@ import com.miu.Address;
 import com.miu.book.Book;
 import com.miu.checkout.CheckoutRecord;
 import com.miu.checkout.CheckoutRecordEntry;
+import com.miu.checkout.CheckoutRecordEntry;
 import com.miu.dataStorage.DataStorageFacade;
 import com.miu.person.*;
 import com.miu.book.BookCopy;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.Date;
 import java.util.Date;
 import java.util.List;
@@ -23,6 +25,7 @@ public class TestData {
         td.userData();
         td.allBooks();
         td.checkoutRecordData();
+        td.checkoutEntryData();
         DataStorageFacade da = new DataStorageFacade();
         System.out.println(da.readUserMap());
     }
@@ -46,6 +49,21 @@ public class TestData {
 
         DataStorageFacade.loadMemberMap(members);
     }
+    List<CheckoutRecordEntry> entriesList = new ArrayList<CheckoutRecordEntry>();
+    public void checkoutEntryData() {
+        Date currentdate = new Date();
+        CheckoutRecordEntry entryrecord = new CheckoutRecordEntry(1,"ISBN3","CPY0003",currentdate,currentdate,currentdate);
+        entriesList.add(entryrecord);
+
+        CheckoutRecordEntry entryrecord1 = new CheckoutRecordEntry(2,"ISBN4","CPY0004",currentdate,currentdate,currentdate);
+        entriesList.add(entryrecord);
+
+        CheckoutRecordEntry entryrecord2 = new CheckoutRecordEntry(3,"ISBN5","CPY0004",currentdate,currentdate,currentdate);
+        entriesList.add(entryrecord);
+
+
+        DataStorageFacade.loadMemberMap(members);
+    }
 
     //create library members
     public void checkoutRecordData() {
@@ -63,6 +81,7 @@ public class TestData {
     ///////////// DATA //////////////
     List<Member> members = new ArrayList<Member>();
     @SuppressWarnings("serial")
+
     List<Address> addresses = new ArrayList<Address>() {
         {
             add(new Address("101 S. Main", "Fairfield", "IA", "52556"));
