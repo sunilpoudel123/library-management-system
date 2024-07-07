@@ -99,7 +99,7 @@ public class ImportBook extends JPanel{
             for(int i = 1; i <= copiedQty; i++){
                 bookCopyList.add(new BookCopy());
             }
-            book = BookFactory.createBook("", "", Integer.parseInt(borrowedPeriodTextField.getText()), author, bookCopyList);
+            book = BookFactory.createBook(titleField.getText(), isbnTextField.getText(), Integer.parseInt(borrowedPeriodTextField.getText()), author, bookCopyList);
         }
         else{
             JOptionPane.showMessageDialog(null, "Copied Qty must be at least one","Invalid copied Qty", JOptionPane.ERROR_MESSAGE);
