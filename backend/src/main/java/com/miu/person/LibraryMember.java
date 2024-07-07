@@ -24,6 +24,7 @@ public class LibraryMember implements Member, Serializable {
         this.firstName = firstName;
         this.lastName = lastName;
         this.phoneNumber = phoneNumber;
+        this.address = address;
     }
 
     public int getMemberId() {
