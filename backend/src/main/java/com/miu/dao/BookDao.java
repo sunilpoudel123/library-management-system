@@ -5,6 +5,7 @@ import com.miu.book.BookCopy;
 import com.miu.checkout.CheckoutRecordEntry;
 import com.miu.dataStorage.DataStorage;
 import com.miu.dataStorage.DataStorageFacade;
+import com.miu.person.LibraryMember;
 import com.miu.person.User;
 
 import java.util.*;
@@ -32,7 +33,7 @@ public class BookDao {
     private static void loadBookCopiesData() {
         HashMap<String, BookCopy> loadedData = DataStorageFacade.readBookCopyMap();
         if (loadedData != null) {
-           bookCopies.clear();
+            bookCopies.clear();
             for (Map.Entry<String, BookCopy> entry : loadedData.entrySet()) {
                 if (entry.getValue() instanceof BookCopy) {
                     bookCopies.put(entry.getKey(), entry.getValue());
@@ -72,7 +73,7 @@ public class BookDao {
     public static int checkAvailableCopyQty(String isbn) {
         int availableQty = 0;
         for (Map.Entry<String, BookCopy> entry : bookCopies.entrySet()) {
-            if(entry.getValue().getISBN().equals(isbn) &&  entry.getValue().getIsAvailable()){
+            if (entry.getValue().getISBN().equals(isbn) && entry.getValue().getIsAvailable()) {
                 availableQty++;
             }
         }
@@ -89,4 +90,18 @@ public class BookDao {
         return null;
     }
 
+    public static Book editBook(Book book) {
+        System.out.println("Updating book with ISBN ID: " + book.getISBN());
+        Book loadedData = BookDao.findBook(book.getISBN());
+        if (loadedData != null && books.containsKey(book.getISBN())) {
+            books.put(book.getISBN(), book);
+            DataStorageFacade.saveNewBook(book);
+            loadData();
+            System.out.println("Data written successfully");
+            System.out.println(String.format("Updated book: %s", book.getISBN()));
+            return book;
+        }
+        System.out.println("Book not found");
+        return null;
+    }
 }
