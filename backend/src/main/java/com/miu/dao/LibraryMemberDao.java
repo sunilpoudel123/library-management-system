@@ -44,7 +44,6 @@ public final class LibraryMemberDao<T extends Serializable> {
                 return entry.getValue();
             }
         }
-        loadData();
         return null;
     }
 
