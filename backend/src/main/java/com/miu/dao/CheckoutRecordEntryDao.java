@@ -47,8 +47,8 @@ public final class CheckoutRecordEntryDao<T extends Serializable> {
 
     public static CheckoutRecordEntry findCheckoutRecord(int memberId) {
         for (Map.Entry<Integer, CheckoutRecordEntry> entry : entries.entrySet()) {
-            System.out.println(entry.getValue().getMemberId() + " Checkout Record Entry" + entry.getValue().getIsbn());
-            if (entry.getValue().getMemberId() == memberId) {
+            System.out.println(entry.getValue().getMember().getMemberId() + " Checkout Record Entry" + entry.getValue().getBookCopy().getBook().getISBN());
+            if (entry.getValue().getMember().getMemberId() == memberId) {
                 return entry.getValue();
             }
         }
@@ -68,7 +68,7 @@ public final class CheckoutRecordEntryDao<T extends Serializable> {
 
     public static CheckoutRecordEntry findCheckoutRecord(int memberId, String isbn) {
         for (Map.Entry<Integer, CheckoutRecordEntry> entry : entries.entrySet()) {
-            if (entry.getValue().getMemberId() == memberId && entry.getValue().getIsbn().equals(isbn)) {
+            if (entry.getValue().getMember().getMemberId() == memberId && entry.getValue().getBookCopy().getBook().getISBN().equals(isbn)) {
                 return entry.getValue();
             }
         }
@@ -76,13 +76,11 @@ public final class CheckoutRecordEntryDao<T extends Serializable> {
     }
 
     public static CheckoutRecordEntry addCheckoutEntry(CheckoutRecordEntry checkoutEntry) {
-        BookCopy bookCopy = copies.get(checkoutEntry.getIsbn());
-        editBookAvailabilty(bookCopy);
         DataStorageFacade.saveNewCheckoutEntry(checkoutEntry);
         loadData();
         System.out.println("Checkout record write successfully");
         for (Map.Entry<Integer, CheckoutRecordEntry> entry : entries.entrySet()) {
-            if (entry.getValue().getMemberId() == checkoutEntry.getMemberId() && entry.getValue().getIsbn().equals(checkoutEntry.getIsbn())) {
+            if (entry.getValue().getCheckoutRecordId() == checkoutEntry.getCheckoutRecordId()) {
                 return entry.getValue();
             }
         }

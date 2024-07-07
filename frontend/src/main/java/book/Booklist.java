@@ -41,11 +41,15 @@ public class Booklist extends JPanel{
                         return;
                     }
                     else{
-
                         Book book = Book.findBook(isbnTextField.getText());
                         Object[] bookArray = {book};
                         ArrayList<Object> objectList = new ArrayList<>(Arrays.asList(bookArray));
                         createTableList(resultPanel, objectList);
+                    }
+                }
+                else if (e.getKeyCode() == KeyEvent.VK_ESCAPE) {
+                    if(isbnTextField.getText().length() == 0){
+                        reload();
                     }
                 }
                 else{

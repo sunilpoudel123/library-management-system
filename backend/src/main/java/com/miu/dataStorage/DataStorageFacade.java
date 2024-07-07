@@ -51,8 +51,7 @@ public class DataStorageFacade {
 
     public static void saveNewCheckoutEntry(CheckoutRecordEntry recordEntry) {
         HashMap<Integer, CheckoutRecordEntry> recordEntries = new HashMap<>();
-        /// int memberId = recordEntry.getMemberId();
-        recordEntries.put(1, recordEntry);
+        recordEntries.put(recordEntry.getCheckoutRecordId(), recordEntry);
         saveToStorage(StorageType.ENTRIES, recordEntries);
     }
 
@@ -124,7 +123,7 @@ public class DataStorageFacade {
 
     public static void loadCheckoutMap(List<CheckoutRecordEntry> entryList) {
         HashMap<Integer, CheckoutRecordEntry> entries = new HashMap<>();
-        entryList.forEach(entry -> entries.put(((CheckoutRecordEntry)entry).getMemberId(), entry));
+        entryList.forEach(entry -> entries.put(((CheckoutRecordEntry)entry).getMember().getMemberId(), entry));
         saveToStorage(StorageType.ENTRIES, entries);
     }
 
