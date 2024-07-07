@@ -39,7 +39,7 @@ public class About extends JPanel{
 
     private void createTableList(JPanel panel, ArrayList<Object> data){
         panel = new JPanel();
-        MyTableModel model = new MyTableModel(data);
+        MyTableModel model = new MyTableModel(memberList);
         JTable table = new JTable(model);
         JScrollPane scrollPane = new JScrollPane(table);
         panel.add(scrollPane, BorderLayout.CENTER);
@@ -48,10 +48,10 @@ public class About extends JPanel{
 
     class MyTableModel extends AbstractTableModel {
 
-        ArrayList<Object> memberList;
-        private String[] columnNames = {"First Name", "Last Name", "Phone Number", "Address"};
+        ArrayList<LibraryMember> memberList;
+        private String[] columnNames = {"First Name", "Last Name", "Phone Number"};
 
-        public MyTableModel(ArrayList<Object> memberList) {
+        public MyTableModel(ArrayList<LibraryMember> memberList) {
             this.memberList = memberList;
         }
 
@@ -67,8 +67,17 @@ public class About extends JPanel{
 
         @Override
         public Object getValueAt(int rowIndex, int columnIndex) {
-            Object person = memberList.get(rowIndex);
-            return null;
+            LibraryMember person = memberList.get(rowIndex);
+            switch (columnIndex) {
+                case 0:
+                    return person.getFirstName();
+                case 1:
+                    return person.getLastName();
+                case 2:
+                    return person.getPhoneNumber();
+                default:
+                    return null;
+            }
         }
 
         @Override
