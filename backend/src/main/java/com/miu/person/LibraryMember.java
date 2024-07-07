@@ -7,10 +7,9 @@ import java.io.*;
 import java.util.List;
 
 import com.miu.dao.LibraryMemberDao;
-import com.miu.libraryinterface.Member;
 import com.miu.util.HelperUtil;
 
-public class LibraryMember implements Member, Serializable {
+public class LibraryMember extends UserRole implements Member, Serializable {
     private static final long serialVersionUID = 1L; // Optional, for version control
     private int memberId;
     private String firstName;
@@ -24,9 +23,10 @@ public class LibraryMember implements Member, Serializable {
         this.firstName = firstName;
         this.lastName = lastName;
         this.phoneNumber = phoneNumber;
+        this.address = address;
     }
 
-    public int getMemberId() {
+    public Integer getMemberId() {
         return memberId;
     }
 

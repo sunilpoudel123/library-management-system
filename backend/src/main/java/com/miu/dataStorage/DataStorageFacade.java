@@ -1,8 +1,8 @@
 package com.miu.dataStorage;
 
 import com.miu.book.Book;
-import com.miu.libraryinterface.Member;
 import com.miu.person.LibraryMember;
+import com.miu.person.Member;
 import com.miu.person.User;
 
 import java.io.IOException;
@@ -102,7 +102,7 @@ public class DataStorageFacade {
 
     public static void loadMemberMap(List<Member> memberList) {
         HashMap<Integer, Member> members = new HashMap<Integer, Member>();
-        memberList.forEach(member -> members.put(((LibraryMember) member).getMemberId(), member));
+        memberList.forEach(member -> members.put(((LibraryMember)member).getMemberId(), member));
         saveToStorage(StorageType.MEMBERS, members);
     }
 
@@ -130,7 +130,6 @@ public class DataStorageFacade {
         try {
             Path path = FileSystems.getDefault().getPath(OUTPUT_DIR, type.toString());
             in = new ObjectInputStream(Files.newInputStream(path));
-
             retVal = in.readObject();
         } catch (Exception e) {
             e.printStackTrace();

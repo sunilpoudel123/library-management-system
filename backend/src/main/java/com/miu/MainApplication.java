@@ -3,10 +3,10 @@ package com.miu;
 import com.miu.book.Book;
 import com.miu.book.BookCopy;
 import com.miu.book.BookFactory;
+import com.miu.dao.BookDao;
 import com.miu.dataStorage.DataStorage;
+import com.miu.dataStorage.DataStorageFacade;
 import com.miu.dataStorage.PopulateDataUtil;
-import com.miu.factory.MemberFactory;
-import com.miu.libraryinterface.Member;
 import com.miu.person.*;
 
 import java.util.Scanner;
@@ -15,17 +15,19 @@ public class MainApplication {
 
     public static void main(String[] args) {
         Address add1 = new Address("Street1", "Fairfield", "Iowa", "52555");
-        Member member = MemberFactory.addLibrarianMember("Trump", "Donald", "aung", add1);
+        Member member = MemberFactory.addLibraryMember("Trump", "Donald", "aung", add1);
 
         LibraryMember.addLibraryMember((LibraryMember) member);
         System.out.println("Checking name: " + ((LibraryMember) member).getFirstName());
-        System.out.println("finding member by id: 1 " + LibraryMember.findMember(1).getFirstName());
+//        System.out.println("finding member by id: 1 " + LibraryMember.findMember(1).getFirstName());
 
         BookCopy bookCopy = new BookCopy();
         Author author = new Author("", "", "", "", "", null);
         Book book = (Book) BookFactory.createBook("MPP", "16855", 7, author, bookCopy);
-
+        DataStorageFacade.saveNewBook(book);
         System.out.println(bookCopy.getBook().getISBN());
+
+        System.out.println(BookDao.getAllBooks());
 
         System.out.println("Library Management System Running .... ");
         System.out.println("#### Default Users are adding #####");

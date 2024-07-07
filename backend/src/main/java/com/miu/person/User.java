@@ -1,9 +1,12 @@
 package com.miu.person;
 
+import com.miu.Address;
 import com.miu.dao.UserDao;
 import com.miu.util.HelperUtil;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 public class User implements Serializable {
 
@@ -13,7 +16,7 @@ public class User implements Serializable {
     private String password;
     private String firstName;
     private String lastName;
-    private UserRole role;
+    private List<UserRole> roles;
 
     public int getId() {
         return id;
@@ -55,21 +58,35 @@ public class User implements Serializable {
         this.lastName = lastName;
     }
 
-    public UserRole getRole() {
-        return role;
+    public List<UserRole> getRoles() {
+        return roles;
     }
 
-    public void setRole(UserRole role) {
-        this.role = role;
+    public void setRole(List<UserRole> roles) {
+        this.roles = roles;
+    }
+    public void setRole(UserRole role){
+        if(!roles.contains(role)){
+            roles.add(role);
+        }
     }
 
+    public User( String username, String password, String firstName, String lastName, List<UserRole> roles) {
+        this.id = HelperUtil.generateID();
+        this.username = username;
+        this.password = password;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.roles = roles;
+    }
     public User( String username, String password, String firstName, String lastName, UserRole role) {
         this.id = HelperUtil.generateID();
         this.username = username;
         this.password = password;
         this.firstName = firstName;
         this.lastName = lastName;
-        this.role = role;
+        this.roles= new ArrayList<>();
+        this.roles.add(role);
     }
 
     @Override
@@ -98,17 +115,4 @@ public class User implements Serializable {
             return null;
         }
     }
-
-//    public User addUser(String username, String password, String firstName, String lastName) {
-//        User user = new User();
-//        System.out.println("Adding user: " + username);
-//        user.setUsername(username);
-//        user.setPassword(password);
-//        user.setFirstName(firstName);
-//        user.setLastName(lastName);
-////        user.setRole();
-//        UserDao.save(user);
-//        System.out.println("User successfully added");
-//        return user;
-//    }
 }
