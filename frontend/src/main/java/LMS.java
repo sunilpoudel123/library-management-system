@@ -1,7 +1,7 @@
 import book.AddBookCopied;
 import book.BookCheckOut;
 import book.ImportBook;
-import com.miu.User;
+import com.miu.person.User;
 import member.EditMemberInformation;
 import member.MemberCheckoutRecord;
 import member.MemberRegistration;
@@ -10,8 +10,6 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.util.Arrays;
-import java.util.List;
 
 import static java.lang.StringTemplate.STR;
 

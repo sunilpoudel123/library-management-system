@@ -1,19 +1,13 @@
 package member;
 
 import com.miu.Address;
-import com.miu.LibraryMember;
-import com.miu.User;
 import utility.Utility;
 
 import javax.swing.*;
-import javax.swing.event.DocumentEvent;
-import javax.swing.event.DocumentListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
-import java.util.Arrays;
-import java.util.List;
 
 public class EditMemberInformation extends JPanel{
     private JPanel basePanel;
@@ -32,7 +26,6 @@ public class EditMemberInformation extends JPanel{
     private JButton submitButton;
     private JPanel actionerPanel;
     private JTextField cityTextField;
-    private LibraryMember member;
     private String memberId;
 
     private boolean isFound;
@@ -54,8 +47,6 @@ public class EditMemberInformation extends JPanel{
         Utility.resetComponent(components);
 
         add(basePanel);
-
-        member = getMember();
 
         memberIDTextField.addKeyListener(new KeyAdapter() {
             @Override
@@ -93,18 +84,18 @@ public class EditMemberInformation extends JPanel{
             }
         });
     }
-    private LibraryMember getMember() {
-        return new LibraryMember("1", "Hang Kheang", "Taing", "6412330129", new Address("1","FairField","AL", "16855"), "Member");
-    }
+//    private LibraryMember getMember() {
+//        return new LibraryMember("1", "Hang Kheang", "Taing", "6412330129", new Address("1","FairField","AL", "16855"), "Member");
+//    }
     private void output(){
-        firstNameTextField.setText(member.getFirstName());
-        lastNameTextField.setText(member.getLastName());
-        phoneNumberTextField.setText(member.getPhoneNumber());
-
-        stateComboBox.setSelectedItem(member.getAddress().getState());
-        cityTextField.setText(member.getAddress().getCity());
-        zipCodeTextField.setText(member.getAddress().getZip());
-        streetTextField.setText(member.getAddress().getStreet());
-        memberId = member.getMemberId();
+//        firstNameTextField.setText(member.getFirstName());
+//        lastNameTextField.setText(member.getLastName());
+//        phoneNumberTextField.setText(member.getPhoneNumber());
+//
+//        stateComboBox.setSelectedItem(member.getAddress().getState());
+//        cityTextField.setText(member.getAddress().getCity());
+//        zipCodeTextField.setText(member.getAddress().getZip());
+//        streetTextField.setText(member.getAddress().getStreet());
+//        memberId = member.getMemberId();
     }
 }

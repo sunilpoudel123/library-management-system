@@ -1,5 +1,4 @@
-import com.miu.User;
-import com.miu.dataStorage.DataStorage;
+import com.miu.person.User;
 
 import javax.swing.*;
 import java.awt.event.*;
@@ -53,7 +52,7 @@ public class Login extends JFrame {
             JOptionPane.showMessageDialog(null, "Username or password is empty", "Empty fields", JOptionPane.WARNING_MESSAGE);
         }
         else{
-            user = DataStorage.testLogin(username, password);
+            user = User.getAuthenticatedUser(username, password);
             if(user==null){
                 JOptionPane.showMessageDialog(null, "Username or password is incorrect", "Invalid credential", JOptionPane.WARNING_MESSAGE);
                 passwordField.setText("");
