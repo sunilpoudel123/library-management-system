@@ -15,10 +15,13 @@ import java.nio.file.Path;
 import java.util.HashMap;
 import java.util.List;
 
+import com.miu.checkout.CheckoutRecord;
+import com.miu.checkout.CheckoutRecordEntry;
+
 public class DataStorageFacade {
 
     enum StorageType {
-        BOOKS, MEMBERS, USERS;
+        BOOKS, MEMBERS, USERS, ENTRIES;
     }
 
     public static final String OUTPUT_DIR = System.getProperty("user.dir")
@@ -47,6 +50,13 @@ public class DataStorageFacade {
         saveToStorage(StorageType.USERS, books);
     }
 
+    public static void saveNewCheckoutEntry(CheckoutRecordEntry recordEntry) {
+        HashMap<Integer, CheckoutRecordEntry> recordEntries = new HashMap<>();
+        /// int memberId = recordEntry.getMemberId();
+        recordEntries.put(1, recordEntry);
+        saveToStorage(StorageType.ENTRIES, recordEntries);
+    }
+
     @SuppressWarnings("unchecked")
     public static HashMap<String, Book> readBooksMap() {
         //Returns a Map with name/value pairs being
@@ -70,9 +80,13 @@ public class DataStorageFacade {
         return (HashMap<Integer, User>) readFromStorage(StorageType.USERS);
     }
 
-
-    /////load methods - these place test data into the storage area
-    ///// - used just once at startup
+    @SuppressWarnings("unchecked")
+    public static HashMap<Integer, CheckoutRecordEntry> readEntryMap() {
+        //Returns a Map with name/value pairs being
+        //   memberId -> LibraryMember
+        return (HashMap<Integer, CheckoutRecordEntry>) readFromStorage(
+                StorageType.ENTRIES);
+    }
 
     public static void loadBookMap(List<Book> bookList) {
         HashMap<String, Book> books = new HashMap<String, Book>();

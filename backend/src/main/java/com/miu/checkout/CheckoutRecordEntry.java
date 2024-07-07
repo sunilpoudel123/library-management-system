@@ -1,16 +1,20 @@
 package com.miu.checkout;
 
-import java.util.Date;
+import com.miu.dao.CheckoutRecordEntryDao;
+import com.miu.dao.LibraryMemberDao;
+import com.miu.person.LibraryMember;
 
-public class CheckoutRecordEntry {
-    private String memberId;
+import java.util.Date;
+import java.io.*;
+public class CheckoutRecordEntry  implements Serializable {
+    private int memberId;
     private String isbn;
     private String bookCopyId;
     private Date checkoutDate;
     private Date dueDate;
     private Date paidDate;
 
-    public CheckoutRecordEntry(String memberId, String isbn, String bookCopyId, Date checkoutDate, Date dueDate,Date paidDate) {
+    public CheckoutRecordEntry(int memberId, String isbn, String bookCopyId, Date checkoutDate, Date dueDate,Date paidDate) {
         this.memberId = memberId;
         this.isbn = isbn;
         this.bookCopyId = bookCopyId;
@@ -18,10 +22,11 @@ public class CheckoutRecordEntry {
         this.dueDate = dueDate;
         this.paidDate = paidDate;
     }
-    public String getMemberId() {
+
+    public int getMemberId() {
         return memberId;
     }
-    public void setMemberId(String memberId) {
+    public void setMemberId(int memberId) {
         this.memberId = memberId;
     }
     public String getIsbn() {
@@ -54,4 +59,17 @@ public class CheckoutRecordEntry {
     public void setPaidDate(Date paidDate) {
         this.paidDate = paidDate;
     }
+
+    public static CheckoutRecordEntry addCheckoutRecordEntry(CheckoutRecordEntry checkEntry) {
+        return  CheckoutRecordEntryDao.addCheckoutEntry(checkEntry);
+    }
+
+    public static CheckoutRecordEntry findCheckoutEntry(int memberId) {
+        return CheckoutRecordEntryDao.findCheckoutRecord(memberId);
+    }
+
+    public static CheckoutRecordEntry findCheckoutEntry(int memberId, String isbn) {
+        return CheckoutRecordEntryDao.findCheckoutRecord(memberId,isbn);
+    }
+
 }

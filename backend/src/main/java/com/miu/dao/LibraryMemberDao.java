@@ -16,7 +16,6 @@ public final class LibraryMemberDao<T extends Serializable> {
 
     static {
         HashMap<Integer, LibraryMember> loadedData = DataStorageFacade.readMemberMap();
-
         if (loadedData != null) {
             for (Map.Entry<Integer, LibraryMember> entry : loadedData.entrySet()) {
                 if (entry.getValue() instanceof LibraryMember) {
@@ -27,7 +26,6 @@ public final class LibraryMemberDao<T extends Serializable> {
     }
 
     public static LibraryMember findMember(int memberId) {
-
         for (Map.Entry<Integer, LibraryMember> entry : members.entrySet()) {
             if (entry.getValue().getMemberId() == memberId) {
                 return entry.getValue();
