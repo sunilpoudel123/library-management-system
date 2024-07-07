@@ -19,8 +19,8 @@ public class LibraryMember implements Member, Serializable {
     private List<BookCopy> bookCopyList;
     private Address address;
 
-    public LibraryMember(int memberId, String firstName, String lastName, String phoneNumber, Address address) {
-        this.memberId = memberId;
+    public LibraryMember(String firstName, String lastName, String phoneNumber, Address address) {
+        this.memberId = HelperUtil.generateID();
         this.firstName = firstName;
         this.lastName = lastName;
         this.phoneNumber = phoneNumber;
@@ -80,8 +80,10 @@ public class LibraryMember implements Member, Serializable {
     }
 
     public static LibraryMember findMember(int memberId) {
-
-
         return LibraryMemberDao.findMember(memberId);
+    }
+
+    public static LibraryMember editMember(LibraryMember member) {
+          return LibraryMemberDao.editMember(member);
     }
 }

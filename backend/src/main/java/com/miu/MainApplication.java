@@ -16,7 +16,7 @@ public class MainApplication {
 
     public static void main(String[] args) {
         Address add1 = new Address("Street1", "Fairfield", "Iowa", "52555");
-        LibraryMember member = MemberFactory.addLibrarianMember(1, "Donald", "aung", "6412332028", add1);
+        LibraryMember member = MemberFactory.addLibrarianMember("Trump", "Donald", "aung", add1);
         LibraryMember.addLibraryMember(member);
         System.out.println("Checking name: " + member.getFirstName());
         System.out.println("finding member by id: 1 " + LibraryMember.findMember(1).getFirstName());
