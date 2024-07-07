@@ -14,19 +14,18 @@ import java.util.Scanner;
 public class MainApplication {
 
     public static void main(String[] args) {
-     //   Address add1 = new Address("Street1", "Fairfield", "Iowa", "52555");
-      //  Member member = MemberFactory.addLibraryMember("Trump", "Donald", "aung", add1);
+        Address add1 = new Address("Street1", "Fairfield", "Iowa", "52555");
+        Member member = MemberFactory.addLibraryMember("Trump", "Donald", "aung", add1);
 
-      //  LibraryMember.addLibraryMember((LibraryMember) member);
-     //   System.out.println("Checking name: " + ((LibraryMember) member).getFirstName());
+        LibraryMember.addLibraryMember((LibraryMember) member);
+        System.out.println("Checking name: " + ((LibraryMember) member).getFirstName());
 //        System.out.println("finding member by id: 1 " + LibraryMember.findMember(1).getFirstName());
-        Author author = new Author("TEST1", "Test1", "8998822", "", "ShortBio", null);
-      //  Book book=new Book("","","","","");
-      //  Book.addBook()
 
-      //  Author author = new Author("", "", "", "", "", null);
-     //   Book book = (Book) BookFactory.createBook("MPP", "16855", 7, author, bookCopy);
-
+        BookCopy bookCopy = new BookCopy("title", "isbn");
+        Author author = new Author("", "", "", "", "", null);
+        Book book = (Book) BookFactory.createBook("MPP", "16855", 7, author, bookCopy);
+        DataStorageFacade.saveNewBook(book);
+        System.out.println(bookCopy.getBook().getISBN());
 
         System.out.println(BookDao.getAllBooks());
 

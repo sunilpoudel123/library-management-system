@@ -44,21 +44,23 @@ public class TestData {
         libraryMember = new LibraryMember("Teo Teo", "Aung", "4512348811", addresses.get(6));
         members.add(libraryMember);
 
-        libraryMember = new LibraryMember( "Sunil", "Poudel", "6414722871", addresses.get(7));
+        libraryMember = new LibraryMember("Sunil", "Poudel", "6414722871", addresses.get(7));
         members.add(libraryMember);
 
         DataStorageFacade.loadMemberMap(members);
     }
+
     List<CheckoutRecordEntry> entriesList = new ArrayList<CheckoutRecordEntry>();
+
     public void checkoutEntryData() {
         Date currentdate = new Date();
-        CheckoutRecordEntry entryrecord = new CheckoutRecordEntry(1,"ISBN3","CPY0003",currentdate,currentdate,currentdate);
+        CheckoutRecordEntry entryrecord = new CheckoutRecordEntry(1, "ISBN3", "CPY0003", currentdate, currentdate, currentdate);
         entriesList.add(entryrecord);
 
-        CheckoutRecordEntry entryrecord1 = new CheckoutRecordEntry(2,"ISBN4","CPY0004",currentdate,currentdate,currentdate);
+        CheckoutRecordEntry entryrecord1 = new CheckoutRecordEntry(2, "ISBN4", "CPY0004", currentdate, currentdate, currentdate);
         entriesList.add(entryrecord);
 
-        CheckoutRecordEntry entryrecord2 = new CheckoutRecordEntry(3,"ISBN5","CPY0004",currentdate,currentdate,currentdate);
+        CheckoutRecordEntry entryrecord2 = new CheckoutRecordEntry(3, "ISBN5", "CPY0004", currentdate, currentdate, currentdate);
         entriesList.add(entryrecord);
 
 
@@ -114,7 +116,7 @@ public class TestData {
         }
     };
 
-    BookCopy bookCopy = new BookCopy();
+    BookCopy bookCopy = new BookCopy("title", "isbn");
 
     List<Book> allBooks = new ArrayList<Book>() {
         {
