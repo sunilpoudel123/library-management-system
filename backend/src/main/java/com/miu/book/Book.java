@@ -1,5 +1,6 @@
 package com.miu.book;
 
+import com.miu.checkout.CheckoutRecord;
 import com.miu.dao.BookDao;
 import com.miu.dataStorage.DataStorageFacade;
 import com.miu.person.Author;
@@ -15,9 +16,14 @@ public class Book implements BookInterface, Serializable {
     protected String title;
     protected String isbn;
     protected int borrowedPeriod;
-
     protected List<Author> authorList;
     protected List<BookCopy> bookCopyList;
+    public Book(String isbn,String title,int borrowedPeriod,List<Author> authorList){
+        this.isbn=isbn;
+        this.title=title;
+        this.borrowedPeriod=borrowedPeriod;
+        this.authorList=authorList;
+    }
 
     public List<BookCopy> getBookCopyList() {
         return bookCopyList;
@@ -55,22 +61,18 @@ public class Book implements BookInterface, Serializable {
         this.id = id;
     }
 
-    public static Book saveBook(Book book) {
-        BookDao.save(book);
-        System.out.println("Book saved");
-        return book;
+    public static Book addBook(Book book) {
+        return BookDao.addBook(book);
     }
 
-    public static Book findByIsbn(String isbn) {
-        Book book = BookDao.findByIsbn(isbn);
-        System.out.println("Book saved");
-        return book;
+    public static Book findBook(String isbn) {
+        return BookDao.findBook(isbn);
     }
 
     public static List<Book> findAllBooks() {
-        List<Book> book = BookDao.getAllBooks();
-        System.out.println("Book retrieved: ");
-        return book;
+        List<Book> bookList = BookDao.getAllBooks();
+        return bookList;
     }
+
 
 }
