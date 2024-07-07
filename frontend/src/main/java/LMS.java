@@ -128,8 +128,14 @@ public class LMS extends JFrame {
             setDynamicView(bookCheckOut);
         });
 
-        /*End Book function*/
-
+        /*About Book function*/
+        aboutMenu.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                About bookCheckOut = new About(dynamicView.getWidth(), dynamicView.getHeight());
+                setDynamicView(bookCheckOut);
+            }
+        });
     }
 
     private void setDynamicView(JPanel newDynamicView){
@@ -169,7 +175,7 @@ public class LMS extends JFrame {
         }
         if(level == 2){
             memberMenuItems = new JMenuItem[] {viewCheckoutRecordItemMenu};
-            bookMenuItems = new JMenuItem[]{addBookItemMenu, addCopyBookItemMenu, checkoutBookItemMenu, viewBookItemMenu};
+            bookMenuItems = new JMenuItem[]{checkoutBookItemMenu, viewBookItemMenu};
 
         }
         if(level == 3){
