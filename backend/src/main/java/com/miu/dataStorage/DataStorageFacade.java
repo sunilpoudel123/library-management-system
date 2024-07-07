@@ -1,6 +1,7 @@
 package com.miu.dataStorage;
 
 import com.miu.book.Book;
+import com.miu.libraryinterface.Member;
 import com.miu.person.LibraryMember;
 import com.miu.person.User;
 
@@ -13,18 +14,18 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.HashMap;
 import java.util.List;
+
 import com.miu.checkout.CheckoutRecord;
 import com.miu.checkout.CheckoutRecordEntry;
 
 public class DataStorageFacade {
 
     enum StorageType {
-        BOOKS, MEMBERS, USERS ,ENTRIES;
+        BOOKS, MEMBERS, USERS, ENTRIES;
     }
 
     public static final String OUTPUT_DIR = System.getProperty("user.dir")
             + "/resources/database/bin";
-    public static final String OUTPUT_FILE_EXTENSION= System.getProperty(".ser");
     public static final String DATE_PATTERN = "MM/dd/yyyy";
 
     //implement: other save operations
@@ -50,13 +51,13 @@ public class DataStorageFacade {
     }
 
     public static void saveNewCheckoutEntry(CheckoutRecordEntry recordEntry) {
-        HashMap<Integer, CheckoutRecordEntry> recordEntries =new HashMap<>();
-       /// int memberId = recordEntry.getMemberId();
+        HashMap<Integer, CheckoutRecordEntry> recordEntries = new HashMap<>();
+        /// int memberId = recordEntry.getMemberId();
         recordEntries.put(1, recordEntry);
         saveToStorage(StorageType.ENTRIES, recordEntries);
     }
 
-     @SuppressWarnings("unchecked")
+    @SuppressWarnings("unchecked")
     public static HashMap<String, Book> readBooksMap() {
         //Returns a Map with name/value pairs being
         //   isbn -> Book
@@ -86,7 +87,7 @@ public class DataStorageFacade {
         return (HashMap<Integer, CheckoutRecordEntry>) readFromStorage(
                 StorageType.ENTRIES);
     }
- /*
+
     public static void loadBookMap(List<Book> bookList) {
         HashMap<String, Book> books = new HashMap<String, Book>();
         bookList.forEach(book -> books.put(book.getISBN(), book));
@@ -99,34 +100,18 @@ public class DataStorageFacade {
         saveToStorage(StorageType.USERS, users);
     }
 
-    public static void loadMemberMap(List<LibraryMember> memberList) {
-        HashMap<Integer, LibraryMember> members = new HashMap<Integer, LibraryMember>();
-        memberList.forEach(member -> members.put(member.getMemberId(), member));
+    public static void loadMemberMap(List<Member> memberList) {
+        HashMap<Integer, Member> members = new HashMap<Integer, Member>();
+        memberList.forEach(member -> members.put(((LibraryMember) member).getMemberId(), member));
         saveToStorage(StorageType.MEMBERS, members);
     }
-
-    public static void loadCheckoutRecordMap(List<CheckoutRecordEntry> CheckoutRecordList) {
-        HashMap<Integer, CheckoutRecordEntry> records = new HashMap<>();
-        CheckoutRecordList.forEach(check -> records.put(check.getMemberId(),check));
-        saveToStorage(StorageType.ENTRIES, records);
-    } */
 
     static void saveToStorage(StorageType type, Object ob) {
         ObjectOutputStream out = null;
         try {
-            Path dirPath = FileSystems.getDefault().getPath(OUTPUT_DIR);
-            if (!Files.exists(dirPath)) {
-                Files.createDirectories(dirPath);
-            }
-
-            Path path = FileSystems.getDefault().getPath(OUTPUT_DIR, type.toString()+".ser");
-            if (!Files.exists(path)) {
-                Files.createFile(path);
-            }
-            System.out.println("path: " + path);
+            Path path = FileSystems.getDefault().getPath(OUTPUT_DIR, type.toString());
             out = new ObjectOutputStream(Files.newOutputStream(path));
             out.writeObject(ob);
-
         } catch (IOException e) {
             e.printStackTrace();
         } finally {
