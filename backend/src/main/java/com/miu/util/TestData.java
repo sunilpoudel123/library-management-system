@@ -2,6 +2,7 @@ package com.miu.util;
 
 import com.miu.Address;
 import com.miu.book.Book;
+import com.miu.book.BookCopy;
 import com.miu.dataStorage.DataStorageFacade;
 import com.miu.person.*;
 
@@ -16,6 +17,7 @@ public class TestData {
         TestData td = new TestData();
         td.libraryMemberData();
         td.userData();
+        td.allBooks();
         DataStorageFacade da = new DataStorageFacade();
         System.out.println(da.readUserMap());
     }
@@ -38,6 +40,11 @@ public class TestData {
         members.add(libraryMember);
 
         DataStorageFacade.loadMemberMap(members);
+    }
+
+    //create library members
+    public void allBooks() {
+        DataStorageFacade.loadBookMap(allBooks);
     }
 
     ///////////// DATA //////////////
@@ -73,6 +80,14 @@ public class TestData {
             add(new User("admin", "admin", "admin", "admin", new Admin()));
             add(new User("librarian", "librarian", "librarian", "librarian", new Librarian()));
             add(new User("superadmin", "superadmin", "superadmin", "superadmin", Arrays.asList(new Admin(), new Librarian())));
+        }
+    };
+
+    BookCopy bookCopy = new BookCopy();
+
+    List<Book> allBooks = new ArrayList<Book>() {
+        {
+            add(new BookCopy("admin", "admin", 1, allAuthors.get(0), bookCopy));
         }
     };
 }

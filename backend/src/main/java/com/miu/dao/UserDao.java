@@ -24,11 +24,6 @@ public final class UserDao<T extends Serializable> {
         }
     }
 
-
-    public User login(String username, String password) {
-        return null;
-    }
-
     public static User findByUsername(String username) {
         User user = null;
         for (Map.Entry<String, User> entry : users.entrySet()) {
@@ -36,7 +31,6 @@ public final class UserDao<T extends Serializable> {
                 user = entry.getValue();
             }
         }
-//        User user = users.get(username);
         if (user != null) {
             return user;
         } else {
