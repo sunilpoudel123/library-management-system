@@ -21,7 +21,7 @@ public class MainApplication {
         System.out.println("Checking name: " + ((LibraryMember) member).getFirstName());
 //        System.out.println("finding member by id: 1 " + LibraryMember.findMember(1).getFirstName());
 
-        BookCopy bookCopy = new BookCopy("title", "isbn");
+        BookCopy bookCopy = new BookCopy();
         Author author = new Author("", "", "", "", "", null);
         Book book = (Book) BookFactory.createBook("MPP", "16855", 7, author, bookCopy);
         DataStorageFacade.saveNewBook(book);

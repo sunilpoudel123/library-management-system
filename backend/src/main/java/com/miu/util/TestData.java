@@ -116,11 +116,11 @@ public class TestData {
         }
     };
 
-    BookCopy bookCopy = new BookCopy("title", "isbn");
+    BookCopy bookCopy = new BookCopy();
 
     List<Book> allBooks = new ArrayList<Book>() {
         {
-            add(new BookCopy("admin", "admin", 1, allAuthors.get(0), bookCopy));
+            add(new BookCopy("MPP", "400", 1, allAuthors.get(0), bookCopy));
         }
     };
 

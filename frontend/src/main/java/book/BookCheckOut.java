@@ -1,7 +1,14 @@
 package book;
 
 
+import com.miu.book.Book;
+import com.miu.book.BookCopy;
+import utility.Utility;
+import java.time.format.DateTimeFormatter;
 import javax.swing.*;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import java.time.LocalDate;
 
 public class BookCheckOut extends JPanel{
     private JPanel basePanel;
@@ -14,6 +21,7 @@ public class BookCheckOut extends JPanel{
     private JTextField customerNameTextField;
     private JTextField dueDateTimeTextField;
 
+
     public BookCheckOut(int width, int height){
         setSize(width, height);
         if (getParent() != null && getParent().isVisible()) { // Check if parent is visible
@@ -21,4 +29,5 @@ public class BookCheckOut extends JPanel{
         }
         add(basePanel);
     }
+
 }

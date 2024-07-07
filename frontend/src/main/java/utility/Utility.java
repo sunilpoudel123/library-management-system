@@ -1,6 +1,10 @@
 package utility;
 
+import com.miu.book.Book;
+import com.miu.person.LibraryMember;
+
 import javax.swing.*;
+import javax.swing.table.AbstractTableModel;
 import javax.swing.text.*;
 import java.awt.*;
 import java.awt.event.KeyAdapter;
@@ -181,5 +185,68 @@ public class Utility extends JFrame {
             }
         }
         return false;
+    }
+
+    public static class CustomizeTableModel extends AbstractTableModel {
+
+        ArrayList<Object> objectsList;
+        private String[] columnName;
+
+        public CustomizeTableModel(ArrayList<Object> objectsList, String[] columnName) {
+            this.objectsList = objectsList;
+            this.columnName = columnName;
+        }
+
+        @Override
+        public int getRowCount() {
+            return objectsList.size();
+        }
+
+        @Override
+        public int getColumnCount() {
+
+            return columnName.length;
+        }
+
+        @Override
+        public Object getValueAt(int rowIndex, int columnIndex) {
+            Object object = objectsList.get(rowIndex);
+            if(object instanceof LibraryMember){
+                LibraryMember member = (LibraryMember)object;
+                switch (columnIndex) {
+                case 0:
+                    return member.getFirstName();
+                case 1:
+                    return member.getLastName();
+                case 2:
+                    return member.getPhoneNumber();
+                default:
+                    return null;
+                }
+            }
+            if(object instanceof Book){
+                Book book = (Book)object;
+
+                switch (columnIndex){
+                    case 0:
+                        return book.getISBN();
+                    case 1:
+                        return book.getTitle();
+                    case 2:
+                        return book.getBorrowedPeriod();
+                    case 3:
+                        return book.getBookCopyList().size();
+                }
+            }
+
+            return null;
+        }
+
+        @Override
+        public String getColumnName(int col) {
+            return columnName[col];
+        }
+
+        // Getters and setters for name and age
     }
 }

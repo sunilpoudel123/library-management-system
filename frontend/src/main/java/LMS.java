@@ -1,5 +1,6 @@
 import book.AddBookCopied;
 import book.BookCheckOut;
+import book.Booklist;
 import book.ImportBook;
 import com.miu.person.User;
 import com.miu.person.UserRole;
@@ -11,6 +12,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.util.List;
 
 import static java.lang.StringTemplate.STR;
@@ -26,7 +29,8 @@ public class LMS extends JFrame {
     private final JMenu memberMenu = new JMenu("Member");
     private final JMenu bookMenu = new JMenu("Book");
     private final JMenu aboutMenu = new JMenu("About");
-    private final JMenu[] mainMenus = {homeMenu, memberMenu, bookMenu, aboutMenu};
+    private final JMenu logoutMenu = new JMenu("Logout");
+    private final JMenu[] mainMenus = {homeMenu, memberMenu, bookMenu, aboutMenu, logoutMenu};
 
     /*Menu Item*/
     private final JMenuItem addMemberItemMenu = new JMenuItem("Add Member");
@@ -74,6 +78,30 @@ public class LMS extends JFrame {
             }
         });
 
+        logoutMenu.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                int result = JOptionPane.showConfirmDialog(null, "Do you want to continue logout?", "Confirmation!", JOptionPane.YES_NO_OPTION);
+                if (result == JOptionPane.YES_OPTION) {
+                    logout();
+                }
+            }
+        });
+
+        this.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosed(WindowEvent e) {
+                    new Login();
+            }
+        });
+
+        viewBookItemMenu.addActionListener(e->{
+            Booklist booklist = new Booklist(dynamicView.getWidth(), dynamicView.getHeight());
+            setDynamicView(booklist);
+        });
+
+
+
         addMemberItemMenu.addActionListener(e ->{
             MemberRegistration memberRegistration = new MemberRegistration(dynamicView.getWidth(), dynamicView.getHeight());
             setDynamicView(memberRegistration);
@@ -106,8 +134,14 @@ public class LMS extends JFrame {
             setDynamicView(bookCheckOut);
         });
 
-        /*End Book function*/
-
+        /*About Book function*/
+        aboutMenu.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                About bookCheckOut = new About(dynamicView.getWidth(), dynamicView.getHeight());
+                setDynamicView(bookCheckOut);
+            }
+        });
     }
 
     private void setDynamicView(JPanel newDynamicView){
@@ -147,12 +181,16 @@ public class LMS extends JFrame {
         }
         if(level == 2){
             memberMenuItems = new JMenuItem[] {viewCheckoutRecordItemMenu};
-            bookMenuItems = new JMenuItem[]{addBookItemMenu, addCopyBookItemMenu, checkoutBookItemMenu, viewBookItemMenu};
+            bookMenuItems = new JMenuItem[]{checkoutBookItemMenu, viewBookItemMenu};
 
         }
         if(level == 3){
             memberMenuItems = new JMenuItem[] {addMemberItemMenu, editMemberItemMenu};
             bookMenuItems = new JMenuItem[]{addBookItemMenu, addCopyBookItemMenu, viewBookItemMenu};
         }
+    }
+
+    private void logout(){
+        this.dispose();
     }
 }
