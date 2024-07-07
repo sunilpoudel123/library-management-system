@@ -42,7 +42,7 @@ public class Booklist extends JPanel{
                     }
                     else{
 
-                        Book book = Book.findByIsbn(isbnTextField.getText());
+                        Book book = Book.findBook(isbnTextField.getText());
                         Object[] bookArray = {book};
                         ArrayList<Object> objectList = new ArrayList<>(Arrays.asList(bookArray));
                         createTableList(resultPanel, objectList);

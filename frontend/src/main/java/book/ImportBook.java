@@ -104,7 +104,7 @@ public class ImportBook extends JPanel{
         else{
             JOptionPane.showMessageDialog(null, "Copied Qty must be at least one","Invalid copied Qty", JOptionPane.ERROR_MESSAGE);
         }
-        if(BookCopy.saveBook((Book) book)!=null){
+        if(Book.addBook((Book) book)!=null){
             JOptionPane.showMessageDialog(null, "Save Successfully!","Saved!", JOptionPane.INFORMATION_MESSAGE);
             Utility.resetComponent(components);
         }

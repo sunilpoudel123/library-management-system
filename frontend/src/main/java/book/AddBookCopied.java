@@ -1,5 +1,7 @@
 package book;
 
+import com.miu.book.Book;
+import com.miu.book.BookCopy;
 import utility.Utility;
 
 import javax.swing.*;
@@ -8,6 +10,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 
 public class AddBookCopied extends JPanel{
     private JPanel basePanel;
@@ -22,8 +27,11 @@ public class AddBookCopied extends JPanel{
     private JTextField increaseCopiedQtyTextField;
     private JTextField titleTextField;
 
-    private boolean isFound = false;
-    private final boolean isSuccess = false;
+    private JComponent[] components = {submitButton, copiedQtyTextField, copiedAvailableQtyTextFeild, titleTextField, submitButton};
+
+    private Book book = null;
+    private BookCopy bookCopy = null;
+    private LocalDate dueDate;
 
     public AddBookCopied(int width, int height){
         setSize(width, height);
@@ -36,33 +44,55 @@ public class AddBookCopied extends JPanel{
             @Override
             public void keyPressed(KeyEvent e) {
                 if (e.getKeyCode() == KeyEvent.VK_ENTER) {
-                    isBookExist(isbnTextField.getText());
+                    if(isbnTextField.getText().length() == 0){
+                        JOptionPane.showMessageDialog(basePanel, "Please enter a Book ISBN", "Warning", JOptionPane.WARNING_MESSAGE);
+                        return;
+                    }
+                    else{
+                        checkBookExist(isbnTextField.getText());
+                        Utility.enableComponent(increaseCopiedQtyTextField, true);
+                        Utility.enableComponent(submitButton, true);
+                    }
+                }
+                else{
+                    Utility.enableComponent(components, false);
+                    Utility.resetComponent(components);
                 }
             }
         });
         submitButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if(Integer.parseInt(increaseCopiedQtyTextField.getText()) > 0)
+                int copiedQty = Integer.parseInt(copiedQtyTextField.getText());
+                if(copiedQty > 0){
+                    for(int i=1; i<=copiedQty; i++){
+                        BookCopy bookCopy = new BookCopy();
+                        bookCopy.setBook(book);
+                        book.addBookCopy(bookCopy);
+                    }
+                    Book.addBook(book);
                     JOptionPane.showMessageDialog(null, STR."The Copied of Book \{isbnTextField.getText()} Qty Increase by \{increaseCopiedQtyTextField.getText()} Copies", "Add Copied Successfully", JOptionPane.INFORMATION_MESSAGE);
-                else if(Integer.parseInt(increaseCopiedQtyTextField.getText()) == 0)
+                }
+                else if(copiedQty == 0)
                     JOptionPane.showMessageDialog(null, "Make no difference by increase 0 Quantity!", "Add Copied by 0?", JOptionPane.INFORMATION_MESSAGE);
             }
         });
     }
-    private void isBookExist(String isbn){
-        if(!isFound){
-            titleTextField.setForeground(Color.RED);
-            titleTextField.setText("N/A");
+    private void checkBookExist(String isbn){
+        book = Book.findBook(isbn);
+        if(book!=null){
+            bookCopy = book.checkAvailableCopy();
+            if(bookCopy!=null){
+                titleTextField.setText(book.getTitle());
+                copiedQtyTextField.setText(STR."\{book.getBookCopyList().size()}");
+                copiedAvailableQtyTextFeild.setText(STR."\{book.checkAvailableCopyQty()}");
+            }
+            else{
+                JOptionPane.showMessageDialog(basePanel, "Book Not Book Available", "Warning", JOptionPane.WARNING_MESSAGE);
+            }
         }
         else{
-            titleTextField.setForeground(Color.GREEN);
-            titleTextField.setText("Object-Oriented-Programming");
-            copiedQtyTextField.setText("10");
-            copiedAvailableQtyTextFeild.setText("2");
-            increaseCopiedQtyTextField.setEditable(true);
+            JOptionPane.showMessageDialog(basePanel, "Book does not exist", "Warning", JOptionPane.WARNING_MESSAGE);
         }
-        submitButton.setEnabled(isFound);
-        isFound = !isFound;
     }
 }

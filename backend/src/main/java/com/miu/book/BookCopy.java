@@ -13,10 +13,11 @@ public class BookCopy extends Book {
 
     //Book with 1 Author & 1 Copy
     public BookCopy(String title, String isbn, int borrowedPeriod, Author author, BookCopy bookCopy) {
-        super(isbn, title,0,null);
-        //this.bookId = HelperUtil.generateStringID();
-        this.title = title;
         this.isbn = isbn;
+        this.title = title;
+        this.borrowedPeriod = borrowedPeriod;
+        this.bookId = HelperUtil.generateStringID();
+
         this.authorList = new ArrayList<>();
         this.authorList.add(author);
         this.bookCopyList = new ArrayList<>();
@@ -25,10 +26,11 @@ public class BookCopy extends Book {
 
     //Book with * Authors & 1 Copy
     public BookCopy(String title, String isbn, int borrowedPeriod, List<Author> authorList, BookCopy bookCopy) {
-        super(isbn, title,0,null);
-        this.bookId = HelperUtil.generateStringID();
-        this.title = title;
         this.isbn = isbn;
+        this.title = title;
+        this.borrowedPeriod = borrowedPeriod;
+        this.bookId = HelperUtil.generateStringID();
+
         this.authorList = authorList;
         this.bookCopyList = new ArrayList<>();
         this.bookCopyList.add(bookCopy);
@@ -36,29 +38,26 @@ public class BookCopy extends Book {
 
     //Book with 1 Author & * Copies
     public BookCopy(String title, String isbn, int borrowedPeriod, Author author, List<BookCopy> bookCopyList) {
-        super(isbn, title,0,null);
-        this.bookId = HelperUtil.generateStringID();
-        this.title = title;
         this.isbn = isbn;
+        this.title = title;
+        this.borrowedPeriod = borrowedPeriod;
+        this.bookId = HelperUtil.generateStringID();
         this.authorList = new ArrayList<>();
         this.authorList.add(author);
-        this.bookCopyList = new ArrayList<>();
         this.bookCopyList = bookCopyList;
     }
 
     //Book with * Authors & * Copies
     public BookCopy(String title, String isbn, int borrowedPeriod, List<Author> authorList, List<BookCopy> bookCopyList) {
-        super(isbn, title,0,null);
-        this.bookId = HelperUtil.generateStringID();
-        this.title = title;
         this.isbn = isbn;
+        this.title = title;
         this.borrowedPeriod = borrowedPeriod;
+        this.bookId = HelperUtil.generateStringID();
         this.authorList = authorList;
         this.bookCopyList = bookCopyList;
     }
 
-    public BookCopy(String title, String isbn) {
-        super(isbn, title,0,null);
+    public BookCopy() {
         this.bookCopyId = HelperUtil.generateStringID();
         this.isAvailable = true;
     }
@@ -81,17 +80,5 @@ public class BookCopy extends Book {
 
     public void setIsAvailable(boolean isAvailable) {
          this.isAvailable = isAvailable;
-    }
-
-    public static BookCopy addBookCopy(BookCopy bookCopy) {
-      return  BookDao.addBookCopy(bookCopy);
-    }
-
-    public static BookCopy checkAvailableCopy(String copyId) {
-        return BookDao.checkAvailableCopy(copyId);
-    }
-
-    public static int checkAvailableCopyQty(String isbn) {
-        return BookDao.checkAvailableCopyQty(isbn);
     }
 }
