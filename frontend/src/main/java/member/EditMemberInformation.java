@@ -29,7 +29,7 @@ public class EditMemberInformation extends JPanel{
     private JTextField cityTextField;
     LibraryMember member;
 
-    private boolean isFound;
+    JComponent[] components;
 
     public EditMemberInformation(int width, int height) {
         setSize(width, height);
@@ -41,14 +41,10 @@ public class EditMemberInformation extends JPanel{
         Utility.textFieldNumericOnly(phoneNumberTextField, false, 11);
         Utility.textFieldNumericOnly(zipCodeTextField, false, 5);
 
-        JComponent[] components = {firstNameTextField, lastNameTextField, phoneNumberTextField, stateComboBox, cityTextField, zipCodeTextField, streetTextField, submitButton};
-
+        components = new JComponent[] {firstNameTextField, lastNameTextField, phoneNumberTextField, stateComboBox, cityTextField, zipCodeTextField, streetTextField, submitButton};
         Utility.enableComponent(components, false);
-
         Utility.resetComponent(components);
-
         add(basePanel);
-
         memberIDTextField.addKeyListener(new KeyAdapter() {
             @Override
             public void keyPressed(KeyEvent e) {
@@ -72,29 +68,27 @@ public class EditMemberInformation extends JPanel{
                 }
             }
         });
-
-        submitButton.addActionListener(new ActionListener() {
+        cancelButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 Utility.resetComponent(components);
                 Utility.enableComponent(components, false);
             }
         });
-        cancelButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                Utility.resetComponent(components);
-            }
-        });
         submitButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                Address address = new Address(streetTextField.getText(), cityTextField.getText(), stateComboBox.getSelectedItem().toString(), zipCodeTextField.getText());
-                member.setAddress(address);
-                member.setPhoneNumber(phoneNumberTextField.getText());
-                member.setFirstName(firstNameTextField.getText());
-                member.setLastName(lastNameTextField.getText());
-                update(member);
+                if(!Utility.validationComponentEmpty(components)){
+                    Address address = new Address(streetTextField.getText(), cityTextField.getText(), stateComboBox.getSelectedItem().toString(), zipCodeTextField.getText());
+                    member.setAddress(address);
+                    member.setPhoneNumber(phoneNumberTextField.getText());
+                    member.setFirstName(firstNameTextField.getText());
+                    member.setLastName(lastNameTextField.getText());
+                    update(member);
+                }
+                else{
+                    JOptionPane.showMessageDialog(basePanel, "Please fill all the required fields.", "Warning", JOptionPane.WARNING_MESSAGE);
+                }
             }
         });
     }

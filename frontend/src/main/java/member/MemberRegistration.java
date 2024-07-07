@@ -32,11 +32,14 @@ public class MemberRegistration extends JPanel{
     private JComboBox<String> stateComboBox;
     private JTextField cityTextField;
 
+    Component[] components;
+
     public MemberRegistration(int width, int height) {
         setSize(width, height);
         if (getParent() != null && getParent().isVisible()) { // Check if parent is visible
             setVisible(true);
         }
+        components = new Component[] {streetTextField, cityTextField, stateComboBox, zipCodeTextField, firstNameTextField, lastNameTextField, phoneNumberTextField};
         Utility.comboBoxItemSetter(stateComboBox, Utility.usState);
         Utility.textFieldNumericOnly(phoneNumberTextField, false, 11);
         Utility.textFieldNumericOnly(zipCodeTextField, false, 5);
@@ -44,13 +47,17 @@ public class MemberRegistration extends JPanel{
         submitButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                addMember();
+                if(!Utility.validationComponentEmpty(components))
+                    addMember();
+                else{
+                    JOptionPane.showMessageDialog(basePanel, "Please fill all the required fields.", "Warning", JOptionPane.WARNING_MESSAGE);
+                }
             }
         });
         cancelButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                clean();
+                clean(components);
             }
         });
     }
@@ -62,11 +69,10 @@ public class MemberRegistration extends JPanel{
         }
         else{
             JOptionPane.showMessageDialog(null, STR."Member ID:\{member.getMemberId()} is created!", "Add Member Successfully", JOptionPane.INFORMATION_MESSAGE);
-            clean();
+            clean(components);
         }
     }
-    private void clean(){
-        Component[] components = {streetTextField, cityTextField, stateComboBox, zipCodeTextField, firstNameTextField, lastNameTextField, phoneNumberTextField};
+    private void clean(Component[] components){
         Utility.resetComponent(components);
     }
 }

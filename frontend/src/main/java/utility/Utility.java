@@ -165,4 +165,21 @@ public class Utility extends JFrame {
             }
         }
     }
+    public static boolean validationComponentEmpty(Component[] components){
+        for(Component component : components){
+            if(component instanceof JTextComponent){
+                JTextComponent jTextComponent = (JTextComponent)component;
+                if(jTextComponent.getText() == null || jTextComponent.getText().length() == 0){
+                    return true;
+                };
+            }
+            else if (component instanceof JComboBox<?>) {
+                JComboBox<?> jTextComponent = (JComboBox<?>)component;
+                if(jTextComponent.getSelectedIndex() == -1){
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
 }
