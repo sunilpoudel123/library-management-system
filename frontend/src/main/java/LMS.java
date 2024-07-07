@@ -1,5 +1,6 @@
 import book.AddBookCopied;
 import book.BookCheckOut;
+import book.Booklist;
 import book.ImportBook;
 import com.miu.person.User;
 import com.miu.person.UserRole;
@@ -92,6 +93,11 @@ public class LMS extends JFrame {
             public void windowClosed(WindowEvent e) {
                     new Login();
             }
+        });
+
+        viewBookItemMenu.addActionListener(e->{
+            Booklist booklist = new Booklist(dynamicView.getWidth(), dynamicView.getHeight());
+            setDynamicView(booklist);
         });
 
 
