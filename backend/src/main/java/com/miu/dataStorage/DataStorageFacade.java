@@ -1,6 +1,7 @@
 package com.miu.dataStorage;
 
 import com.miu.book.Book;
+import com.miu.book.BookCopy;
 import com.miu.person.LibraryMember;
 import com.miu.person.Member;
 import com.miu.person.User;
@@ -20,7 +21,7 @@ import com.miu.checkout.CheckoutRecordEntry;
 public class DataStorageFacade {
 
     enum StorageType {
-        BOOKS, MEMBERS, USERS, ENTRIES;
+        BOOKS, MEMBERS, USERS, ENTRIES,COPIES;
     }
 
     public static final String OUTPUT_DIR = System.getProperty("user.dir") + "/resources/database/bin";
@@ -55,6 +56,12 @@ public class DataStorageFacade {
         saveToStorage(StorageType.ENTRIES, recordEntries);
     }
 
+    public static void saveNewBookCopy(BookCopy bookCopy) {
+        HashMap<String, BookCopy> bookCopiess = readBookCopyMap();
+        String isbn = bookCopy.getISBN();
+        bookCopiess.put(isbn, bookCopy);
+        saveToStorage(StorageType.COPIES, bookCopiess);
+    }
 
     @SuppressWarnings("unchecked")
     public static HashMap<String, Book> readBooksMap() {
@@ -86,6 +93,13 @@ public class DataStorageFacade {
                 StorageType.ENTRIES);
     }
 
+    public static HashMap<String, BookCopy> readBookCopyMap() {
+        //Returns a Map with name/value pairs being
+        //   memberId -> LibraryMember
+        return (HashMap<String, BookCopy>) readFromStorage(
+                StorageType.COPIES);
+    }
+
 
     /////load methods - these place test data into the storage area
     ///// - used just once at startup
@@ -109,9 +123,15 @@ public class DataStorageFacade {
     }
 
     public static void loadCheckoutMap(List<CheckoutRecordEntry> entryList) {
-        HashMap<Integer, CheckoutRecordEntry> entries = new HashMap();
+        HashMap<Integer, CheckoutRecordEntry> entries = new HashMap<>();
         entryList.forEach(entry -> entries.put(((CheckoutRecordEntry)entry).getMemberId(), entry));
         saveToStorage(StorageType.ENTRIES, entries);
+    }
+
+    public static void loadBookCopyMap(List<BookCopy> bookCopyList) {
+        HashMap<String, BookCopy> bookCopies = new HashMap<>();
+        bookCopyList.forEach(bookCopy -> bookCopies.put(bookCopy.getBookCopyId(), bookCopy));
+        saveToStorage(StorageType.COPIES, bookCopies);
     }
 
 
