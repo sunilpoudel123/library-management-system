@@ -15,11 +15,16 @@ public class BookDao {
     private static Map<String, Book> books = new HashMap<>();
 
     static {
+        loadData();
+    }
+
+    private static void loadData() {
         HashMap<String, Book> loadedData = DataStorageFacade.readBooksMap();
         if (loadedData != null) {
+            books.clear();
             for (Map.Entry<String, Book> entry : loadedData.entrySet()) {
                 if (entry.getValue() instanceof Book) {
-                    books.put((String) entry.getKey(), (Book) entry.getValue());
+                    books.put(entry.getKey(), entry.getValue());
                 }
             }
         }
@@ -27,6 +32,7 @@ public class BookDao {
 
     public static Book save(Book book) {
         DataStorageFacade.saveNewBook(book);
+        loadData();
         System.out.println("data write successfully");
         return null;
     }
@@ -47,9 +53,9 @@ public class BookDao {
 
     public static Book saveBookCopy(BookCopy bookCopy) {
         DataStorageFacade.saveNewBook(bookCopy);
+        loadData();
         System.out.println("data write successfully");
         return null;
     }
-
 
 }

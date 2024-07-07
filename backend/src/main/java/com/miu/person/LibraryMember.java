@@ -74,7 +74,6 @@ public class LibraryMember extends UserRole implements Member, Serializable {
         this.address = address;
     }
 
-
     public static LibraryMember addLibraryMember(LibraryMember libraryMember) {
         return LibraryMemberDao.addLibraryMember(libraryMember);
     }

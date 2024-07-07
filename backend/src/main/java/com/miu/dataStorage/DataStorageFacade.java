@@ -14,15 +14,16 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.HashMap;
 import java.util.List;
+import com.miu.checkout.CheckoutRecord;
+import com.miu.checkout.CheckoutRecordEntry;
 
 public class DataStorageFacade {
 
     enum StorageType {
-        BOOKS, MEMBERS, USERS;
+        BOOKS, MEMBERS, USERS, ENTRIES;
     }
 
-    public static final String OUTPUT_DIR = System.getProperty("user.dir")
-            + "/resources/database/bin";
+    public static final String OUTPUT_DIR = System.getProperty("user.dir") + "/resources/database/bin";
     public static final String DATE_PATTERN = "MM/dd/yyyy";
 
     //implement: other save operations
@@ -47,6 +48,14 @@ public class DataStorageFacade {
         saveToStorage(StorageType.USERS, books);
     }
 
+    public static void saveNewCheckoutEntry(CheckoutRecordEntry recordEntry) {
+        HashMap<Integer, CheckoutRecordEntry> recordEntries = new HashMap<>();
+        /// int memberId = recordEntry.getMemberId();
+        recordEntries.put(1, recordEntry);
+        saveToStorage(StorageType.ENTRIES, recordEntries);
+    }
+
+
     @SuppressWarnings("unchecked")
     public static HashMap<String, Book> readBooksMap() {
         //Returns a Map with name/value pairs being
@@ -70,6 +79,13 @@ public class DataStorageFacade {
         return (HashMap<Integer, User>) readFromStorage(StorageType.USERS);
     }
 
+    public static HashMap<Integer, CheckoutRecordEntry> readEntryMap() {
+        //Returns a Map with name/value pairs being
+        //   memberId -> LibraryMember
+        return (HashMap<Integer, CheckoutRecordEntry>) readFromStorage(
+                StorageType.ENTRIES);
+    }
+
 
     /////load methods - these place test data into the storage area
     ///// - used just once at startup
@@ -91,6 +107,13 @@ public class DataStorageFacade {
         memberList.forEach(member -> members.put(((LibraryMember)member).getMemberId(), member));
         saveToStorage(StorageType.MEMBERS, members);
     }
+
+    public static void loadCheckoutMap(List<CheckoutRecordEntry> entryList) {
+        HashMap<Integer, CheckoutRecordEntry> entries = new HashMap();
+        entryList.forEach(entry -> entries.put(((CheckoutRecordEntry)entry).getMemberId(), entry));
+        saveToStorage(StorageType.ENTRIES, entries);
+    }
+
 
     static void saveToStorage(StorageType type, Object ob) {
         ObjectOutputStream out = null;

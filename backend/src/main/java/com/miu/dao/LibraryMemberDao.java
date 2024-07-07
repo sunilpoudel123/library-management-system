@@ -15,8 +15,11 @@ public final class LibraryMemberDao<T extends Serializable> {
     private static Map<Integer, LibraryMember> members = new HashMap<>();
 
     static {
-        HashMap<Integer, LibraryMember> loadedData = DataStorageFacade.readMemberMap();
+        loadData();
+    }
 
+    private static void loadData() {
+        HashMap<Integer, LibraryMember> loadedData = DataStorageFacade.readMemberMap();
         if (loadedData != null) {
             for (Map.Entry<Integer, LibraryMember> entry : loadedData.entrySet()) {
                 if (entry.getValue() instanceof LibraryMember) {
@@ -27,7 +30,6 @@ public final class LibraryMemberDao<T extends Serializable> {
     }
 
     public static LibraryMember findMember(int memberId) {
-
         for (Map.Entry<Integer, LibraryMember> entry : members.entrySet()) {
             if (entry.getValue().getMemberId() == memberId) {
                 return entry.getValue();
@@ -38,6 +40,7 @@ public final class LibraryMemberDao<T extends Serializable> {
 
     public static LibraryMember addLibraryMember(LibraryMember libraryMember) {
         DataStorageFacade.saveNewMember(libraryMember);
+        loadData();
         System.out.println("data write successfully");
         for (Map.Entry<Integer, LibraryMember> entry : members.entrySet()) {
             if (entry.getValue().getMemberId() == libraryMember.getMemberId()) {
@@ -66,6 +69,7 @@ public final class LibraryMemberDao<T extends Serializable> {
         }
         if (updated) {
             DataStorageFacade.saveNewMember(loadedData);
+            loadData();
             System.out.println("Data written successfully");
             System.out.println(STR."Updated member: \{libraryMember.getFirstName()}");
             return libraryMember;

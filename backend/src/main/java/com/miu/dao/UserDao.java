@@ -13,6 +13,10 @@ public final class UserDao<T extends Serializable> {
     private static Map<String, User> users = new HashMap<>();
 
     static {
+        loadData();
+    }
+
+    private static void loadData() {
         HashMap<Integer, User> loadedData = DataStorageFacade.readUserMap();
 
         if (loadedData != null) {
@@ -24,6 +28,11 @@ public final class UserDao<T extends Serializable> {
         }
     }
 
+
+    public User login(String username, String password) {
+        return null;
+    }
+
     public static User findByUsername(String username) {
         User user = null;
         for (Map.Entry<String, User> entry : users.entrySet()) {
@@ -31,6 +40,7 @@ public final class UserDao<T extends Serializable> {
                 user = entry.getValue();
             }
         }
+//        User user = users.get(username);
         if (user != null) {
             return user;
         } else {
@@ -44,9 +54,7 @@ public final class UserDao<T extends Serializable> {
     }
 
     public static User save(User user) {
-        Map<Object, Object> data = new HashMap<>();
-        data.put(user.getUsername(), user);
-        DataStorage.write(data);
+        DataStorageFacade.saveNewUser(user);
         System.out.println("data write successfully");
         return null;
     }

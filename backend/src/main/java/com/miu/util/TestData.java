@@ -2,12 +2,18 @@ package com.miu.util;
 
 import com.miu.Address;
 import com.miu.book.Book;
-import com.miu.book.BookCopy;
+import com.miu.checkout.CheckoutRecord;
+import com.miu.checkout.CheckoutRecordEntry;
+import com.miu.checkout.CheckoutRecordEntry;
 import com.miu.dataStorage.DataStorageFacade;
 import com.miu.person.*;
+import com.miu.book.BookCopy;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
+import java.util.Date;
+import java.util.Date;
 import java.util.List;
 
 public class TestData {
@@ -18,6 +24,8 @@ public class TestData {
         td.libraryMemberData();
         td.userData();
         td.allBooks();
+        td.checkoutRecordData();
+        td.checkoutEntryData();
         DataStorageFacade da = new DataStorageFacade();
         System.out.println(da.readUserMap());
     }
@@ -40,6 +48,29 @@ public class TestData {
         members.add(libraryMember);
 
         DataStorageFacade.loadMemberMap(members);
+    }
+    List<CheckoutRecordEntry> entriesList = new ArrayList<CheckoutRecordEntry>();
+    public void checkoutEntryData() {
+        Date currentdate = new Date();
+        CheckoutRecordEntry entryrecord = new CheckoutRecordEntry(1,"ISBN3","CPY0003",currentdate,currentdate,currentdate);
+        entriesList.add(entryrecord);
+
+        CheckoutRecordEntry entryrecord1 = new CheckoutRecordEntry(2,"ISBN4","CPY0004",currentdate,currentdate,currentdate);
+        entriesList.add(entryrecord);
+
+        CheckoutRecordEntry entryrecord2 = new CheckoutRecordEntry(3,"ISBN5","CPY0004",currentdate,currentdate,currentdate);
+        entriesList.add(entryrecord);
+
+
+        DataStorageFacade.loadMemberMap(members);
+    }
+
+    //create library members
+    public void checkoutRecordData() {
+        CheckoutRecord libraryMember = new CheckoutRecord();
+
+        DataStorageFacade.saveNewCheckoutEntry(new CheckoutRecordEntry(12, "2323", "23", new Date(), new Date(), new Date()));
+
     }
 
     //create library members
@@ -88,6 +119,13 @@ public class TestData {
     List<Book> allBooks = new ArrayList<Book>() {
         {
             add(new BookCopy("admin", "admin", 1, allAuthors.get(0), bookCopy));
+        }
+    };
+
+    @SuppressWarnings("serial")
+    List<CheckoutRecord> allCheckoutRecord = new ArrayList<CheckoutRecord>() {
+        {
+            add(new CheckoutRecord());
         }
     };
 }
