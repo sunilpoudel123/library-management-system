@@ -1,26 +1,25 @@
 package com.miu.person;
 
 import com.miu.dao.UserDao;
+import com.miu.util.HelperUtil;
 
 import java.io.Serializable;
 
 public class User implements Serializable {
 
-    private static UserDao userDao = new UserDao();
-
     private static final long serialVersionUID = 1L;
-    private long id;
+    private int id;
     private String username;
     private String password;
     private String firstName;
     private String lastName;
     private UserRole role;
 
-    public long getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -64,18 +63,27 @@ public class User implements Serializable {
         this.role = role;
     }
 
+    public User( String username, String password, String firstName, String lastName, UserRole role) {
+        this.id = HelperUtil.generateID();
+        this.username = username;
+        this.password = password;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.role = role;
+    }
+
     @Override
     public String toString() {
         return "User{id=" + id + ", name='" + firstName + " " + lastName + "'}";
     }
 
-    public User findByUsername(String username) {
+    public static User findByUsername(String username) {
         System.out.println("finding user by: " + username);
-        User user = userDao.findByUsername(username);
+        User user = UserDao.findByUsername(username);
         return user;
     }
 
-    public User getAuthenticatedUser(String username, String password) {
+    public static User getAuthenticatedUser(String username, String password) {
         System.out.println("Login requested by: " + username);
         User user = findByUsername(username);
         if (user == null) {
@@ -91,16 +99,16 @@ public class User implements Serializable {
         }
     }
 
-    public User addUser(String username, String password, String firstName, String lastName) {
-        User user = new User();
-        System.out.println("Adding user: " + username);
-        user.setUsername(username);
-        user.setPassword(password);
-        user.setFirstName(firstName);
-        user.setLastName(lastName);
-//        user.setRole();
-        userDao.save(user);
-        System.out.println("User successfully added");
-        return user;
-    }
+//    public User addUser(String username, String password, String firstName, String lastName) {
+//        User user = new User();
+//        System.out.println("Adding user: " + username);
+//        user.setUsername(username);
+//        user.setPassword(password);
+//        user.setFirstName(firstName);
+//        user.setLastName(lastName);
+////        user.setRole();
+//        UserDao.save(user);
+//        System.out.println("User successfully added");
+//        return user;
+//    }
 }
