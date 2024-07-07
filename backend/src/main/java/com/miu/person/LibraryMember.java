@@ -82,4 +82,8 @@ public class LibraryMember extends UserRole implements Member, Serializable {
     public static LibraryMember findMember(int memberId) {
         return LibraryMemberDao.findMember(memberId);
     }
+
+    public static LibraryMember editMember(LibraryMember member) {
+          return LibraryMemberDao.editMember(member);
+    }
 }
