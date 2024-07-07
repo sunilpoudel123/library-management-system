@@ -48,7 +48,35 @@ public final class LibraryMemberDao<T extends Serializable> {
         return null;
     }
 
-    public int findMaxId() {
+    public static LibraryMember editMember(LibraryMember libraryMember) {
+        boolean updated = false;
+        System.out.println("Updating member with ID: " + libraryMember.getMemberId());
+        Map<Object, Object> loadedData = DataStorage.read();
+        if (loadedData != null) {
+            for (Map.Entry<Object, Object> entry : loadedData.entrySet()) {
+                if (entry.getValue() instanceof LibraryMember) {
+                    LibraryMember member = (LibraryMember) entry.getValue();
+                    if (member.getMemberId() == libraryMember.getMemberId()) {
+                        entry.setValue(libraryMember);
+                        updated = true;
+                        break;
+                    }
+                }
+            }
+        }
+        if (updated) {
+            DataStorage.write(loadedData);
+            System.out.println("Data written successfully");
+            System.out.println("Updated member: " + libraryMember.getFirstName());
+            return libraryMember;
+        }
+        System.out.println("Member not found");
+        return null;
+    }
+
+
+
+    public static int findMaxId() {
         return members.keySet().stream()
                 .map(id -> {
                     try {

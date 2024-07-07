@@ -28,15 +28,15 @@ public class TestData {
 
     //create library members
     public void libraryMemberData() {
-        LibraryMember libraryMember = new LibraryMember(1001, "Andy", "Rogers", "641-223-2211", addresses.get(4));
+        LibraryMember libraryMember = new LibraryMember("Andy", "Rogers", "641-223-2211", addresses.get(4));
         members.add(libraryMember);
-        libraryMember = new LibraryMember(1002, "Drew", "Stevens", "702-998-2414", addresses.get(5));
-        members.add(libraryMember);
-
-        libraryMember = new LibraryMember(1003, "Sarah", "Eagleton", "451-234-8811", addresses.get(6));
+        libraryMember = new LibraryMember("Drew", "Stevens", "702-998-2414", addresses.get(5));
         members.add(libraryMember);
 
-        libraryMember = new LibraryMember(1004, "Ricardo", "Montalbahn", "641-472-2871", addresses.get(7));
+        libraryMember = new LibraryMember("Sarah", "Eagleton", "451-234-8811", addresses.get(6));
+        members.add(libraryMember);
+
+        libraryMember = new LibraryMember( "Ricardo", "Montalbahn", "641-472-2871", addresses.get(7));
         members.add(libraryMember);
 
         DataStorageFacade.loadMemberMap(members);
@@ -61,11 +61,11 @@ public class TestData {
     @SuppressWarnings("serial")
     public List<Author> allAuthors = new ArrayList<Author>() {
         {
-            add(new Author("Joe", "Thomas", "641-445-2123", "", "A happy man is he.", addresses.get(0)));
-            add(new Author("Sandra", "Thomas", "641-445-2123", "", "A happy wife is she.", addresses.get(0)));
-            add(new Author("Nirmal", "Pugh", "641-919-3223", "", "Thinker of thoughts.", addresses.get(0)));
-            add(new Author("Andrew", "Cleveland", "976-445-2232", "", "Author of childrens' books.", addresses.get(0)));
-            add(new Author("Sarah", "Connor", "123-422-2663", "", "Known for her clever style.", addresses.get(0)));
+            add(new Author("Joe", "Thomas", "6414452123", "", "A happy man is he.", addresses.get(0)));
+            add(new Author("Sandra", "Thomas", "6414452123", "", "A happy wife is she.", addresses.get(0)));
+            add(new Author("Nirmal", "Pugh", "6419193223", "", "Thinker of thoughts.", addresses.get(0)));
+            add(new Author("Andrew", "Cleveland", "9764452232", "", "Author of childrens' books.", addresses.get(0)));
+            add(new Author("Sarah", "Connor", "1234222663", "", "Known for her clever style.", addresses.get(0)));
         }
     };
 
