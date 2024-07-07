@@ -1,8 +1,8 @@
 package com.miu.dao;
 
-import com.miu.LibraryMember;
-import com.miu.User;
 import com.miu.dataStorage.DataStorage;
+import com.miu.dataStorage.DataStorageFacade;
+import com.miu.person.LibraryMember;
 
 import java.io.Serializable;
 import java.lang.reflect.Member;
@@ -11,42 +11,36 @@ import java.util.Map;
 import java.util.Optional;
 
 public final class LibraryMemberDao<T extends Serializable> {
-    private static Map<String, LibraryMember> members = new HashMap<>();
+    private static Map<Integer, LibraryMember> members = new HashMap<>();
 
-    public LibraryMemberDao() {
-        Map<Object, Object> loadedData = DataStorage.read();
+    static {
+        HashMap<Integer, LibraryMember> loadedData = DataStorageFacade.readMemberMap();
+
         if (loadedData != null) {
-            for (Map.Entry<Object, Object> entry : loadedData.entrySet()) {
+            for (Map.Entry<Integer, LibraryMember> entry : loadedData.entrySet()) {
                 if (entry.getValue() instanceof LibraryMember) {
-                    members.put(entry.getKey().toString(), (LibraryMember) entry.getValue());
+                    members.put(entry.getKey(), (LibraryMember) entry.getValue());
                 }
             }
         }
     }
 
     public static LibraryMember findMember(int memberId) {
-        Map<Object, Object> loadedData = DataStorage.read();
-        if (loadedData != null) {
-            for (Map.Entry<Object, Object> entry : loadedData.entrySet()) {
-                if (entry.getValue() instanceof LibraryMember) {
-                    LibraryMember member = (LibraryMember) entry.getValue();
-                         // System.out.println("***"+member.getMemberId()  + " " + memberId+"Before Test find data" );
-                     if (member.getMemberId() == memberId) {
-                         // System.out.println("*******"+member.getMemberId() +" After Test find data");
-                        return member;
-                    }
-                }
+
+        for (Map.Entry<Integer, LibraryMember> entry : members.entrySet()) {
+            if (entry.getValue().getMemberId() == memberId) {
+                return entry.getValue();
             }
         }
         return null;
     }
 
-    public static LibraryMember addMember(LibraryMember libraryMember) {
+    public static LibraryMember addLibraryMember(LibraryMember libraryMember) {
         Map<Object, Object> data = new HashMap<>();
         data.put(libraryMember.getMemberId(), libraryMember);
-        DataStorage.write(data);
+        DataStorageFacade.saveNewMember(libraryMember);
         System.out.println("data write successfully");
-        for (Map.Entry<String, LibraryMember> entry : members.entrySet()) {
+        for (Map.Entry<Integer, LibraryMember> entry : members.entrySet()) {
             if (entry.getValue().getMemberId() == libraryMember.getMemberId()) {
                 return entry.getValue();
             }
@@ -86,7 +80,7 @@ public final class LibraryMemberDao<T extends Serializable> {
         return members.keySet().stream()
                 .map(id -> {
                     try {
-                        return Integer.parseInt(id);
+                        return Integer.parseInt(String.valueOf(id));
                     } catch (NumberFormatException e) {
                         return null;
                     }

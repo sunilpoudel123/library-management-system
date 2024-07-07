@@ -1,4 +1,7 @@
-package com.miu;
+package com.miu.person;
+
+import com.miu.Address;
+import com.miu.book.BookCopy;
 
 import java.io.*;
 import java.util.List;
@@ -71,8 +74,9 @@ public class LibraryMember implements Member, Serializable {
         this.address = address;
     }
 
-    public static LibraryMember addMember(LibraryMember libraryMember) {
-        return LibraryMemberDao.addMember(libraryMember);
+
+    public static LibraryMember addLibraryMember(LibraryMember libraryMember) {
+        return LibraryMemberDao.addLibraryMember(libraryMember);
     }
 
     public static LibraryMember findMember(int memberId) {
