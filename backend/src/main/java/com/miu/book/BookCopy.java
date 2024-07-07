@@ -1,5 +1,6 @@
 package com.miu.book;
 
+import com.miu.dao.BookDao;
 import com.miu.person.Author;
 import com.miu.util.HelperUtil;
 
@@ -64,5 +65,11 @@ public class BookCopy extends Book {
 
     public Book getBook() {
         return this.book;
+    }
+
+    public static Book saveBookCopy(BookCopy book) {
+        BookDao.saveBookCopy(book);
+        System.out.println("Book saved");
+        return book;
     }
 }

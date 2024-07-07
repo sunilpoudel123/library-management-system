@@ -20,7 +20,7 @@ import com.miu.checkout.CheckoutRecordEntry;
 public class DataStorageFacade {
 
     enum StorageType {
-        BOOKS, MEMBERS, USERS,ENTRIES;
+        BOOKS, MEMBERS, USERS, ENTRIES;
     }
 
     public static final String OUTPUT_DIR = System.getProperty("user.dir") + "/resources/database/bin";
