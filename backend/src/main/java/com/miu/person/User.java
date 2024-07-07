@@ -16,7 +16,7 @@ public class User implements Serializable {
     private String password;
     private String firstName;
     private String lastName;
-    private List<UserRole> roles = new ArrayList<>();
+    private List<UserRole> roles;
 
     public int getId() {
         return id;
@@ -78,6 +78,15 @@ public class User implements Serializable {
         this.firstName = firstName;
         this.lastName = lastName;
         this.roles = roles;
+    }
+    public User( String username, String password, String firstName, String lastName, UserRole role) {
+        this.id = HelperUtil.generateID();
+        this.username = username;
+        this.password = password;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.roles= new ArrayList<>();
+        this.roles.add(role);
     }
 
     @Override

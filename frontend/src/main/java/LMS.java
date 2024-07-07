@@ -2,6 +2,7 @@ import book.AddBookCopied;
 import book.BookCheckOut;
 import book.ImportBook;
 import com.miu.person.User;
+import com.miu.person.UserRole;
 import member.EditMemberInformation;
 import member.MemberCheckoutRecord;
 import member.MemberRegistration;
@@ -10,6 +11,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.List;
 
 import static java.lang.StringTemplate.STR;
 
@@ -31,7 +33,7 @@ public class LMS extends JFrame {
     private final JMenuItem editMemberItemMenu = new JMenuItem("Edit Member");
     private final JMenuItem viewCheckoutRecordItemMenu = new JMenuItem("View Checkout Record");
 
-    private final JMenuItem[] memberMenuItems = {addMemberItemMenu, editMemberItemMenu, viewCheckoutRecordItemMenu};
+    private JMenuItem[] memberMenuItems = {addMemberItemMenu, editMemberItemMenu, viewCheckoutRecordItemMenu};
 
     private final JMenuItem addBookItemMenu = new JMenuItem("Add Book");
     private final JMenuItem addCopyBookItemMenu = new JMenuItem("Add Copied Book");
@@ -43,9 +45,10 @@ public class LMS extends JFrame {
     private JPanel menuPanel;
     private JPanel dynamicView;
 
-    private final JMenuItem[] bookMenuItems = {addBookItemMenu, addCopyBookItemMenu, checkoutBookItemMenu, viewBookItemMenu, searchBookItemMenu};
+    private JMenuItem[] bookMenuItems = {addBookItemMenu, addCopyBookItemMenu, checkoutBookItemMenu, viewBookItemMenu};
 
     public LMS(User username){
+        functionalSetup(username.getRoles());
         setTitle(STR."\{TITLE} (\{username.getUsername()})");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setVisible(true);
@@ -129,5 +132,27 @@ public class LMS extends JFrame {
             menuBar.add(menuItem);
         }
         return menuBar;
+    }
+
+    private void functionalSetup(List<UserRole> roles){
+        int level = 0;
+        for(UserRole role : roles){
+            System.out.println(role.getClass().getSimpleName());
+            if(role.getClass().getSimpleName().equals("Admin")){
+                level+=3;
+            }
+            if(role.getClass().getSimpleName().equals("Librarian")){
+                level+=2;
+            }
+        }
+        if(level == 2){
+            memberMenuItems = new JMenuItem[] {viewCheckoutRecordItemMenu};
+            bookMenuItems = new JMenuItem[]{addBookItemMenu, addCopyBookItemMenu, checkoutBookItemMenu, viewBookItemMenu};
+
+        }
+        if(level == 3){
+            memberMenuItems = new JMenuItem[] {addMemberItemMenu, editMemberItemMenu};
+            bookMenuItems = new JMenuItem[]{addBookItemMenu, addCopyBookItemMenu, viewBookItemMenu};
+        }
     }
 }
