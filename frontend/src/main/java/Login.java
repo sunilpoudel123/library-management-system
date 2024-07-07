@@ -12,7 +12,7 @@ public class Login extends JFrame {
     private JTextField usernameTextField;
     private final String TITLE = "Login";
 
-    static boolean isSuccess = false;
+    private boolean isSuccess = false;
     private User user;
     public Login(){
         setTitle(TITLE);
