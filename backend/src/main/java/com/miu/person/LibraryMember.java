@@ -20,7 +20,7 @@ public class LibraryMember implements Member, Serializable {
     private Address address;
 
     public LibraryMember(int memberId, String firstName, String lastName, String phoneNumber, Address address) {
-        this.memberId = HelperUtil.generateID();
+        this.memberId = memberId;
         this.firstName = firstName;
         this.lastName = lastName;
         this.phoneNumber = phoneNumber;
@@ -80,6 +80,8 @@ public class LibraryMember implements Member, Serializable {
     }
 
     public static LibraryMember findMember(int memberId) {
+
+
         return LibraryMemberDao.findMember(memberId);
     }
 }
