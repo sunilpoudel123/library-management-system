@@ -15,16 +15,17 @@ public class TestData {
 
 
     public static void main(String[] args) {
+
         TestData td = new TestData();
         td.libraryMemberData();
-        td.userData();
         DataStorageFacade da = new DataStorageFacade();
         System.out.println(da.readUserMap());
-    }
 
+    }
+/*
     public void userData() {
         DataStorageFacade.loadUserMap(allUsers);
-    }
+    } */
 
     //create library members
     public void libraryMemberData() {
@@ -39,7 +40,7 @@ public class TestData {
         libraryMember = new LibraryMember( "Ricardo", "Montalbahn", "641-472-2871", addresses.get(7));
         members.add(libraryMember);
 
-        DataStorageFacade.loadMemberMap(members);
+     //   DataStorageFacade.loadMemberMap(members);
     }
 
     ///////////// DATA //////////////

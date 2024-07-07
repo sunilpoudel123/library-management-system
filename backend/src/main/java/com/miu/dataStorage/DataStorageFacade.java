@@ -13,15 +13,18 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.HashMap;
 import java.util.List;
+import com.miu.checkout.CheckoutRecord;
+import com.miu.checkout.CheckoutRecordEntry;
 
 public class DataStorageFacade {
 
     enum StorageType {
-        BOOKS, MEMBERS, USERS;
+        BOOKS, MEMBERS, USERS ,ENTRIES;
     }
 
     public static final String OUTPUT_DIR = System.getProperty("user.dir")
             + "/resources/database/bin";
+    public static final String OUTPUT_FILE_EXTENSION= System.getProperty(".ser");
     public static final String DATE_PATTERN = "MM/dd/yyyy";
 
     //implement: other save operations
@@ -46,7 +49,14 @@ public class DataStorageFacade {
         saveToStorage(StorageType.USERS, books);
     }
 
-    @SuppressWarnings("unchecked")
+    public static void saveNewCheckoutEntry(CheckoutRecordEntry recordEntry) {
+        HashMap<Integer, CheckoutRecordEntry> recordEntries =new HashMap<>();
+       /// int memberId = recordEntry.getMemberId();
+        recordEntries.put(1, recordEntry);
+        saveToStorage(StorageType.ENTRIES, recordEntries);
+    }
+
+     @SuppressWarnings("unchecked")
     public static HashMap<String, Book> readBooksMap() {
         //Returns a Map with name/value pairs being
         //   isbn -> Book
@@ -69,10 +79,14 @@ public class DataStorageFacade {
         return (HashMap<Integer, User>) readFromStorage(StorageType.USERS);
     }
 
-
-    /////load methods - these place test data into the storage area
-    ///// - used just once at startup
-
+    @SuppressWarnings("unchecked")
+    public static HashMap<Integer, CheckoutRecordEntry> readEntryMap() {
+        //Returns a Map with name/value pairs being
+        //   memberId -> LibraryMember
+        return (HashMap<Integer, CheckoutRecordEntry>) readFromStorage(
+                StorageType.ENTRIES);
+    }
+ /*
     public static void loadBookMap(List<Book> bookList) {
         HashMap<String, Book> books = new HashMap<String, Book>();
         bookList.forEach(book -> books.put(book.getISBN(), book));
@@ -91,12 +105,28 @@ public class DataStorageFacade {
         saveToStorage(StorageType.MEMBERS, members);
     }
 
+    public static void loadCheckoutRecordMap(List<CheckoutRecordEntry> CheckoutRecordList) {
+        HashMap<Integer, CheckoutRecordEntry> records = new HashMap<>();
+        CheckoutRecordList.forEach(check -> records.put(check.getMemberId(),check));
+        saveToStorage(StorageType.ENTRIES, records);
+    } */
+
     static void saveToStorage(StorageType type, Object ob) {
         ObjectOutputStream out = null;
         try {
-            Path path = FileSystems.getDefault().getPath(OUTPUT_DIR, type.toString());
+            Path dirPath = FileSystems.getDefault().getPath(OUTPUT_DIR);
+            if (!Files.exists(dirPath)) {
+                Files.createDirectories(dirPath);
+            }
+
+            Path path = FileSystems.getDefault().getPath(OUTPUT_DIR, type.toString()+".ser");
+            if (!Files.exists(path)) {
+                Files.createFile(path);
+            }
+            System.out.println("path: " + path);
             out = new ObjectOutputStream(Files.newOutputStream(path));
             out.writeObject(ob);
+
         } catch (IOException e) {
             e.printStackTrace();
         } finally {
@@ -115,6 +145,7 @@ public class DataStorageFacade {
         try {
             Path path = FileSystems.getDefault().getPath(OUTPUT_DIR, type.toString());
             in = new ObjectInputStream(Files.newInputStream(path));
+
             retVal = in.readObject();
         } catch (Exception e) {
             e.printStackTrace();

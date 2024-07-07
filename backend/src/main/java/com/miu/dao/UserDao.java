@@ -11,7 +11,6 @@ import java.util.Map;
 public final class UserDao<T extends Serializable> {
 
     private static Map<String, User> users = new HashMap<>();
-
     static {
         HashMap<Integer, User> loadedData = DataStorageFacade.readUserMap();
 
@@ -23,7 +22,6 @@ public final class UserDao<T extends Serializable> {
             }
         }
     }
-
 
     public User login(String username, String password) {
         return null;
