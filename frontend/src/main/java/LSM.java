@@ -1,6 +1,3 @@
-package src.main.java;
-
-
 import src.main.java.member.CreateNewMember;
 import src.main.java.member.EditMemberInfo;
 

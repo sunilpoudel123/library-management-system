@@ -1,7 +1,7 @@
 package com.miu.person;
 
-public class Librarian extends UserRole {
-    public Librarian(String roleName) {
-        super(roleName);
-    }
+import java.io.Serializable;
+
+public class Librarian extends UserRole implements Serializable {
+
 }

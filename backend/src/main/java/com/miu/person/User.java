@@ -1,8 +1,11 @@
 package com.miu.person;
 
+import com.miu.Address;
 import com.miu.dao.UserDao;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 public class User implements Serializable {
 
@@ -14,7 +17,7 @@ public class User implements Serializable {
     private String password;
     private String firstName;
     private String lastName;
-    private UserRole role;
+    private List<UserRole> roles = new ArrayList<>();
 
     public long getId() {
         return id;
@@ -56,12 +59,17 @@ public class User implements Serializable {
         this.lastName = lastName;
     }
 
-    public UserRole getRole() {
-        return role;
+    public List<UserRole> getRoles() {
+        return roles;
     }
 
-    public void setRole(UserRole role) {
-        this.role = role;
+    public void setRole(List<UserRole> roles) {
+        this.roles = roles;
+    }
+    public void setRole(UserRole role){
+        if(!roles.contains(role)){
+            roles.add(role);
+        }
     }
 
     @Override
@@ -69,13 +77,13 @@ public class User implements Serializable {
         return "User{id=" + id + ", name='" + firstName + " " + lastName + "'}";
     }
 
-    public User findByUsername(String username) {
+    public static User findByUsername(String username) {
         System.out.println("finding user by: " + username);
         User user = userDao.findByUsername(username);
         return user;
     }
 
-    public User getAuthenticatedUser(String username, String password) {
+    public static User getAuthenticatedUser(String username, String password) {
         System.out.println("Login requested by: " + username);
         User user = findByUsername(username);
         if (user == null) {
@@ -98,7 +106,7 @@ public class User implements Serializable {
         user.setPassword(password);
         user.setFirstName(firstName);
         user.setLastName(lastName);
-//        user.setRole();
+        user.setRole(new LibraryMember(firstName, lastName, "", null));
         userDao.save(user);
         System.out.println("User successfully added");
         return user;
