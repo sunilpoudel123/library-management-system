@@ -1,17 +1,15 @@
 package member;
 
 import com.miu.Address;
-import com.miu.factory.MemberFactory;
 import com.miu.person.LibraryMember;
-import com.miu.util.HelperUtil;
+import com.miu.person.Member;
+import com.miu.person.MemberFactory;
 import utility.Utility;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.Arrays;
-import java.util.List;
 
 
 public class MemberRegistration extends JPanel{
@@ -63,12 +61,12 @@ public class MemberRegistration extends JPanel{
     }
     private void addMember(){
         Address address = new Address(streetTextField.getText(), cityTextField.getText(), stateComboBox.getSelectedItem().toString(), zipCodeTextField.getText());
-        LibraryMember member =  MemberFactory.addLibrarianMember(firstNameTextField.getText(), lastNameTextField.getText(), phoneNumberTextField.getText(), address);
-        if(LibraryMember.addLibraryMember(member) != null){
+        Member member =  MemberFactory.addLibraryMember(firstNameTextField.getText(), lastNameTextField.getText(), phoneNumberTextField.getText(), address);
+        if(LibraryMember.addLibraryMember((LibraryMember) member) != null){
             JOptionPane.showMessageDialog(null, "Something Went!", "Warning", JOptionPane.WARNING_MESSAGE);
         }
         else{
-            JOptionPane.showMessageDialog(null, STR."Member ID:\{member.getMemberId()} is created!", "Add Member Successfully", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(null, STR."Member ID:\{((LibraryMember)member).getMemberId()} is created!", "Add Member Successfully", JOptionPane.INFORMATION_MESSAGE);
             clean(components);
         }
     }

@@ -71,13 +71,13 @@ public class User implements Serializable {
         }
     }
 
-    public User( String username, String password, String firstName, String lastName, UserRole role) {
+    public User( String username, String password, String firstName, String lastName, List<UserRole> roles) {
         this.id = HelperUtil.generateID();
         this.username = username;
         this.password = password;
         this.firstName = firstName;
         this.lastName = lastName;
-        this.role = role;
+        this.roles = roles;
     }
 
     @Override

@@ -55,7 +55,8 @@ public final class LibraryMemberDao<T extends Serializable> {
             for (Map.Entry<Integer, LibraryMember> entry : members.entrySet()) {
                 if (entry.getValue() instanceof LibraryMember) {
                     LibraryMember member = entry.getValue();
-                    if (member.getMemberId() == libraryMember.getMemberId()) {
+                    System.out.println(member.getMemberId() + "==" + libraryMember.getMemberId());
+                    if (member.getMemberId().equals(libraryMember.getMemberId())) {
                         entry.setValue(libraryMember);
                         updated = true;
                         break;

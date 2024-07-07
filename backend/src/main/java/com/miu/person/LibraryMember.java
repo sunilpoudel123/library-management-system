@@ -26,7 +26,7 @@ public class LibraryMember extends UserRole implements Member, Serializable {
         this.address = address;
     }
 
-    public int getMemberId() {
+    public Integer getMemberId() {
         return memberId;
     }
 

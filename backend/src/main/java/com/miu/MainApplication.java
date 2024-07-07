@@ -5,10 +5,7 @@ import com.miu.book.BookCopy;
 import com.miu.book.BookFactory;
 import com.miu.dataStorage.DataStorage;
 import com.miu.dataStorage.PopulateDataUtil;
-import com.miu.factory.MemberFactory;
-import com.miu.person.Author;
-import com.miu.person.LibraryMember;
-import com.miu.person.User;
+import com.miu.person.*;
 
 import java.util.Scanner;
 
@@ -16,9 +13,10 @@ public class MainApplication {
 
     public static void main(String[] args) {
         Address add1 = new Address("Street1", "Fairfield", "Iowa", "52555");
-        LibraryMember member = MemberFactory.addLibrarianMember("Trump", "Donald", "aung", add1);
-        LibraryMember.addLibraryMember(member);
-        System.out.println("Checking name: " + member.getFirstName());
+        Member member = MemberFactory.addLibraryMember("Trump", "Donald", "aung", add1);
+
+        LibraryMember.addLibraryMember((LibraryMember) member);
+        System.out.println("Checking name: " + ((LibraryMember)member).getFirstName());
         System.out.println("finding member by id: 1 " + LibraryMember.findMember(1).getFirstName());
 
         BookCopy bookCopy = new BookCopy();

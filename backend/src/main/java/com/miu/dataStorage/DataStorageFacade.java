@@ -2,6 +2,7 @@ package com.miu.dataStorage;
 
 import com.miu.book.Book;
 import com.miu.person.LibraryMember;
+import com.miu.person.Member;
 import com.miu.person.User;
 
 import java.io.IOException;
@@ -85,9 +86,9 @@ public class DataStorageFacade {
         saveToStorage(StorageType.USERS, users);
     }
 
-    public static void loadMemberMap(List<LibraryMember> memberList) {
-        HashMap<Integer, LibraryMember> members = new HashMap<Integer, LibraryMember>();
-        memberList.forEach(member -> members.put(member.getMemberId(), member));
+    public static void loadMemberMap(List<Member> memberList) {
+        HashMap<Integer, Member> members = new HashMap<Integer, Member>();
+        memberList.forEach(member -> members.put(((LibraryMember)member).getMemberId(), member));
         saveToStorage(StorageType.MEMBERS, members);
     }
 

@@ -5,6 +5,7 @@ import com.miu.book.Book;
 import com.miu.dataStorage.DataStorageFacade;
 import com.miu.person.Author;
 import com.miu.person.LibraryMember;
+import com.miu.person.Member;
 import com.miu.person.User;
 
 import java.util.ArrayList;
@@ -28,7 +29,7 @@ public class TestData {
 
     //create library members
     public void libraryMemberData() {
-        LibraryMember libraryMember = new LibraryMember("Andy", "Rogers", "641-223-2211", addresses.get(4));
+        Member libraryMember = new LibraryMember("Andy", "Rogers", "641-223-2211", addresses.get(4));
         members.add(libraryMember);
         libraryMember = new LibraryMember("Drew", "Stevens", "702-998-2414", addresses.get(5));
         members.add(libraryMember);
@@ -43,7 +44,7 @@ public class TestData {
     }
 
     ///////////// DATA //////////////
-    List<LibraryMember> members = new ArrayList<LibraryMember>();
+    List<Member> members = new ArrayList<Member>();
     @SuppressWarnings("serial")
 
     List<Address> addresses = new ArrayList<Address>() {
