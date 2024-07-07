@@ -2,11 +2,13 @@ package com.miu.util;
 
 import com.miu.Address;
 import com.miu.book.Book;
+import com.miu.checkout.CheckoutRecordEntry;
 import com.miu.dataStorage.DataStorageFacade;
 import com.miu.person.*;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 
 public class TestData {
@@ -16,6 +18,7 @@ public class TestData {
         TestData td = new TestData();
         td.libraryMemberData();
         td.userData();
+        td.checkoutEntryData();
         DataStorageFacade da = new DataStorageFacade();
         System.out.println(da.readUserMap());
     }
@@ -36,6 +39,21 @@ public class TestData {
 
         libraryMember = new LibraryMember( "Sunil", "Poudel", "6414722871", addresses.get(7));
         members.add(libraryMember);
+
+        DataStorageFacade.loadMemberMap(members);
+    }
+    List<CheckoutRecordEntry> entriesList = new ArrayList<CheckoutRecordEntry>();
+    public void checkoutEntryData() {
+        Date currentdate = new Date();
+        CheckoutRecordEntry entryrecord = new CheckoutRecordEntry(1,"ISBN3","CPY0003",currentdate,currentdate,currentdate);
+        entriesList.add(entryrecord);
+
+        CheckoutRecordEntry entryrecord1 = new CheckoutRecordEntry(2,"ISBN4","CPY0004",currentdate,currentdate,currentdate);
+        entriesList.add(entryrecord);
+
+        CheckoutRecordEntry entryrecord2 = new CheckoutRecordEntry(3,"ISBN5","CPY0004",currentdate,currentdate,currentdate);
+        entriesList.add(entryrecord);
+
 
         DataStorageFacade.loadMemberMap(members);
     }

@@ -3,10 +3,14 @@ package com.miu;
 import com.miu.book.Book;
 import com.miu.book.BookCopy;
 import com.miu.book.BookFactory;
+import com.miu.checkout.CheckoutFactory;
+import com.miu.checkout.CheckoutRecordEntry;
+import com.miu.dao.CheckoutRecordEntryDao;
 import com.miu.dataStorage.DataStorage;
 import com.miu.dataStorage.PopulateDataUtil;
 import com.miu.person.*;
 
+import java.util.Date;
 import java.util.Scanner;
 
 public class MainApplication {
@@ -15,9 +19,23 @@ public class MainApplication {
         Address add1 = new Address("Street1", "Fairfield", "Iowa", "52555");
         Member member = MemberFactory.addLibraryMember("Trump", "Donald", "aung", add1);
 
+           // public CheckoutRecordEntry(int memberId, String isbn, String bookCopyId, Date checkoutDate, Date dueDate,Date paidDate)
+        Date currentDate = new Date();
+        CheckoutRecordEntry checkouot= CheckoutFactory.addNewCheckoutRecordEntry(4,"ISBN001","CPY001",currentDate,currentDate,currentDate);
+        CheckoutRecordEntry.addCheckoutRecordEntry(checkouot);
+
+        System.out.println("Member ID testing ... " +checkouot.getMemberId());
+
+        CheckoutRecordEntry checkouot1=CheckoutRecordEntry.findCheckoutEntry(4);
+
+        System.out.println("Member ID testing after inserting ..." +checkouot1.getMemberId());
+
+        CheckoutRecordEntry recordEntry=  CheckoutRecordEntry.findCheckoutEntry(checkouot.getMemberId());
+      //  System.out.println(recordEntry.getMemberId() + "" + recordEntry.getIsbn());
+
         LibraryMember.addLibraryMember((LibraryMember) member);
         System.out.println("Checking name: " + ((LibraryMember)member).getFirstName());
-        System.out.println("finding member by id: 1 " + LibraryMember.findMember(1).getFirstName());
+      //  System.out.println("finding member by id: 1 " + LibraryMember.findMember(1).getFirstName());
 
         BookCopy bookCopy = new BookCopy();
         Author author = new Author("", "", "", "", "", null);
