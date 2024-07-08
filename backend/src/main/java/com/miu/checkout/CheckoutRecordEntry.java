@@ -1,62 +1,67 @@
 package com.miu.checkout;
 
+import com.miu.book.Book;
+import com.miu.book.BookCopy;
+import com.miu.book.BookFactory;
 import com.miu.dao.CheckoutRecordEntryDao;
-import com.miu.dao.LibraryMemberDao;
 import com.miu.person.LibraryMember;
+import com.miu.util.HelperUtil;
+
 import java.util.Date;
 import java.io.Serializable;
 public class CheckoutRecordEntry  implements Serializable {
-    private int memberId;
-    private String isbn;
-    private String bookCopyId;
+
+    private int checkoutRecordId;
+    private LibraryMember member;
+    private BookCopy bookCopy;
     private Date checkoutDate;
     private Date dueDate;
     private Date paidDate;
+    private double fine;
 
-    public CheckoutRecordEntry(int memberId, String isbn, String bookCopyId, Date checkoutDate, Date dueDate,Date paidDate) {
-        this.memberId = memberId;
-        this.isbn = isbn;
-        this.bookCopyId = bookCopyId;
-        this.checkoutDate = checkoutDate;
+
+    public CheckoutRecordEntry(LibraryMember member, BookCopy bookCopy, Date dueDate) {
+        this.checkoutRecordId = HelperUtil.generateID();
+        this.member = member;
+        this.bookCopy = bookCopy;
+        this.checkoutDate = new Date();
         this.dueDate = dueDate;
-        this.paidDate = paidDate;
+        for(BookCopy book : this.bookCopy.getBook().getBookCopyList()){
+            if(bookCopy.equals(book)){
+                bookCopy.setIsAvailable(false);
+            }
+        }
+        Book.addBook(bookCopy.getBook());
     }
 
-    public int getMemberId() {
-        return memberId;
+    public int getCheckoutRecordId(){
+        return this.checkoutRecordId;
     }
-    public void setMemberId(int memberId) {
-        this.memberId = memberId;
+
+    public LibraryMember getMember() {
+        return member;
     }
-    public String getIsbn() {
-        return isbn;
+    public BookCopy getBookCopy() {
+        return bookCopy;
     }
-    public void setIsbn(String isbn) {
-        this.isbn = isbn;
-    }
-    public String getBookCopyId() {
-        return bookCopyId;
-    }
-    public void setBookCopyId(String bookCopyId) {
-        this.bookCopyId = bookCopyId;
-    }
+
     public Date getCheckoutDate() {
-        return checkoutDate;
-    }
-    public void setCheckoutDate(Date checkoutDate) {
-        this.checkoutDate = checkoutDate;
+        return this.checkoutDate;
     }
     public Date getDueDate() {
-        return dueDate;
-    }
-    public void setDueDate(Date dueDate) {
-        this.dueDate = dueDate;
+        return this.dueDate;
     }
     public Date getPaidDate() {
-        return paidDate;
+        return this.paidDate;
     }
     public void setPaidDate(Date paidDate) {
         this.paidDate = paidDate;
+    }
+    public double getFine(){
+        return  this.fine;
+    }
+    public void setFine(double fine){
+        this.fine =  fine;
     }
 
     public static CheckoutRecordEntry addCheckoutRecordEntry(CheckoutRecordEntry checkEntry) {

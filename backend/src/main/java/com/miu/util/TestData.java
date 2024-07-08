@@ -2,8 +2,8 @@ package com.miu.util;
 
 import com.miu.Address;
 import com.miu.book.Book;
+import com.miu.book.BookFactory;
 import com.miu.checkout.CheckoutRecord;
-import com.miu.checkout.CheckoutRecordEntry;
 import com.miu.checkout.CheckoutRecordEntry;
 import com.miu.dataStorage.DataStorageFacade;
 import com.miu.person.*;
@@ -11,8 +11,6 @@ import com.miu.book.BookCopy;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Date;
-import java.util.Date;
 import java.util.Date;
 import java.util.List;
 
@@ -24,7 +22,7 @@ public class TestData {
         td.libraryMemberData();
         td.userData();
         td.allBooks();
-        td.checkoutRecordData();
+//        td.checkoutRecordData();
         td.checkoutEntryData();
         DataStorageFacade da = new DataStorageFacade();
         System.out.println(da.readUserMap());
@@ -54,26 +52,31 @@ public class TestData {
 
     public void checkoutEntryData() {
         Date currentdate = new Date();
-        CheckoutRecordEntry entryrecord = new CheckoutRecordEntry(1, "ISBN3", "CPY0003", currentdate, currentdate, currentdate);
+        LibraryMember libraryMember = (LibraryMember) members.get(0);
+        BookCopy bookCopy0 = allBooks.get(0).getBookCopyList().get(0);
+
+        Date dueDate = new Date();
+        CheckoutRecordEntry entryrecord = new CheckoutRecordEntry(libraryMember, bookCopy0, dueDate);
         entriesList.add(entryrecord);
 
-        CheckoutRecordEntry entryrecord1 = new CheckoutRecordEntry(2, "ISBN4", "CPY0004", currentdate, currentdate, currentdate);
-        entriesList.add(entryrecord);
+        CheckoutRecordEntry entryrecord1 = new CheckoutRecordEntry(libraryMember, bookCopy0, dueDate);
+        entriesList.add(entryrecord1);
 
-        CheckoutRecordEntry entryrecord2 = new CheckoutRecordEntry(3, "ISBN5", "CPY0004", currentdate, currentdate, currentdate);
-        entriesList.add(entryrecord);
+        CheckoutRecordEntry entryrecord2 = new CheckoutRecordEntry(libraryMember, bookCopy0, dueDate);
+        entriesList.add(entryrecord2);
 
+        DataStorageFacade.loadBookCopyMap(allBooks.get(0).getBookCopyList());
 
-        DataStorageFacade.loadMemberMap(members);
+        DataStorageFacade.loadCheckoutMap(entriesList);
     }
 
     //create library members
-    public void checkoutRecordData() {
-        CheckoutRecord libraryMember = new CheckoutRecord();
-
-        DataStorageFacade.saveNewCheckoutEntry(new CheckoutRecordEntry(12, "2323", "23", new Date(), new Date(), new Date()));
-
-    }
+//    public void checkoutRecordData() {
+//        CheckoutRecord libraryMember = new CheckoutRecord();
+//
+//        DataStorageFacade.saveNewCheckoutEntry(new CheckoutRecordEntry(12, "2323", "23", new Date(), new Date(), new Date()));
+//
+//    }
 
     //create library members
     public void allBooks() {
@@ -117,12 +120,13 @@ public class TestData {
     };
 
     BookCopy bookCopy = new BookCopy();
-
+    Book book = (Book) BookFactory.createBook("MPP", "500", 7, allAuthors.getFirst(), bookCopy);
     List<Book> allBooks = new ArrayList<Book>() {
         {
-            add(new BookCopy("MPP", "400", 1, allAuthors.get(0), bookCopy));
+            add(book);
         }
     };
+
 
     @SuppressWarnings("serial")
     List<CheckoutRecord> allCheckoutRecord = new ArrayList<CheckoutRecord>() {

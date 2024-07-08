@@ -50,24 +50,25 @@ public class AddBookCopied extends JPanel{
                     }
                     else{
                         checkBookExist(isbnTextField.getText());
-                        Utility.enableComponent(increaseCopiedQtyTextField, true);
-                        Utility.enableComponent(submitButton, true);
                     }
                 }
                 else{
                     Utility.enableComponent(components, false);
                     Utility.resetComponent(components);
+                    Utility.enableComponent(increaseCopiedQtyTextField, false);
+                    Utility.enableComponent(submitButton, false);
                 }
             }
         });
         submitButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                int copiedQty = Integer.parseInt(copiedQtyTextField.getText());
+                int copiedQty = Integer.parseInt(increaseCopiedQtyTextField.getText());
                 if(copiedQty > 0){
                     for(int i=1; i<=copiedQty; i++){
                         BookCopy bookCopy = new BookCopy();
                         bookCopy.setBook(book);
+
                         book.addBookCopy(bookCopy);
                     }
                     Book.addBook(book);
@@ -81,18 +82,16 @@ public class AddBookCopied extends JPanel{
     private void checkBookExist(String isbn){
         book = Book.findBook(isbn);
         if(book!=null){
-            bookCopy = book.checkAvailableCopy();
-            if(bookCopy!=null){
-                titleTextField.setText(book.getTitle());
-                copiedQtyTextField.setText(STR."\{book.getBookCopyList().size()}");
-                copiedAvailableQtyTextFeild.setText(STR."\{book.checkAvailableCopyQty()}");
-            }
-            else{
-                JOptionPane.showMessageDialog(basePanel, "Book Not Book Available", "Warning", JOptionPane.WARNING_MESSAGE);
-            }
+            titleTextField.setText(book.getTitle());
+            copiedQtyTextField.setText(STR."\{book.getBookCopyList().size()}");
+            copiedAvailableQtyTextFeild.setText(STR."\{book.checkAvailableCopyQty()}");
+            Utility.enableComponent(increaseCopiedQtyTextField, true);
+            Utility.enableComponent(submitButton, true);
         }
         else{
             JOptionPane.showMessageDialog(basePanel, "Book does not exist", "Warning", JOptionPane.WARNING_MESSAGE);
+            Utility.enableComponent(increaseCopiedQtyTextField, false);
+            Utility.enableComponent(submitButton, false);
         }
     }
 }

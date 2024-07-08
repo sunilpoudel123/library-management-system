@@ -1,6 +1,7 @@
 package utility;
 
 import com.miu.book.Book;
+import com.miu.checkout.CheckoutRecordEntry;
 import com.miu.person.LibraryMember;
 
 import javax.swing.*;
@@ -236,6 +237,34 @@ public class Utility extends JFrame {
                         return book.getBorrowedPeriod();
                     case 3:
                         return book.getBookCopyList().size();
+                    case 4:
+                        return book.checkAvailableCopyQty();
+                    default:
+                        return null;
+                }
+            }
+            if(object instanceof CheckoutRecordEntry){
+                CheckoutRecordEntry entry = (CheckoutRecordEntry)object;
+
+                switch (columnIndex){
+                    case 0:
+                        return entry.getMember().getMemberId();
+                    case 1:
+                        return entry.getMember().getFirstName() + " " + entry.getMember().getLastName();
+                    case 2:
+                        return entry.getBookCopy().getBook().getISBN();
+                    case 3:
+                        return entry.getBookCopy().getBook().getTitle();
+                    case 4:
+                        return entry.getCheckoutDate();
+                    case 5:
+                        return entry.getDueDate();
+                    case 6:
+                        return entry.getPaidDate();
+                    case 7:
+                        return entry.getFine();
+                    default:
+                        return null;
                 }
             }
 

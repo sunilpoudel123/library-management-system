@@ -1,11 +1,17 @@
 package member;
 
+import com.miu.book.Book;
+import com.miu.checkout.CheckoutRecord;
+import com.miu.checkout.CheckoutRecordEntry;
 import utility.Utility;
 
 import javax.swing.*;
 import javax.swing.table.AbstractTableModel;
 import java.awt.*;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class MemberCheckoutRecord extends JPanel {
 
@@ -15,58 +21,67 @@ public class MemberCheckoutRecord extends JPanel {
     private JPanel searchPanel;
     private JPanel resultPanel;
 
+    private String[] columnNames = {"Member ID", "Member Name", "Book ISBN", "Book Title", "Checkout Date", "Due Date", "Paid Date", "Fine"};
+
+
     public MemberCheckoutRecord(int width, int height) {
         setSize(width, height);
         ArrayList<Object> object = new ArrayList<>();
         basePanel.add(searchPanel, BorderLayout.NORTH);
-        createTableList(resultPanel, object);
+        reload();
         setSize(width, height);
         if (getParent() != null && getParent().isVisible()) { // Check if parent is visible
             setVisible(true);
         }
-
         add(basePanel);
+
+
+        memberIDTextField.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyPressed(KeyEvent e) {
+                if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+                    if(memberIDTextField.getText().length() == 0){
+                        JOptionPane.showMessageDialog(basePanel, "Please enter a Book ISBN", "Warning", JOptionPane.WARNING_MESSAGE);
+                        return;
+                    }
+                    else{
+                        CheckoutRecordEntry entry = CheckoutRecordEntry.findCheckoutEntry(Integer.parseInt(memberIDTextField.getText()));
+                        Object[] bookArray = {entry};
+                        ArrayList<Object> objectList = new ArrayList<>(Arrays.asList(bookArray));
+                        createTableList(resultPanel, objectList);
+
+                    }
+                }
+                else if (e.getKeyCode() == KeyEvent.VK_ESCAPE) {
+                    if(memberIDTextField.getText().length() == 0){
+                        reload();
+                    }
+                }
+                else{
+                    reload();
+                }
+            }
+        });
+    }
+
+    private void reload(){
+        var objects = CheckoutRecord.checkoutRecordEntryList();
+        Object[] entriesArray = objects.toArray();
+        ArrayList<Object> objectList = new ArrayList<>(Arrays.asList(entriesArray));
+        createTableList(resultPanel, objectList);
     }
 
     private void createTableList(JPanel panel, ArrayList<Object> data){
+        resultPanel.removeAll();
+        resultPanel.repaint();
+        resultPanel.revalidate();
+
         panel = new JPanel();
-        MyTableModel model = new MyTableModel(data);
-        JTable table = new JTable(model);
+        Utility.CustomizeTableModel customize = new Utility.CustomizeTableModel(data, columnNames);
+        customize.fireTableDataChanged(); // Notify JTable of changes
+        JTable table = new JTable(customize);
         JScrollPane scrollPane = new JScrollPane(table);
         panel.add(scrollPane, BorderLayout.CENTER);
         resultPanel.add(panel, BorderLayout.CENTER);
-    }
-
-    class MyTableModel extends AbstractTableModel {
-
-        private ArrayList<Object> data;
-        private String[] columnNames = {"Member Name", "Book Title", "Checkout Date", "Due Date", "Return Date", "Fine"};
-
-        public MyTableModel(ArrayList<Object> data) {
-            this.data = data;
-        }
-
-        @Override
-        public int getRowCount() {
-            return data.size();
-        }
-
-        @Override
-        public int getColumnCount() {
-            return columnNames.length;
-        }
-
-        @Override
-        public Object getValueAt(int rowIndex, int columnIndex) {
-            Object person = data.get(rowIndex);
-            return null;
-        }
-
-        @Override
-        public String getColumnName(int col) {
-            return columnNames[col];
-        }
-
-        // Getters and setters for name and age
     }
 }
