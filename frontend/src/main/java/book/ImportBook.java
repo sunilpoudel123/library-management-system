@@ -70,7 +70,13 @@ public class ImportBook extends JPanel{
             @Override
             public void actionPerformed(ActionEvent e) {
                 if(!Utility.validationComponentEmpty(components)){
-                    addBook();
+                    int borrowedPeriod = Integer.parseInt(borrowedPeriodTextField.getText());
+                    if(borrowedPeriod >= 7 && borrowedPeriod <= 21){
+                        addBook();
+                    }
+                    else{
+                        JOptionPane.showMessageDialog(basePanel, "Please enter a valid borrowed period between 7 to 21 days", "Valid Period", JOptionPane.ERROR_MESSAGE);
+                    }
                 }
                 else{
                     JOptionPane.showMessageDialog(basePanel, "Please fill all the required fields.", "Warning", JOptionPane.WARNING_MESSAGE);
@@ -90,6 +96,7 @@ public class ImportBook extends JPanel{
         Address address = new Address(streetTextField.getText(), cityTextField.getText(), stateComboBox.getSelectedItem().toString(), zipCodeTextField.getText());
         Author author = new Author(firstNameTextField.getText(), lastNameTextField.getText(), phoneNumberTextField.getText(), credentialTextField.getText(), bioTextArea.getText(), address);
         int copiedQty = Integer.parseInt(copiedQtyTextField.getText());
+
         if(copiedQty==1){
             BookCopy bookCopy = new BookCopy();
             book = BookFactory.createBook(titleField.getText(), isbnTextField.getText(), Integer.parseInt(borrowedPeriodTextField.getText()), author, bookCopy);
@@ -103,6 +110,7 @@ public class ImportBook extends JPanel{
         }
         else{
             JOptionPane.showMessageDialog(null, "Copied Qty must be at least one","Invalid copied Qty", JOptionPane.ERROR_MESSAGE);
+            return ;
         }
         if(Book.addBook((Book) book)!=null){
             JOptionPane.showMessageDialog(null, "Save Successfully!","Saved!", JOptionPane.INFORMATION_MESSAGE);

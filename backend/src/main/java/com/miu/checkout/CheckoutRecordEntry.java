@@ -1,6 +1,8 @@
 package com.miu.checkout;
 
+import com.miu.book.Book;
 import com.miu.book.BookCopy;
+import com.miu.book.BookFactory;
 import com.miu.dao.CheckoutRecordEntryDao;
 import com.miu.person.LibraryMember;
 import com.miu.util.HelperUtil;
@@ -24,6 +26,12 @@ public class CheckoutRecordEntry  implements Serializable {
         this.bookCopy = bookCopy;
         this.checkoutDate = new Date();
         this.dueDate = dueDate;
+        for(BookCopy book : this.bookCopy.getBook().getBookCopyList()){
+            if(bookCopy.equals(book)){
+                bookCopy.setIsAvailable(false);
+            }
+        }
+        Book.addBook(bookCopy.getBook());
     }
 
     public int getCheckoutRecordId(){
