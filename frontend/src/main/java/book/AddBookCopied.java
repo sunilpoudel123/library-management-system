@@ -50,8 +50,6 @@ public class AddBookCopied extends JPanel{
                     }
                     else{
                         checkBookExist(isbnTextField.getText());
-                        Utility.enableComponent(increaseCopiedQtyTextField, true);
-                        Utility.enableComponent(submitButton, true);
                     }
                 }
                 else{
@@ -87,9 +85,13 @@ public class AddBookCopied extends JPanel{
             titleTextField.setText(book.getTitle());
             copiedQtyTextField.setText(STR."\{book.getBookCopyList().size()}");
             copiedAvailableQtyTextFeild.setText(STR."\{book.checkAvailableCopyQty()}");
+            Utility.enableComponent(increaseCopiedQtyTextField, true);
+            Utility.enableComponent(submitButton, true);
         }
         else{
             JOptionPane.showMessageDialog(basePanel, "Book does not exist", "Warning", JOptionPane.WARNING_MESSAGE);
+            Utility.enableComponent(increaseCopiedQtyTextField, false);
+            Utility.enableComponent(submitButton, false);
         }
     }
 }
